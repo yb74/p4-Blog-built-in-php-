@@ -1,0 +1,40 @@
+header .navbar-brand img {
+    width: 50px;
+    height: 50px; 
+  }
+  .fa-home {
+    font-size: 2em;
+  }
+
+.card-img-top {
+  -webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.m-3:hover>.card-img-top {
+  -webkit-filter: grayscale(0);
+	filter: grayscale(0);
+}
+.m-3:hover {
+  background-color: lightgrey;
+}
+  
+footer {
+  padding: 10px;
+  text-align: center; 
+}
+  footer p {
+    margin: 0; 
+  }
+  footer .social-link {
+    margin-left: 15px; 
+  }
+    footer .social-link img {
+      width: 100%; 
+    }
+    footer .social-link img:hover {
+      width: 80%; 
+      transition-duration: 1s;
+    }
+  
