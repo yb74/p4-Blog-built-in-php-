@@ -1,42 +1,42 @@
 <?php
 class Comment {
-    private $_comment_id;
-    private $_related_post_id;
-    private $_comment_author;
-    private $_comment_content;
-    private $_comment_date;
+    private int $id;
+    private int $relatedId;
+    private string $author;
+    private string $content;
+    private string $date;
 
     // SETTERS
-    public function setCommentId(int $commentId) {
-        $this->_comment_id = $commentId;
+    public function setId(int $id) {
+        $this->id = $id;
     }
-    public function setRelatedPostId(int $relatedPostId) {
-        $this->_related_post_id = $relatedPostId;
+    public function setRelatedId(int $relatedId) {
+        $this->relatedId = $relatedId;
     }
-    public function setCommentAuthor(int $commentAuthor) {
-        $this->_comment_author = $commentAuthor;
+    public function setAuthor(int $author) {
+        $this->author = $author;
     }
-    public function setCommentContent(int $commentContent) {
-        $this->_comment_content = $commentContent;
+    public function setContent(int $content) {
+        $this->content = $content;
     }
-    public function setCommentDate(int $commentDate) {
-        $this->_comment_date = $commentDate;
+    public function setDate(int $date) {
+        $this->date = $date;
     }
 
     // GETTERS
-    public function getCommentId(): int {
-        return $this->_comment_id;
+    public function getId(): int {
+        return $this->id;
     }
-    public function getRelatedPostId(): string  {
-        return $this->_related_post_id;
+    public function getRelatedId(): string  {
+        return $this->relatedId;
     }
-    public function getCommentAuthor(): string  {
-        return $this->_comment_author;
+    public function getAuthor(): string  {
+        return $this->author;
     }
     public function getCommentContent(): string {
-        return $this->_comment_content;
+        return $this->content;
     }
     public function getCommentDate(): string {
-        return $this->_comment_date;
+        return $this->date;
     }
 }
