@@ -1,4 +1,6 @@
 <?php
+namespace App\model;
+
 class Post {
     private int $id;
     private string $title;

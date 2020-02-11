@@ -7,5 +7,5 @@ if ($url != '/' && file_exists(__DIR__ . $url))
     return false;
 }
 
-//$_SERVER['SCRIPT_NAME'] = "/index.php";
+$_SERVER['SCRIPT_NAME'] = "/index.php";
 require_once 'index.php';

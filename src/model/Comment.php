@@ -1,10 +1,12 @@
 <?php
+namespace App\model;
+
 class Comment {
-    private int $id;
-    private int $relatedId;
-    private string $author;
-    private string $content;
-    private string $date;
+    private $id;
+    private $relatedId;
+    private $author;
+    private $content;
+    private $date;
 
     // SETTERS
     public function setId(int $id) {
