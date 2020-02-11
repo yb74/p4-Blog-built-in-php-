@@ -40,7 +40,49 @@ catch(Exception $e) {
 }
 */
 
-//require dirname(__DIR__) . "vendor/autoload.php";
-var_dump($_SERVER);
+use blog\controller\FrontendController;
+use blog\controller\BackendController;
 
-echo "Salut, je suis un fichier php";
+require_once('controller/FrontendController.php');
+require_once('controller/BackendController.php');
+
+class Routeur
+{
+    private $FrontendController;
+    private $BackendController;
+
+    public function __construct()
+    {
+        $this->FrontendController = new FrontendController();
+        $this->BackendController = new BackendController();
+    }
+
+    /**
+     * Choose the action according to the request
+     */
+    public function routerRequete()
+    {
+        try {
+            if (isset($_GET['action'])) {
+                if ($_GET['action'] == 'listPosts') {
+                    $this->FrontendController->listPosts();
+                } elseif ($_GET['action'] == 'post') {
+                    $this->FrontendController->post();
+                } elseif ($_GET['action'] == 'addComment') {
+                    $this->FrontendController->addComment();
+                } elseif ($_GET['action'] == 'reportComment') {
+                    $this->FrontendController->reportComment();
+                } elseif ($_GET['action'] == 'accountCreate') {
+                    $this->FrontendController->accountcreate();
+                } elseif ($_GET['action'] == 'login') {
+                    $this->FrontendController->login();
+                } elseif ($_GET['action'] == 'unlog') {
+                    $this->FrontendController->unplug();
+                }
+            }
+        }
+        catch(Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+    }
+}
