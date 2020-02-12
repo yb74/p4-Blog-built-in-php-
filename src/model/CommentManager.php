@@ -1,10 +1,10 @@
 <?php
-namespace App\model;
+//namespace App\model;
 
-use App\model\Comment;
+//use App\model\Comment;
 
-//require_once("src/model/Manager.php");
-//require_once("src/model/Comment.php");
+require_once("src/model/Manager.php");
+require_once("src/model/Comment.php");
 
 class CommentManager extends Manager
 {

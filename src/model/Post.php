@@ -1,11 +1,11 @@
 <?php
-namespace App\model;
+//namespace App\model;
 
 class Post {
-    private int $id;
-    private string $title;
-    private string $content;
-    private string $date;
+    private $id;
+    private $title;
+    private $content;
+    private $date;
 
 
     public function getId(): int
