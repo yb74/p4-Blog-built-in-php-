@@ -1,10 +1,6 @@
 <?php
 
-//namespace App\model;
-//use App\model\Post;
-
-require_once("src/model/Manager.php");
-require_once ('src/model/Post.php');
+namespace App\Manager;
 
 class PostManager extends Manager
 {

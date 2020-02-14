@@ -1,12 +1,10 @@
 <?php
-//namespace App\controller;
+namespace App\Controller;
 
-/*use App\controller\{
+use App\Manager\{
     PostManager,
     CommentManager
-};*/
-require_once "src/model/PostManager.php";
-require_once "src/model/CommentManager.php";
+};
 
 class PostController {
     public function listPosts()

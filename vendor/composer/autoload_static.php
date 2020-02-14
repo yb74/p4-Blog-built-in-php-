@@ -20,22 +20,11 @@ class ComposerStaticInitab251815d9271268869eb849c34961ef
         ),
     );
 
-    public static $classMap = array (
-        'App\\controller\\CommentController' => __DIR__ . '/../..' . '/src/controller/CommentController.php',
-        'App\\controller\\PostController' => __DIR__ . '/../..' . '/src/controller/PostController.php',
-        'App\\model\\Comment' => __DIR__ . '/../..' . '/src/model/Comment.php',
-        'App\\model\\CommentManager' => __DIR__ . '/../..' . '/src/model/CommentManager.php',
-        'App\\model\\Manager' => __DIR__ . '/../..' . '/src/model/Manager.php',
-        'App\\model\\Post' => __DIR__ . '/../..' . '/src/model/Post.php',
-        'App\\model\\PostManager' => __DIR__ . '/../..' . '/src/model/PostManager.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitab251815d9271268869eb849c34961ef::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitab251815d9271268869eb849c34961ef::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitab251815d9271268869eb849c34961ef::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -53,36 +53,25 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="messages-subscription"></div>
-                                <form action="#" method="post" id="subscribe-form">
-                                    <div class="form-group">
+                                <form action="index.php?action=addNewUser" method="post" id="subscribe-form">
+                                    <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
                                         <label for="username">Pseudo</label>
-                                        <input type="text" class="form-control" name="subscribe-username" value="">
-                                        <small id="passwordHelp" class="form-text text-muted">Votre login doit être composé de 6
-                                            caractères minimum.</small>
+                                        <input type="text" class="form-control" name="subscribe-username" value="<?=$this->username?>">
+                                        <small id="passwordHelp" class="form-text text-muted"><?= $this->username_err; ?></small>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group <?= $this->password_err ? 'has-error' : ''; ?>">
                                         <label for="subscribe-password">Mot de passe</label>
-                                        <input type="password" class="form-control" name="subscribe-password"
+                                        <input type="password" class="form-control" name="subscribe-password" value="<?=$this->password?>"
                                                aria-describedby="passwordHelp">
-                                        <small id="passwordHelp" class="form-text text-muted">Votre mot de passe doit être composé de 8
-                                            caractères dont à minima un chiffre et une lettre majuscule.</small>
+                                        <small id="passwordHelp" class="form-text text-muted"><?= $this->password_err; ?></small>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password-confirmation">Confirmer votre mot de passe</label>
-                                        <input type="password" class="form-control" name="password-confirmation">
+                                    <div class="form-group <?= $this->confirm_password_err ? 'has-error' : ''; ?>">
+                                        <label for="password-confirmation"><?= $this->confirm_password_err; ?></label>
+                                        <input type="password" class="form-control" name="confirm_password" value="<?= $this->confirm_password; ?>">
                                     </div>
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" name="email" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="lastname">Nom</label>
-                                        <input type="text" class="form-control" name="lastname" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="firstname">Prénom</label>
-                                        <input type="text" class="form-control" name="firstname" value="">
+                                        <input type="email" class="form-control" name="email" value="$this->email">
                                     </div>
                                     <div class="form-group">
                                         <label for="profile-picture">Sélectionner votre photo de profil</label>
@@ -90,7 +79,7 @@
                                                aria-describedby="select-profile-picture-help">
                                         <small id="select-profile-picture-help" class="form-text text-muted">Votre photo de profil ne doit
                                             pas dépasser 2 Mo et doit respecter le ratio 150*150px.</small>
-                                    </div>
+                                    </div>-->
                                 </form>
                             </div>
                             <div class="modal-footer">

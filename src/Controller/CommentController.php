@@ -1,9 +1,7 @@
 <?php
-//namespace App\controller;
+namespace App\Controller;
 
-//use App\model\CommentManager;
-
-require_once 'src/model/CommentManager.php';
+use App\Manager\CommentManager;
 
 class CommentController {
     public function addComment($relatedId, $author, $content)
