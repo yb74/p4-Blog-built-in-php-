@@ -13,7 +13,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="public/images/slider/slider-picture1.jpg" class="d-block w-100" alt="...">
+          <img src="/public/images/slider/slider-picture1.jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>Bienvenue sur Evasion Littéraire</h5>
             <p>Profitez de livres en accès gratuit et d'une réelle communauté ! </p>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img src="public/images/slider/slider-picture2.jpg" class="d-block w-100" alt="...">
+          <img src="/public/images/slider/slider-picture2.jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>L'alaska, ce pays magnifique</h5>
             <p>J'y ai trouvé mon inspiration </p>
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img src="public/images/slider/slider-picture3.jpg" class="d-block w-100" alt="...">
+          <img src="/public/images/slider/slider-picture3.jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>Une aurore boréale</h5>
             <p>Le dernier chapitre de 'Billet simple pour l'Alaska' </p>
@@ -57,13 +57,13 @@ while ($data = $posts->fetch())
 {
     ?>
         <div class="card m-3" style="width: 20.5rem; height:20.5rem">
-          <img src="public/images/chapters/chapter-image1.jpg" class="card-img-top"
+          <img src="/public/images/chapters/chapter-image1.jpg" class="card-img-top"
                alt="Image du chapitre intitulé Une aurore boréale">
           <div class="card-body">
             <h4><?= htmlspecialchars($data['post_title']) ?></h4>
             <h5 class="card-title"><?= htmlspecialchars($data['creation_date_fr']) ?></h5>
             <p class="card-text"><?= substr(nl2br(htmlspecialchars($data['post_content'])), 0, 50) ?></p>
-            <a href="index.php?action=post&amp;post_id=<?= $data['post_id'] ?>" class="btn btn-primary">Lire la suite</a>
+            <a href="/post/<?= $data['post_id'] ?>" class="btn btn-primary">Lire la suite</a>
           </div>
         </div>
     <?php

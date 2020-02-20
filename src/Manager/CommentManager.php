@@ -15,9 +15,13 @@ class CommentManager extends Manager
     public function postComment($relatedId, $author, $content) // permet d'afficher un nouveau commentaire en l'inserant dans la table
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO comments(related_post_id, comment_author, comment_content, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($relatedId, $author, $content));
+        $comments = $db->prepare('INSERT INTO comments(related_post_id, comment_author, comment_content, comment_date) VALUES(:related_post_id, :comment_author, :comment_content, NOW())');
+        $comments->execute(array(
+            'related_post_id'=> $relatedId,
+            'comment_author' => $author,
+            'comment_content'=> $content
+        ));
 
-        return $affectedLines;
+        return $comment;
     }
 }

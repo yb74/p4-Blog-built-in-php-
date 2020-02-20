@@ -6,10 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?= $title ?></title>
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'#edit_post'});</script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <!-- icones fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -22,15 +25,21 @@
                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="listPostsView.php">
-            <img src="public\images\logo.png" class="d-inline-block align-center text-white">
+        <a class="navbar-brand" href="/">
+            <img src="/public/images/logo.png" class="d-inline-block align-center text-white">
             Billet simple pour l'Alaska
         </a>
 
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="listPostsView.php">Accueil</a>
+                    <a class="nav-link" href="/">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminLogin">Admin Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
@@ -163,12 +172,12 @@
                 <div class="row justify-content-center">
                     <div class="social-link">
                         <a href="#">
-                            <img src="public/images/social_networks/facebook-icon.png" alt="Lien vers le compte Facebook">
+                            <img src="/public/images/social_networks/facebook-icon.png" alt="Lien vers le compte Facebook">
                         </a>
                     </div>
                     <div class="social-link">
                         <a href="#">
-                            <img src="public/images/social_networks/twitter-icon.png" alt="Lien vers le compte Twitter">
+                            <img src="/public/images/social_networks/twitter-icon.png" alt="Lien vers le compte Twitter">
                         </a>
                     </div>
                 </div>

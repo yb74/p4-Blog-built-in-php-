@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
-<p><a href="index.php">Retour à la liste des billets</a></p>
+<p><a href="/">Retour à la liste des billets</a></p>
 
 <div class="news">
     <h3>
@@ -17,7 +17,7 @@
 
 <h2>Commentaires</h2>
 
-<form action="index.php?action=addComment&amp;post_id=<?= $post['post_id'] ?>" method="post">
+<form action="/post/<?= $post['post_id'] ?>" method="post">
     <div>
         <label for="comment_author">Auteur</label><br />
         <input type="text" id="comment_author" name="comment_author" />

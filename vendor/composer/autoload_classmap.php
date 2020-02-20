@@ -6,4 +6,19 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controller\\AdminController' => $baseDir . '/src/Controller/AdminController.php',
+    'App\\Controller\\CommentController' => $baseDir . '/src/Controller/CommentController.php',
+    'App\\Controller\\PostController' => $baseDir . '/src/Controller/PostController.php',
+    'App\\Controller\\RegistrationController' => $baseDir . '/src/Controller/RegistrationController.php',
+    'App\\Manager\\AdminManager' => $baseDir . '/src/Manager/AdminManager.php',
+    'App\\Manager\\CommentManager' => $baseDir . '/src/Manager/CommentManager.php',
+    'App\\Manager\\Manager' => $baseDir . '/src/Manager/Manager.php',
+    'App\\Manager\\PostManager' => $baseDir . '/src/Manager/PostManager.php',
+    'App\\Manager\\RegistrationManager' => $baseDir . '/src/Manager/RegistrationManager.php',
+    'App\\Model\\Comment' => $baseDir . '/src/Model/Comment.php',
+    'App\\Model\\Post' => $baseDir . '/src/Model/Post.php',
+    'App\\Model\\User' => $baseDir . '/src/Model/User.php',
+    'App\\Router\\Route' => $baseDir . '/src/Router/Route.php',
+    'App\\Router\\Router' => $baseDir . '/src/Router/Router.php',
+    'App\\Router\\RouterException' => $baseDir . '/src/Router/RouterException.php',
 );
