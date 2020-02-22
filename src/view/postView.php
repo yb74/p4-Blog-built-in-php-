@@ -1,15 +1,17 @@
 <?php $title = htmlspecialchars($post['post_title']); ?>
 
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
-<p><a href="/">Retour à la liste des billets</a></p>
+    <div style="background-image: url('<?= $post['post_picture'] ?>'); background-size: cover;">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container chapter-title">
+                <h1 class="display-4"><?= htmlspecialchars($post['post_title']) ?></h1>
+                <h3 class="lead"><?= $post['creation_date_fr'] ?></h3>
+            </div>
+        </div>
+    </div>
+
 
 <div class="news">
-    <h3>
-        <?= htmlspecialchars($post['post_title']) ?>
-        <em><?= $post['creation_date_fr'] ?></em>
-    </h3>
-
     <p>
         <?= nl2br(htmlspecialchars($post['post_content'])) ?>
     </p>
@@ -17,7 +19,7 @@
 
 <h2>Commentaires</h2>
 
-<form action="/post/<?= $post['post_id'] ?>" method="post">
+<form action="/post/<?= $post['post_id'] ?>" method="post" class="p-5 bg-light">
     <div>
         <label for="comment_author">Auteur</label><br />
         <input type="text" id="comment_author" name="comment_author" />
@@ -35,8 +37,24 @@
 while ($comment = $comments->fetch())
 {
     ?>
-    <p><strong><?= htmlspecialchars($comment['comment_author']) ?></strong> <?= $comment['comment_date_fr'] ?></p>
-    <p><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
+
+    <div class="container comment-zone p-4 mx-auto bg-light">
+        <div id="report-message"></div>
+        <div class="media mt-3 p-3 bg-white comment-bubble">
+            <img src="public/images/profile_pictures/155678948553782604_2525062594189150_7288303766074294272_o (2).jpg" class="mr-3 profile-picture align-middle" alt="profile picture">
+            <div class="media-body">
+                <div class="row">
+                    <p class="comment-username mt-0 mx-2"><?= htmlspecialchars($comment['comment_author']) ?></p>
+                    <span class="font-weight-lighter font-italic"><?= $comment['comment_date_fr'] ?></span>
+                </div>
+                <div class="row">
+                    <p class="comment-title p-0 col-12 mt-0 mx-2 mb-1">Sujet du commentaire</p>
+                    <p class="col-12 p-0 mt-0 mx-2 mb-0"><?= nl2br(htmlspecialchars($comment['comment_content'])) ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php
 }
 ?>

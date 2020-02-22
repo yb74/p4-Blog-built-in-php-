@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-    <h1>Espace d'administration</h1>
+    <h1>Espace de connection d'administration</h1>
     <p><a href="/">Retour à la liste des billets</a></p>
 
     <form method="post" action="/adminLogin" class="p-5 bg-light">

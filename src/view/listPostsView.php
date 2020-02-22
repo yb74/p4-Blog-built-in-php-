@@ -57,7 +57,7 @@ while ($data = $posts->fetch())
 {
     ?>
         <div class="card m-3" style="width: 20.5rem; height:20.5rem">
-          <img src="/public/images/chapters/chapter-image1.jpg" class="card-img-top"
+          <img src="<?= $data['post_picture'] ?>" class="card-img-top"
                alt="Image du chapitre intitulé Une aurore boréale">
           <div class="card-body">
             <h4><?= htmlspecialchars($data['post_title']) ?></h4>

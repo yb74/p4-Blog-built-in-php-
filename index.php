@@ -33,9 +33,10 @@ $router = new App\Router\Router($_SERVER['REQUEST_URI']);
 
 $router->get('/admin', "Admin#displayAdminPanel");
 $router->get('/adminLogin', "Admin#displayLoginAdminPanel");
+$router->post('/adminLogin', "Admin#displayLoginAdminPanel");
 $router->post('/admin/:', "Admin#displayAdminPanel")->with('relatedId', '[0-9]+');; // Comment an article
 
-$router->get('/', "Post#listPosts"); // display the list of articles/posts
+$router->get('/', "Post#listPosts")->with('page', '[0-9]+'); // display the list of articles/posts
 $router->get('/post/:postId', "Post#post")->with('postId', '[0-9]+'); // display the selected article/post
 $router->post('/post/:postId', "Comment#addComment")->with('relatedId', '[0-9]+');; // Comment an article
 

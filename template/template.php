@@ -36,7 +36,7 @@
                     <a class="nav-link" href="/">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin</a>
+                    <a class="nav-link" href="/admin">Admin panel</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/adminLogin">Admin Login</a>
@@ -159,7 +159,9 @@
 
 </header>
 
-<?= $content ?>
+<div class="container">
+    <?= $content ?>
+</div>
 
 <!--PIED DE PAGE-->
 <footer class="footer mt-auto py-3 bg-dark">

@@ -11,7 +11,7 @@ class AdminController
 
     public function displayLoginAdminPanel() {
         //header('Location: /admin');
-        var_dump($_SERVER);
+        //var_dump($_SERVER['PATH_INFO']);
         if(isset($_POST['send_data'])) {
             $adminName = $_POST['admin_name'];
             $adminManager = new AdminManager();

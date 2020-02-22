@@ -13,25 +13,31 @@ use App\Manager\{
 };
 
 class PostController {
-    public function listPosts()
+
+    public function listPosts($page)
     {
         $postManager = new PostManager(); // Creation obj
 
         $posts = $postManager->getPosts();
+
+        // Pagination :
+        $page = 1;
+        $totalArticleNumber = $postManager->getNumberPage();
+        $currentPage = (int)($page ?? 1);
+        if($currentPage <= 0) {
+            throw new Exception('Numéro de page invalide !');
+        }
+        var_dump($currentPage);
 
         require('src/view/listPostsView.php');
     }
 
     public function post($postId)
     {
-        //if (isset($_GET['post_id']) && $_GET['post_id'] > 0) {
             $postManager = new PostManager();
             $commentManager = new CommentManager();
             $post = $postManager->getPost($postId);
             $comments = $commentManager->getComments($postId);
-        /*} else {
-            throw new Exception('Aucun identifiant de billet envoyé');
-        }*/
 
         require('src/view/postView.php');
     }

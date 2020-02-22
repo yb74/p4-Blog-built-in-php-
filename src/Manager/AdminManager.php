@@ -9,7 +9,7 @@ class AdminManager extends Manager
         $req = $db->prepare('SELECT id, username, password, role FROM users WHERE username = ?');
         $req->execute(array($adminName));
 
-        return $req;
+        return $req->fetch();
     }
 }
 
