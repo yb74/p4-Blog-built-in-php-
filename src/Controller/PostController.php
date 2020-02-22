@@ -21,7 +21,6 @@ class PostController {
         $posts = $postManager->getPosts();
 
         // Pagination :
-        $page = 1;
         $totalArticleNumber = $postManager->getNumberPage();
         $currentPage = (int)($page ?? 1);
         if($currentPage <= 0) {
