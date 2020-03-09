@@ -16,8 +16,8 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->query("SELECT post_id, post_title, post_content, post_picture, DATE_FORMAT(post_date, 'Le %d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY post_date DESC LIMIT $offset, $perPage");
-
-        $req;
+        $req->execute(array($postId));
+        return $req;
     }
 
     public function getPost($postId) // get the selected post
