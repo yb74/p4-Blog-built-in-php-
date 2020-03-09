@@ -22,15 +22,15 @@
     <p>Please, <a href="/connection" class="btn btn-info">Log In</a> to be able to leave a comment !</p>
 <?php else: ?>
         <form action="/chapter<?= $post['post_id'] ?>" method="post" class="p-5 bg-light">
-            <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
+            <div class="form-group <?= $author_help ? 'has-error' : ''; ?>">
                 <label for="author">Author</label><br />
                 <input type="text" id="author" name="author" value="" />
-                <span class="help-block"><?= $this->username_err; ?></span>
+                <span class="help-block"><?= $author_help; ?></span>
             </div>
-            <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
+            <div class="form-group <?= $content_help ? 'has-error' : ''; ?>">
                 <label for="content">Comment</label><br />
                 <textarea id="content" name="content" cols="30" rows="5" class="form-control"></textarea>
-                <span class="help-block"><?= $this->content_err; ?></span>
+                <span class="help-block"><?= $content_help; ?></span>
             </div>
             <div>
                 <input type="submit" value="Post" name="send_data" class="btn py-2 px-3 my-2 btn-primary" />

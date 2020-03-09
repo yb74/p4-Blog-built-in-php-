@@ -16,7 +16,7 @@ class CommentManager extends Manager
         return $comments;
     }
 
-    public function selectReportedComments()
+    /*public function selectReportedComments()
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, author, content, related_id, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE status = 1 ORDER BY creation_date DESC LIMIT 5 OFFSET 0');
@@ -32,7 +32,7 @@ class CommentManager extends Manager
         $newStatus = $req->execute($commentId, $related_id);
 
         return $newStatus;
-    }
+    }*/
 
     public function postComment(Comment $comment) // permet d'afficher un nouveau commentaire en l'inserant dans la table
     {
@@ -47,7 +47,7 @@ class CommentManager extends Manager
         return $req;
     }
 
-    public function getCommentsAdmin()// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
+    /*public function getCommentsAdmin()// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('SELECT id, author, content, DATE_FORMAT(creation_date, \'Le %d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments ORDER BY creation_date DESC');
@@ -63,5 +63,5 @@ class CommentManager extends Manager
         $comments->execute([$postId]);
         $nbComments = $comments->fetch();
         return $nbComments;
-    }
+    }*/
 }
