@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:list-style-type="http://www.w3.org/1999/xhtml">
 
 <head>
     <!-- Required meta tags -->
@@ -8,7 +8,7 @@
     <title><?= $title ?></title>
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({selector:'#edit_post'});</script>
+    <script>tinymce.init({selector:'#adminForm'});</script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -21,145 +21,48 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!--<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">-->
         <a class="navbar-brand" href="/">
-            <img src="/public/images/logo.png" class="d-inline-block align-center text-white">
+            <img src="/public/images/logo.png" class="d-inline-block align-center text-white" style="width:50px;height:50px;">
             Billet simple pour l'Alaska
         </a>
 
-        <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin panel</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/adminLogin">Admin Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-            <div>
-                <button type="button" class="btn btn-outline-light" data-toggle="modal"
-                        data-target="#subscribeForm">S'inscrire</button>
-                <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#connexionForm">Se connecter</button>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+        </ul>
 
-                <!-- Modal Subscription-->
-                <div class="modal fade" id="subscribeForm" tabindex="-1" role="dialog" aria-labelledby="subscribeFormTitle"
-                     style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="subscribeFormTitle">Formulaire d'inscription</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="index.php?action=addNewUser" method="post" id="subscribe-form">
-                                    <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
-                                        <label for="username">Pseudo</label>
-                                        <input type="text" class="form-control" name="subscribe-username" value="<?=$this->username?>">
-                                        <small id="passwordHelp" class="form-text text-muted"><?= $this->username_err; ?></small>
-                                    </div>
-                                    <div class="form-group <?= $this->password_err ? 'has-error' : ''; ?>">
-                                        <label for="subscribe-password">Mot de passe</label>
-                                        <input type="password" class="form-control" name="subscribe-password" value="<?=$this->password?>"
-                                               aria-describedby="passwordHelp">
-                                        <small id="passwordHelp" class="form-text text-muted"><?= $this->password_err; ?></small>
-                                    </div>
-                                    <div class="form-group <?= $this->confirm_password_err ? 'has-error' : ''; ?>">
-                                        <label for="password-confirmation"><?= $this->confirm_password_err; ?></label>
-                                        <input type="password" class="form-control" name="confirm_password" value="<?= $this->confirm_password; ?>">
-                                    </div>
-                                    <!--<div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" name="email" value="$this->email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="profile-picture">Sélectionner votre photo de profil</label>
-                                        <input type="file" class="form-control-file" name="profile-picture"
-                                               aria-describedby="select-profile-picture-help">
-                                        <small id="select-profile-picture-help" class="form-text text-muted">Votre photo de profil ne doit
-                                            pas dépasser 2 Mo et doit respecter le ratio 150*150px.</small>
-                                    </div>-->
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" id="subscribe-button" class="btn btn-primary"
-                                        form="subscribe-form">S'inscrire</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal Connexion-->
-                <div class="modal fade" id="connexionForm" tabindex="-1" role="dialog" aria-labelledby="connexionFormTitle"
-                     aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="connexionFormTitle">Formulaire de connexion</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="messages"></div>
-                                <form action="#" method="post" id="connexion-form">
-                                    <div class="form-group">
-                                        <label for="username">Pseudo</label>
-                                        <input type="text" class="form-control" name="username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Mot de passe</label>
-                                        <input type="password" class="form-control" name="password">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                <button type="submit" class="btn btn-primary" form="connexion-form" id="connect-button">Se
-                                    connecter</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class = "d-flex">
+            <?php if (!$_SESSION): ?>
+                <a class="nav-link" href="/connection">
+                    <button type="button" class="btn btn-primary">Log In</button>
+                </a>
+            <?php else: ?>
+                <?php if ($_SESSION['id']): ?>
+                    <a class="nav-link" href="/logout">
+                        <button type="button" class="btn btn-primary">Log Out</button>
+                    </a>
+                <?php endif; ?>
+                <?php if ($_SESSION['role'] === 'admin'): ?>
+                    <a class="nav-link" href="/admin">
+                        <button type="button" class="btn btn-primary">Dashboard</button>
+                    </a>
+                <?php elseif ($_SESSION['role'] === 'user'): ?>
+                    <li class="nav-item" style="list-style-type:none";><a href="/" class="nav-link"></a></li>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
-
     </nav>
-
-    <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Forgot password</h3>
-                    <button type="button" class="close font-weight-light" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <p>Reset your password..</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </header>
 
-<div class="container">
+<div class="container flex-grow-1">
     <?= $content ?>
 </div>
 

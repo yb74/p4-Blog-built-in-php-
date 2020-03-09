@@ -1,42 +1,43 @@
 <?php
 namespace App\Controller;
 
-/*class PostsController {
-    public function show($slug, $id, $page) {
-        echo "Je suis l'article $id, et je suis en page  " . $page;
-    }
-}*/
-
 use App\Manager\{
     PostManager,
     CommentManager
 };
 
-class PostController {
+class PostController
+{
+    private $postManager;
+    private $commentManager;
 
-    public function listPosts($page)
+    public function __construct()
     {
-        $postManager = new PostManager(); // Creation obj
+        $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
+    }
 
-        $posts = $postManager->getPosts();
+    public function listPosts()
+    {
+        $totalArticleNumber = $this->postManager->getTotal();
+        $currentPage = (int)($_GET['page'] ?? 1);
+        $perPage = 6;
+        $totalPages = ceil($totalArticleNumber / $perPage);
+        $offset = $perPage * ($currentPage - 1);
 
-        // Pagination :
-        $totalArticleNumber = $postManager->getNumberPage();
-        $currentPage = (int)($page ?? 1);
-        if($currentPage <= 0) {
-            throw new Exception('Numéro de page invalide !');
-        }
-        var_dump($currentPage);
+        $posts = $this->postManager->getPosts($perPage, $offset);
 
         require('src/view/listPostsView.php');
     }
 
     public function post($postId)
     {
-            $postManager = new PostManager();
-            $commentManager = new CommentManager();
-            $post = $postManager->getPost($postId);
-            $comments = $commentManager->getComments($postId);
+        $postManager = new PostManager();
+        $post = $postManager->getPost($postId);
+
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getComments($postId);
+        //$comments=$this->commentManager->getComments($_GET['id']);
 
         require('src/view/postView.php');
     }

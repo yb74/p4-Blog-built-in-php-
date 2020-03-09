@@ -6,9 +6,30 @@ class User
     private $id;
     private $username;
     private $password;
-    //private $email;
-    //private $registrationDate;
-    //private $role;
+    private $email;
+    private $registrationDate;
+    private $role;
+
+    // Constructor
+    /*public function __construct(array $donnees)
+    {
+        $this->hydrate($donnees);
+    }
+    // Method hydratation
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value) {
+            $method = 'set' . ucfirst($key);
+
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
+    public function valideUsername()
+    {
+        return !empty($this->username);
+    }*/
 
     // SETTERS
     public function setId(int $id) {
@@ -17,11 +38,17 @@ class User
     public function setUsername(string $username) {
         $this->username = $username;
     }
-    public function setPassword(int $password) {
+    public function setPassword(string $password) {
         $this->password = $password;
     }
     public function setEmail(string $email) {
         $this->email = $email;
+    }
+    public function setRegistrationDate(string $registrationDate) {
+        $this->registrationDate = $registrationDate;
+    }
+    public function setRole(string $role) {
+        $this->role = $role;
     }
 
     //GETTERS
@@ -33,5 +60,14 @@ class User
     }
     public function getPassword(): string {
         return $this->password;
+    }
+    public function getEmail(): string {
+        return $this->email;
+    }
+    public function getRegistrationDate(): string {
+        return $this->registrationDate;
+    }
+    public function getRole(): string {
+        return $this->role;
     }
 }

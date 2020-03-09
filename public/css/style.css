@@ -1,3 +1,9 @@
+html, body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 header .navbar-brand img {
     width: 50px;
     height: 50px; 
@@ -19,7 +25,7 @@ header .navbar-brand img {
 .m-3:hover {
   background-color: lightgrey;
 }
-  
+
 footer {
   padding: 10px;
   text-align: center; 
@@ -37,4 +43,3 @@ footer {
       width: 80%; 
       transition-duration: 1s;
     }
-  

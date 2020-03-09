@@ -1,4 +1,4 @@
-<?php $title = "Billets pour l'Alaska"; ?>
+<?php $title = "Liste des chapitres"; ?>
 
 <?php ob_start(); ?>
 
@@ -50,7 +50,7 @@
     </div>
 <!--EXTRAITS DES CHAPITRES-->
     <div id="latest-chapters" class="container">
-      <h2 class="row justify-content-center text-center mt-4">Les derniers chapitres postés</h2>
+      <h2 class="row justify-content-center text-center mt-4">Latest posted chapters</h2>
       <div class="row justify-content-center">
 <?php
 while ($data = $posts->fetch())
@@ -63,7 +63,7 @@ while ($data = $posts->fetch())
             <h4><?= htmlspecialchars($data['post_title']) ?></h4>
             <h5 class="card-title"><?= htmlspecialchars($data['creation_date_fr']) ?></h5>
             <p class="card-text"><?= substr(nl2br(htmlspecialchars($data['post_content'])), 0, 50) ?></p>
-            <a href="/post/<?= $data['post_id'] ?>" class="btn btn-primary">Lire la suite</a>
+            <a href="/chapter<?= $data['post_id'] ?>" class="btn btn-primary">Read more</a>
           </div>
         </div>
     <?php
@@ -72,7 +72,14 @@ $posts->closeCursor();
 ?>
       </div>
     </div>
-
+      <div class="d-flex justify-content-between my-4">
+          <?php if ($currentPage > 1): ?>
+              <a href="<?= '/?page='?><?= $currentPage -1 ?>" class="btn btn-primary">&laquo; Previous page</a>
+          <?php endif ?>
+          <?php if ($currentPage < $totalPages): ?>
+              <a href="<?= '/?page='?><?= $currentPage +1 ?>" class="btn btn-primary ml-auto">Next page &raquo;</a>
+          <?php endif ?>
+      </div>
   </section>
 
 <?php $content = ob_get_clean(); ?>

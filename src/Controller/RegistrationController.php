@@ -1,9 +1,7 @@
 <?php
 namespace App\Controller;
 
-//use App\Manager\RegistrationManager;
-
-require_once 'src/Manager/RegistrationManager.php';
+use App\Manager\RegistrationManager;
 
 class RegistrationController
 {
@@ -15,7 +13,7 @@ class RegistrationController
     public $confirm_password_err = "";
     public $id = "";
 
-    public function addNewUser($username, $password)
+    public function pushUserInfo($username, $password)
     {
         $user = $_POST['username'];
         // Processing form data when form is submitted
