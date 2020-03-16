@@ -1,19 +1,19 @@
-<?php $title = htmlspecialchars($post['post_title']); ?>
+<?php $title = htmlspecialchars($post->getTitle()); ?>
 
 <?php ob_start(); ?>
     <section>
-        <div style="background-image: url('<?= $post['post_picture'] ?>'); background-size: cover;">
+        <div style="background-image: url('<?= $post->getPictureUrl ?>'); background-size: cover;">
             <div class="jumbotron jumbotron-fluid">
                 <div class="container chapter-title">
-                    <h1 class="display-4"><?= htmlspecialchars($post['post_title']) ?></h1>
-                    <h3 class="lead"><?= $post['creation_date_fr'] ?></h3>
+                    <h1 class="display-4"><?= htmlspecialchars($post->getTitle()) ?></h1>
+                    <h3 class="lead"><?= $post->getCreationDateFr() ?></h3>
                 </div>
             </div>
         </div>
 
         <div class="news">
             <p>
-                <?= nl2br(htmlspecialchars($post['post_content'])) ?>
+                <?= nl2br(htmlspecialchars($post->getContent())) ?>
             </p>
         </div>
             <a href="<?= '/'?>" class="btn btn-primary my-3">&laquo; Back to chapters list</a>
@@ -21,7 +21,7 @@
 <?php if (!$_SESSION): ?>
     <p>Please, <a href="/connection" class="btn btn-info">Log In</a> to be able to leave a comment !</p>
 <?php else: ?>
-        <form action="/chapter<?= $post['post_id'] ?>" method="post" class="p-5 bg-light">
+        <form action="/chapter<?= $post->getId() ?>" method="post" class="p-5 bg-light">
             <div class="form-group <?= $author_help ? 'has-error' : ''; ?>">
                 <label for="author">Author</label><br />
                 <input type="text" id="author" name="author" value="" />
@@ -48,14 +48,14 @@ foreach ($comments as $comment)
                     <div class="media-body">
                         <div class="row">
                             <p class="comment-username mt-0 mx-2"><?= htmlspecialchars($comment->getAuthor()); ?></p>
-                            <span class="font-weight-lighter font-italic"><?= $comment->getComment_date_fr(); ?></span>
+                            <span class="font-weight-lighter font-italic"><?= $comment->getCommentDateFr(); ?></span>
                         </div>
                         <div class="row">
                             <p class="col-12 p-0 mt-0 mx-2 mb-0"><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
 
                             <?php if ($_SESSION): ?>
                                 <?php if ($_SESSION['role'] === 'user'): ?>
-                                    <a href="<?= '/chapter?postId='?><?= $_GET['comment_id'] ?>">
+                                    <a href="<?= '/chapter?postId='?><?= $comment->getId() ?>">
                                         <button class="btn btn-danger ml-5 mt-3">Report</button>
                                     </a>
                                 <?php endif; ?>

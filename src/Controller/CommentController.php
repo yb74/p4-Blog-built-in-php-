@@ -1,20 +1,17 @@
 <?php
 namespace App\Controller;
 
-use App\Model\{
-    Post,
-    Comment
-};
-use App\Manager\{
-    PostManager,
-    CommentManager
-};
+use App\Manager\UserManager;
+use App\Model\Comment;
+
+use App\Manager\CommentManager;
 
 
 class CommentController
 {
     public function __construct()
     {
+        $this->userManager = new UserManager();
         $this->commentManager = new CommentManager();
         $this->comment = new Comment();
     }
@@ -36,13 +33,13 @@ class CommentController
                 $this->comment->setRelatedId($related_id);
                 $this->commentManager->postComment($this->comment);
 
-                echo '<pre>';
+                /*echo '<pre>';
                 var_dump($this->comment);
                 echo '</pre>';
 
                 echo '<pre>';
                 var_dump($_POST);
-                echo '</pre>';
+                echo '</pre>';*/
 
                 header('Location: /chapter' . $related_id);
                 //require 'src/view/postView.php';

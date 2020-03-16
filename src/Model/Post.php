@@ -5,46 +5,87 @@ class Post {
     private $id;
     private $title;
     private $content;
-    private $date;
+    private $creation_date_fr;
+    private $picture_url;
 
-
-    public function getId(): int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
-    public function getTitle(): string
+    /**
+     * @return mixed
+     */
+    public function getTitle()
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): void
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
 
-    public function getContent(): string
+    /**
+     * @return mixed
+     */
+    public function getContent()
     {
         return $this->content;
     }
 
-    public function setContent(string $content): void
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content): void
     {
         $this->content = $content;
     }
 
-    public function getDate(): string
+    /**
+     * @return mixed
+     */
+    public function getCreationDateFr()
     {
-        return $this->date;
+        return $this->creation_date_fr;
     }
 
-    public function setDate(string $date): void
+    /**
+     * @param mixed $creation_date_fr
+     */
+    public function setCreationDateFr($creation_date_fr): void
     {
-        $this->date = $date;
+        $this->creation_date_fr = $creation_date_fr;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureUrl()
+    {
+        return $this->picture_url;
+    }
+
+    /**
+     * @param mixed $picture_url
+     */
+    public function setPictureUrl($picture_url): void
+    {
+        $this->picture_url = $picture_url;
+    }
+
 }

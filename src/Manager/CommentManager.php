@@ -5,12 +5,12 @@ use App\Model\Comment;
 
 class CommentManager extends Manager
 {
-    public function getComments($related_id)// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
+    public function getComments($postId)// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, author, content, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE related_id = ? ORDER BY creation_date DESC LIMIT 5 OFFSET 0');
+        $req->execute(array($postId));
         $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
-        $req->execute(array($related_id));
         $comments = $req->fetchAll();
 
         return $comments;

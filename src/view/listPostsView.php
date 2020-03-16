@@ -53,22 +53,22 @@
       <h2 class="row justify-content-center text-center mt-4">Latest posted chapters</h2>
       <div class="row justify-content-center">
 <?php
-while ($data = $posts->fetch())
+foreach ($posts as $post)
 {
     ?>
         <div class="card m-3" style="width: 20.5rem; height:20.5rem">
-          <img src="<?= $data['post_picture'] ?>" class="card-img-top"
+          <img src="<?= $post->getPictureUrl() ?>" class="card-img-top"
                alt="Image du chapitre intitulé Une aurore boréale">
           <div class="card-body">
-            <h4><?= htmlspecialchars($data['post_title']) ?></h4>
-            <h5 class="card-title"><?= htmlspecialchars($data['creation_date_fr']) ?></h5>
-            <p class="card-text"><?= substr(nl2br(htmlspecialchars($data['post_content'])), 0, 50) ?></p>
-            <a href="/chapter<?= $data['post_id'] ?>" class="btn btn-primary">Read more</a>
+            <h4><?= htmlspecialchars($post->getTitle()) ?></h4>
+            <h5 class="card-title"><?= htmlspecialchars($post->getCreationDateFr()); ?></h5>
+            <p class="card-text"><?= substr(nl2br(htmlspecialchars($post->getContent())), 0, 50) ?></p>
+            <a href="/chapter<?= $post->getId() ?>" class="btn btn-primary">Read more</a>
+             <!--$data['post_id']-->
           </div>
         </div>
     <?php
 }
-$posts->closeCursor();
 ?>
       </div>
     </div>

@@ -18,6 +18,14 @@ class Comment {
     }
 
     /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return mixed
      */
     public function getRelatedId()
@@ -68,7 +76,7 @@ class Comment {
     /**
      * @return mixed
      */
-    public function getComment_date_fr()
+    public function getCommentDateFr()
     {
         return $this->comment_date_fr;
     }
@@ -76,7 +84,7 @@ class Comment {
     /**
      * @param mixed $comment_date_fr
      */
-    public function setComment_date_fr($comment_date_fr): void
+    public function setCommentDateFr($comment_date_fr): void
     {
         $this->comment_date_fr = $comment_date_fr;
     }
@@ -97,45 +105,5 @@ class Comment {
         $this->status = $status;
     }
 
-    /*
-    // SETTERS
-    public function setId(int $id) {
-        $this->id = $id;
-    }
-    public function setRelated_id(int $related_id) {
-        $this->related_id = $related_id;
-    }
-    public function setAuthor(string $author) {
-        $this->author = $author;
-    }
-    public function setContent(string $content) {
-        $this->content = $content;
-    }
-    public function setComment_date_fr(string $comment_date_fr) {
-        $this->comment_date_fr = $comment_date_fr;
-    }
-    public function setStatus(bool $status) {
-        $this->status = $status;
-    }
 
-    // GETTERS
-    public function getId(): int {
-        return $this->id;
-    }
-    public function getRelated_id(): string  {
-        return $this->related_id;
-    }
-    public function getAuthor(): string  {
-        return $this->author;
-    }
-    public function getContent(): string {
-        return $this->content;
-    }
-    public function getCreation_date(): string {
-        return $this->comment_date_fr;
-    }
-    public function getStatus(): bool {
-        return $this->status;
-    }
-    */
 }
