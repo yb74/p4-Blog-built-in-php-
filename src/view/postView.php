@@ -20,12 +20,10 @@
         <h2 class="my-3">Comments</h2>
 <?php if (!$_SESSION): ?>
     <p>Please, <a href="/connection" class="btn btn-info">Log In</a> to be able to leave a comment !</p>
-<?php else: ?>
+<?php elseif ($_SESSION['role'] === 'user'): ?>
         <form action="/chapter<?= $post->getId() ?>" method="post" class="p-5 bg-light">
-            <div class="form-group <?= $author_help ? 'has-error' : ''; ?>">
-                <label for="author">Author</label><br />
-                <input type="text" id="author" name="author" value="" />
-                <span class="help-block"><?= $author_help; ?></span>
+            <div class="form-group">
+                <input type="text" id="author" style= "cursor: not-allowed" name="author" readonly="readonly" value = "<?= $_SESSION['username']  ?>" class="form-control mb-4">
             </div>
             <div class="form-group <?= $content_help ? 'has-error' : ''; ?>">
                 <label for="content">Comment</label><br />
@@ -47,7 +45,7 @@ foreach ($comments as $comment)
                     <!--<img src="public/images/profile_pictures/155678948553782604_2525062594189150_7288303766074294272_o (2).jpg" class="mr-3 profile-picture align-middle" alt="profile picture">-->
                     <div class="media-body">
                         <div class="row">
-                            <p class="comment-username mt-0 mx-2"><?= htmlspecialchars($comment->getAuthor()); ?></p>
+                            <p class="comment-username mt-0 mx-2"><?= $comment->getAuthor(); ?></p>
                             <span class="font-weight-lighter font-italic"><?= $comment->getCommentDateFr(); ?></span>
                         </div>
                         <div class="row">

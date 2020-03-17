@@ -10,6 +10,12 @@ use App\Manager\{
 
 class UserController
 {
+    public function __construct()
+    {
+        $this->userManager = new UserManager();
+        $this->commentManager = new CommentManager();
+    }
+
     public $confirm_password = "";
     public $username_err = "";
     public $password_err = "";
@@ -78,6 +84,8 @@ class UserController
                 if (password_verify($password, $user->getPassword())) {
                     $_SESSION['id'] = $user->getId();
                     $_SESSION['role'] = $user->getRole();
+                    $_SESSION['username'] = $user->getUsername();
+
                     if ($user->getRole() === 'admin') {
 
                         header('Location: /admin');
@@ -114,13 +122,16 @@ class UserController
         require 'src/view/adminView.php';
     }
 
-    public function dashboardPost($currentPage, $offset) // affiche la liste des articles dans l'interface admin
+    public function dashboardPost() // affiche la liste des articles dans l'interface admin
     {
-        $postsList = new PostManager();
-        $posts = $postsList->listPosts($currentPage, $offset);
+        /*$postsList = new PostManager();
+        $posts = $postsList->getAdminPosts();*/
+
+        $comments = $this->commentManager->getNbCommentAdmin();
+        //var_dump($comment['nb_comments']);
+
         //$commentList = new CommentManager();
         //$comments = $commentList->getCommentsAdmin();
-        var_dump($posts);
         require 'src/view/adminView.php';
     }
 }

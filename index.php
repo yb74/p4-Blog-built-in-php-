@@ -12,7 +12,7 @@ use App\Controller\{
 $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
 
 // ADMIN SYSTEM
-$router->get('/admin', "User#displayAdminPanel"); // display the admin panel
+$router->get('/admin', "User#dashboardPost"); // display the admin panel
 
 // USER SYSTEM
 // registration
@@ -30,7 +30,7 @@ $router->get('/welcome', "User#displayWelcomeView"); // display the WelcomeView
 $router->get('/', "Post#listPosts"); // display all chapters
 
 $router->get('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // display the selected chapter
-$router->post('/chapter:postId', "Comment#addComment")->with('related_id', '[0-9]+'); // Comment a chapter
+$router->post('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // Comment a chapter
 //$router->get('/chapter:commentId', "Comment#reportComment")->with('commentId', '[0-9]+'); // Report a comment
 
 // CONTACT SYSTEM

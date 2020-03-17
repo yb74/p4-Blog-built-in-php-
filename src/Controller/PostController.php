@@ -30,9 +30,6 @@ class PostController
 
         $posts = $this->postManager->getPosts($perPage, $offset);
 
-        /*echo "<pre>";
-        var_dump($posts);
-        echo "</pre">;*/
         require('src/view/listPostsView.php');
     }
 
@@ -42,7 +39,13 @@ class PostController
         $content_help = null;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['author']) && isset($_POST['content'])) {
+            if (empty($_POST['author'])) {
+                $author_help = "Please, enter your username !";
+            }
+            if (empty($_POST['content'])) {
+                $content_help = "Please, enter a comment !";
+            }
+            else if (isset($_POST['author']) && isset($_POST['content'])) {
                 $this->comment->setAuthor($_POST['author']);
                 $this->comment->setContent($_POST['content']);
                 $this->comment->setRelatedId($postId);
@@ -50,28 +53,10 @@ class PostController
 
                 header('Location: /chapter' . $postId);
             }
-            else if (empty($_POST['author'])) {
-                    $author_help = "Please, enter your username !";
-            } else if (empty($_POST['content'])) {
-                $content_help = "Please, enter a comment !";
-            }
         }
 
         $post  = $this->postManager->getPost($postId);
-
-        /*if($post === false || $comments === false){
-            header("HTTP:1.0 404 Not Found");
-            header('Location:index.php');
-        }*/
-
-        /*echo "<pre>";
-        var_dump($post);
-        echo "</pre>";
-
-        echo "<pre>";
-        var_dump($comments);
-        echo "</pre>";
-        */
+        $comments  = $this->commentManager->getComments($postId);
 
         require('src/view/postView.php');
     }

@@ -35,6 +35,18 @@ class PostManager extends Manager
 
         return $post;
     }
+
+    // admin
+    public function getAdminPosts() // get all posts in dashboard
+    {
+        $db = $this->dbConnect();
+        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 15");
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
+            'App\Model\Post');
+        $posts = $req->fetchAll();
+        return $posts;
+    }
+
     /*
     // UPDATE a post
     public function updatePost($title, $content, $postId)

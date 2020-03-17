@@ -18,21 +18,21 @@
                         <div class="case">
                             <div class="row">
                                 <?php
-                                while ($data = $posts->fetch()) {
+                                foreach ($comments as $comment) {
                                     ?>
                                     <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                         <div class="text w-100 pl-md-3">
                                             <p class="text-center">Title</p>
                                             <h3 class="text-center">
-                                                <?= htmlspecialchars($data['post_title']) ?>
+                                                <?= $comment['title'] ?>
                                             </h3>
                                             <p class="text-center">Comments number</p>
                                             <h3 class="text-center">
-                                                Comments number
+                                                <?= $comment['nb_comments'] ?>
                                             </h3>
                                             <p class="text-center">Creation date</p>
                                             <h3 class="text-center">
-                                                <?= htmlspecialchars($data['creation_date_fr']) ?>
+                                                <?= $comment['creation_date_fr'] ?>
                                             </h3>
                                             <br>
                                             <p class="text-center">Available options</p>
@@ -45,7 +45,6 @@
                                     </div>
                                     <?php
                                 }
-                                $posts->closeCursor();
                                 ?>
                             </div>
                         </div>
@@ -63,6 +62,8 @@
                 <input type="submit" value="Post a post" class="btn py-2 px-3 my-2 btn-primary">
             </div>
         </form>
+
+        </div>
     </section>
 <!--
     <h1>Espace d'administration</h1>
