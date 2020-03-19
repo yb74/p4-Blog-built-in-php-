@@ -39,7 +39,6 @@ class UserController
                 return;
             }
             if ($user) {
-                //var_dump($user);
                 $this->username_err = "This username is already taken.";
                 require 'src/view/registrationView.php';
                 return;
@@ -117,21 +116,22 @@ class UserController
         exit;
     }
 
-    // ADMIN FUNCTIONS
-    public function displayAdminPanel() {
-        require 'src/view/adminView.php';
-    }
 
-    public function dashboardPost() // affiche la liste des articles dans l'interface admin
-    {
+    // ADMIN FUNCTIONS
+    /*public function displayAdminPanel() {
+        require 'src/view/adminView.php';
+    }*/
+
+    /*public function dashboardPost() // affiche la liste des articles dans l'interface admin
+    {*/
         /*$postsList = new PostManager();
         $posts = $postsList->getAdminPosts();*/
 
-        $comments = $this->commentManager->getNbCommentAdmin();
+        //$comments = $this->commentManager->getNbCommentAdmin();
         //var_dump($comment['nb_comments']);
 
         //$commentList = new CommentManager();
         //$comments = $commentList->getCommentsAdmin();
-        require 'src/view/adminView.php';
-    }
+        /*require 'src/view/adminView.php';
+    }*/
 }

@@ -22,24 +22,25 @@
                                     ?>
                                     <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                         <div class="text w-100 pl-md-3">
+                                            <img src="<?= $comment->getCommentUrl() ?>" class="img-fluid mb-3" alt="Responsive image">
                                             <p class="text-center">Title</p>
                                             <h3 class="text-center">
-                                                <?= $comment['title'] ?>
+                                                <?= $comment->getTitle() ?>
                                             </h3>
                                             <p class="text-center">Comments number</p>
                                             <h3 class="text-center">
-                                                <?= $comment['nb_comments'] ?>
+                                                <?= $comment->getNbComments() ?>
                                             </h3>
                                             <p class="text-center">Creation date</p>
                                             <h3 class="text-center">
-                                                <?= $comment['creation_date_fr'] ?>
+                                                <?= $comment->getCreationDateFr() ?>
                                             </h3>
                                             <br>
                                             <p class="text-center">Available options</p>
                                             <div class="d-flex justify-content-center">
-                                                <a href="/post/:postId" class="btn btn-primary btn-sm mx-2">See</a>
-                                                <a href="" class="btn btn-warning btn-sm mx-2">Modify</a>
-                                                <a href="" class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
+                                                <a href="/chapter<?= $comment['post_id'] ?>" class="btn btn-primary btn-sm mx-2 display-button">See</a>
+                                                <a href="/modifyPost<?= $comment['post_id'] ?>" class="btn btn-warning btn-sm mx-2 modify-button">Modify</a>
+                                                <a href="/deletePost<?= $comment['post_id'] ?>" class="delete-post btn btn-danger btn-sm mx-2 delete-button">Delete</a>
                                             </div>
                                         </div>
                                     </div>

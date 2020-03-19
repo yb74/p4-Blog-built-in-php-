@@ -8,6 +8,8 @@ class Comment {
     private $content;
     private $comment_date_fr;
     private $status;
+    private $nb_comments;
+
 
     /**
      * @return mixed
@@ -105,5 +107,19 @@ class Comment {
         $this->status = $status;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNbComments()
+    {
+        return $this->nb_comments;
+    }
 
+    /**
+     * @param mixed $nb_comments
+     */
+    public function setNbComments($nb_comments): void
+    {
+        $this->nb_comments = $nb_comments;
+    }
 }

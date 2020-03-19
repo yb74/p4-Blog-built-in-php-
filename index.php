@@ -12,7 +12,9 @@ use App\Controller\{
 $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
 
 // ADMIN SYSTEM
-$router->get('/admin', "User#dashboardPost"); // display the admin panel
+$router->get('/admin', "Admin#manageDashboard"); // display the admin panel
+$router->get('/modifyPost:postId', "Admin#modifyPost"); // modify a post
+$router->get('/deletePost', "Admin#deletePost"); // delete a post
 
 // USER SYSTEM
 // registration
