@@ -28,9 +28,6 @@ class AdminController {
     public function manageDashboard() // affiche la liste des articles dans l'interface admin
     {
         $comments = $this->commentManager->getNbCommentAdmin();
-        /*echo "<pre>";
-        var_dump($comments);
-        echo "</pre>";*/
 
         //$commentList = new CommentManager();
         //$comments = $commentList->getCommentsAdmin();
@@ -50,6 +47,7 @@ class AdminController {
     // POST ADMINISTRATION
     public function modifyPost() {
         $post = $this->postManager->getPost($postId);
+
         require "src/view/modifyPostView.php";
     }
 

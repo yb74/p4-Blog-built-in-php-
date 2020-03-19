@@ -59,7 +59,7 @@ class CommentManager extends Manager
     public function getNbCommentAdmin()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, posts.title AS title, posts.content AS content, posts.picture_url as picture_url, posts.id AS post_id, posts.creation_date AS creation_date_fr FROM comments
+        $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, posts.title AS title, posts.content AS postContent, posts.picture_url as picture_url, posts.id AS post_id, posts.creation_date AS post_date FROM comments
             INNER JOIN posts ON comments.related_id = posts.id
             GROUP BY comments.related_id');
         $comments = $req->fetchAll(\PDO::FETCH_CLASS,'App\Model\Comment');

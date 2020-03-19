@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 ftco-animate">
-                <form action="index.php?action=modifyPost&amp;id=<?= $post->getId() ?>" method="post"
+                <form action="/modifyPost<?= $post->getId() ?>" method="post"
                       class="p-5 bg-light">
                     <div class="form-group">
                         <label for="title">Title</label><br/>

@@ -9,7 +9,11 @@ class Comment {
     private $comment_date_fr;
     private $status;
     private $nb_comments;
-
+    private $title;
+    private $picture_url;
+    private $postContent;
+    private $post_id;
+    private $post_date;
 
     /**
      * @return mixed
@@ -121,5 +125,85 @@ class Comment {
     public function setNbComments($nb_comments): void
     {
         $this->nb_comments = $nb_comments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureUrl()
+    {
+        return $this->picture_url;
+    }
+
+    /**
+     * @param mixed $picture_url
+     */
+    public function setPictureUrl($picture_url): void
+    {
+        $this->picture_url = $picture_url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostContent()
+    {
+        return $this->postContent;
+    }
+
+    /**
+     * @param mixed $postContent
+     */
+    public function setPostContent($postContent): void
+    {
+        $this->postContent = $postContent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostId()
+    {
+        return $this->post_id;
+    }
+
+    /**
+     * @param mixed $post_id
+     */
+    public function setPostId($post_id): void
+    {
+        $this->post_id = $post_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostDate()
+    {
+        return $this->post_date;
+    }
+
+    /**
+     * @param mixed $post_date
+     */
+    public function setPostDate($post_date): void
+    {
+        $this->post_date = $post_date;
     }
 }

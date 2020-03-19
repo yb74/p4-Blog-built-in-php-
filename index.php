@@ -13,7 +13,7 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
 
 // ADMIN SYSTEM
 $router->get('/admin', "Admin#manageDashboard"); // display the admin panel
-$router->get('/modifyPost:postId', "Admin#modifyPost"); // modify a post
+$router->get('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // modify a post
 $router->get('/deletePost', "Admin#deletePost"); // delete a post
 
 // USER SYSTEM
