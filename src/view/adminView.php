@@ -6,8 +6,8 @@
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Posts</h2>
-                <a href="" class="btn btn-primary">Manage comments</a>
-                <a href="" class="btn btn-primary">Create a post</a>
+                <a href="/manageComments" class="btn btn-primary">Manage comments</a>
+                <a href="createPost" class="btn btn-primary">Create a post</a>
             </div>
         </div>
 

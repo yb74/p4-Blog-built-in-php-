@@ -16,6 +16,26 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    public function getAllComments()// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT id, author, content, related_id, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
+        $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
+        $comments = $req->fetchAll();
+
+        return $comments;
+    }
+
+    /*public function getPosts($perPage, $offset) // get all posts
+    {
+        $db = $this->dbConnect();
+        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT $offset, $perPage");
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
+            'App\Model\Post');
+        $posts = $req->fetchAll();
+        return $posts;
+    }*/
+
     /*public function selectReportedComments()
     {
         $db = $this->dbConnect();

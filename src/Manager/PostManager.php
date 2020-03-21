@@ -36,31 +36,41 @@ class PostManager extends Manager
         return $post;
     }
 
-    // admin
-    public function getAdminPosts() // get all posts in dashboard
+    // ADMIN
+
+    // UPDATE a post
+    public function updatePost(Post $post)
     {
         $db = $this->dbConnect();
-        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 15");
-        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
-            'App\Model\Post');
-        $posts = $req->fetchAll();
-        return $posts;
+        $req = $db->prepare('UPDATE posts SET :title, :content WHERE :id');
+        $req->execute(array(
+            'title'=> $post->getTitle(),
+            'content'=> $post->getContent(),
+            'id'=> $post->getId()
+        ));
+
+        return $req;
     }
 
-    /*
-    // UPDATE a post
-    public function updatePost($title, $content, $postId)
-    {
-        $db = $this->dbConnect();
-        $updatePost = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
-        $updatePost->execute(array($title, $content, $postId));
-    }
     // DELETE a post
     public function deletePost($postId)
     {
         $db = $this->dbConnect();
-        $deletePost = $db->prepare('DELETE FROM p4_posts WHERE post_id = ?');
+        $deletePost = $db->prepare('DELETE FROM posts WHERE id = ?');
         $deletePost->execute(array($postId));
     }
-    */
+
+
+    public function postComment(Comment $comment) // permet d'afficher un nouveau commentaire en l'inserant dans la table
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO comments(related_id, author, content, status, creation_date) VALUES(:related_id, :author, :content, 0, NOW())');
+        $req->execute(array(
+            'related_id'=> $comment->getRelatedId(),
+            'author'=> $comment->getAuthor(),
+            'content'=> $comment->getContent()
+        ));
+
+        return $req;
+    }
 }
