@@ -98,7 +98,7 @@ class AdminController {
                 $this->post->setId($postId);
                 $this->postManager->updatePost($this->post);
                 //var_dump($postId);
-                header('Location: /admin' . $postId);
+                header('Location: /admin');
             }
         //}
         $post = $this->postManager->getPost($postId);
