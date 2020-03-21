@@ -38,6 +38,20 @@ class PostManager extends Manager
 
     // ADMIN
 
+    // CREATE a post
+    public function addPost(Post $post)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO posts(title, content, creation_date, picture_url) VALUES(:title, :content, NOW(), :picture_url)');
+        $req->execute(array(
+            'title'=> $post->getTitle(),
+            'content'=> $post->getContent(),
+            'picture_url'=> $post->getPictureUrl()
+        ));
+
+        return $req;
+    }
+
     // UPDATE a post
     public function updatePost(Post $post)
     {
@@ -58,19 +72,5 @@ class PostManager extends Manager
         $db = $this->dbConnect();
         $deletePost = $db->prepare('DELETE FROM posts WHERE id = ?');
         $deletePost->execute(array($postId));
-    }
-
-
-    public function postComment(Comment $comment) // permet d'afficher un nouveau commentaire en l'inserant dans la table
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments(related_id, author, content, status, creation_date) VALUES(:related_id, :author, :content, 0, NOW())');
-        $req->execute(array(
-            'related_id'=> $comment->getRelatedId(),
-            'author'=> $comment->getAuthor(),
-            'content'=> $comment->getContent()
-        ));
-
-        return $req;
     }
 }

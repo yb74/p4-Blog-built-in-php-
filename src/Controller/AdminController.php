@@ -75,11 +75,35 @@ class AdminController {
 
     // POST ADMINISTRATION
     public function createPost(){
+        $uploadPicture_help = null;
+        $createTitle_help = null;
+        $createContent_help = null;
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (empty($_POST['picture_url'])) {
+                $uploadPicture_help = "Please, upload a picture !";
+            }
+            if (empty($_POST['title'])) {
+                $createTitle_help = "Please, enter a title !";
+            }
+            if (empty($_POST['content'])) {
+                $createContent_help = "Please, enter a content !";
+            }
+            else if (isset($_POST['picture_url']) && isset($_POST['title']) && isset($_POST['content'])) {
+                $this->post->setPictureUrl($_POST['picture_url']); ///public/images/chapters/chapter-image1.jpg
+                $this->post->setTitle($_POST['title']);
+                $this->post->setContent($_POST['content']);
+                //$this->post->setId($postId);
+                $this->postManager->addPost($this->post);
+
+                header('Location: /admin');
+            }
+        }
         require('src/view/createPostView.php');
+        return;
     }
 
     public function modifyPost($postId) {
-
         $modifyTitle_help = null;
         $modifyContent_help = null;
 
