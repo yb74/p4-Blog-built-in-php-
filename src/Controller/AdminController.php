@@ -83,26 +83,23 @@ class AdminController {
         $modifyTitle_help = null;
         $modifyContent_help = null;
 
-        //if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            /*if (empty($_POST['title'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (empty($_POST['title'])) {
                 $modifyTitle_help = "Please, enter a title !";
-                var_dump("route");
             }
             if (empty($_POST['content'])) {
                 $modifyContent_help = "Please, enter a content !";
-                var_dump("contenu");
-            }*/
-            /*else*/ if (isset($_POST['title']) && isset($_POST['content'])) {
-                $this->post->setTitle($_POST['title']);
-                $this->post->setContent($_POST['content']);
+            }
+            else if (isset($_POST['title']) && isset($_POST['content'])) {
+                $this->post->setTitle(htmlspecialchars($_POST['title']));
+                $this->post->setContent(htmlspecialchars($_POST['content']));
                 $this->post->setId($postId);
                 $this->postManager->updatePost($this->post);
-                //var_dump($postId);
+
                 header('Location: /admin');
             }
-        //}
+        }
         $post = $this->postManager->getPost($postId);
-        var_dump($postId);
         require "src/view/modifyPostView.php";
         return;
     }
