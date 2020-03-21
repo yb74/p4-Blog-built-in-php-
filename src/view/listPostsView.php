@@ -62,9 +62,8 @@ foreach ($posts as $post)
           <div class="card-body">
             <h4><?= htmlspecialchars($post->getTitle()) ?></h4>
             <h5 class="card-title"><?= htmlspecialchars($post->getCreationDateFr()); ?></h5>
-            <p class="card-text"><?= substr(nl2br(htmlspecialchars($post->getContent())), 0, 50) ?></p>
+            <p class="card-text"><?= substr(nl2br($post->getContent()), 0, 50) ?></p>
             <a href="/chapter<?= $post->getId() ?>" class="btn btn-primary">Read more</a>
-             <!--$data['post_id']-->
           </div>
         </div>
     <?php

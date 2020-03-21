@@ -116,7 +116,7 @@ class AdminController {
             }
             else if (isset($_POST['title']) && isset($_POST['content'])) {
                 $this->post->setTitle(htmlspecialchars($_POST['title']));
-                $this->post->setContent(htmlspecialchars($_POST['content']));
+                $this->post->setContent($_POST['content']);
                 $this->post->setId($postId);
                 $this->postManager->updatePost($this->post);
 

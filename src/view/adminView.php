@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-    <section>
+
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Posts</h2>
@@ -54,32 +54,6 @@
             </div>
         </section>
 
-        <form action="" method="post" class="p-5 bg-light">
-            <div class="form-group">
-                <label for="adminform">Comment</label><br />
-                <textarea name="adminform" id="adminform" cols="30" rows="10" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Post a post" class="btn py-2 px-3 my-2 btn-primary">
-            </div>
-        </form>
-
-        </div>
-    </section>
-<!--
-    <h1>Espace d'administration</h1>
-    <p><a href="/">Retour à la liste des billets</a></p>
-
-    <form method="post" action="" class="p-5 bg-light">
-        <div>
-            <label for="adminForm">Editer l'article</label><br />
-            <textarea id="edit_post" name="edit_post"></textarea>
-        </div>
-        <div>
-            <input type="submit" />
-        </div>
-    </form>
--->
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template/template.php'); ?>

@@ -6,7 +6,7 @@
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Manage Comments</h2>
-                <a href="" class="btn btn-primary">Manage posts</a>
+                <a href="/admin" class="btn btn-primary">Manage posts</a>
                 <a href="/createPost" class="btn btn-primary">Create a post</a>
                 <a href="/error" class="btn btn-primary">Test Display Error view</a>
             </div>

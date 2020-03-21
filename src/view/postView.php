@@ -13,7 +13,7 @@
 
         <div class="news">
             <p>
-                <?= nl2br(htmlspecialchars($post->getContent())) ?>
+                <?= $post->getContent() ?>
             </p>
         </div>
             <a href="<?= '/'?>" class="btn btn-primary my-3">&laquo; Back to chapters list</a>
