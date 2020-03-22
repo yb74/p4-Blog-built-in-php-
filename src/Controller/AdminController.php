@@ -12,6 +12,8 @@ use App\Model\{
 };
 
 class AdminController {
+    public $msg= "";
+
     public function __construct()
     {
         $this->userManager = new UserManager();
@@ -32,9 +34,11 @@ class AdminController {
     public function manageDashboard() // affiche les infos des articles dans l'interface admin
     {
         $comments = $this->commentManager->getNbCommentAdmin();
+        //$posts = $this->postManager->getDashboardPosts();
 
         //$commentList = new CommentManager();
         //$comments = $commentList->getCommentsAdmin();
+
         require 'src/view/adminView.php';
     }
 
@@ -90,7 +94,7 @@ class AdminController {
                 $createContent_help = "Please, enter a content !";
             }
             else if (isset($_POST['picture_url']) && isset($_POST['title']) && isset($_POST['content'])) {
-                $this->post->setPictureUrl($_POST['picture_url']); ///public/images/chapters/chapter-image1.jpg
+                $this->post->setPictureUrl($_POST['picture_url']);
                 $this->post->setTitle($_POST['title']);
                 $this->post->setContent($_POST['content']);
                 //$this->post->setId($postId);
@@ -128,8 +132,23 @@ class AdminController {
         return;
     }
 
-    public function deletePost($postId) {
-        $this->postManager->deletePost($postId);
-        header('Location: /admin' . $postId);
+    /*public function postDelete($postId) {
+        $this->post->setId($postId);
+        $this->postManager->deletePost($this->post);
+        header('Location: /admin');
+        //require "src/view/adminView.php";
+    }*/
+
+    public function postDelete($postId){
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $this->post->setId($postId);
+            $this->postManager->deletePost($this->post);
+
+                header('Location: /admin');
+        }
+        else {
+            $this->msg='No post id has been sent !';
+            require('src/view/errorView.php');
+        }
     }
 }

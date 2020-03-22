@@ -1,4 +1,8 @@
-<?php $title = 'Single ticket for Alaska'; ?>
+<?php $title = 'Single ticket for Alaska';
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Welcome to my blog !';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
     <section>

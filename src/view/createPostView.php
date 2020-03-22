@@ -1,4 +1,8 @@
-<?php $title = 'Create a post'; ?>
+<?php $title = 'Create a post';
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Post creation';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 
@@ -12,7 +16,7 @@
                             <label for="title">Picture</label><br/>
                             <span class="help-block text-danger"><?= $uploadPicture_help; ?></span>
                             <input type="text" name="picture_url" id="title" cols="30" rows="10"
-                                   class="form-control">
+                                   class="form-control">  <!-- /public/images/chapters/chapter-image1.jpg -->
                         </div>
                         <div class="form-group <?= $createTitle_help ? 'has-error' : ''; ?>">
                             <label for="title">Title</label><br/>

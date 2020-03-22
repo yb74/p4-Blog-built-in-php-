@@ -1,4 +1,8 @@
-<?php $title = htmlspecialchars($post->getTitle()); ?>
+<?php $title = htmlspecialchars($post->getTitle());
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage= htmlspecialchars($post->getTitle());
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
     <section>

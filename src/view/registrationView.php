@@ -1,9 +1,12 @@
-<?php $title = "Registration"; ?>
+<?php $title = "Registration";
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Sign Up space';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 
     <section>
-        <h1 class="text-center">Sign Up space</h1>
 
         <form action="/registration" method="post" class="bg-light p-4 p-md-5 contact-form">
             <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">

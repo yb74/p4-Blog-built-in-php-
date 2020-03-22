@@ -1,4 +1,8 @@
-<?php $title = 'Manage Comments'; ?>
+<?php $title = 'Manage Comments';
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Manage the reported comments !';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 

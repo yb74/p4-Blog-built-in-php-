@@ -23,8 +23,7 @@ $router->post('/createPost', "Admin#createPost"); // access to the post creation
 
 $router->get('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // modify a post
 $router->post('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // update a post
-
-$router->get('/admin', "Admin#deletePost")->with('postId', '[0-9]+'); // delete a post
+$router->get('/deletePost:postId', "Admin#postDelete")->with('postId', '[0-9]+'); // delete a post
 
 $router->get('/manageComments', "Admin#manageComments"); // access to the comment management view
 

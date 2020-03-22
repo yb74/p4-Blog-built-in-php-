@@ -1,4 +1,8 @@
-<?php $title = 'Modify a post'; ?>
+<?php $title = 'Modify a post';
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Modify a post';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 

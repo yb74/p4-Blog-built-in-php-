@@ -1,53 +1,13 @@
-<?php $title = "Liste des chapitres"; ?>
+<?php $title = "Liste des chapitres";
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Homepage';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 
 <!--CONTENU PRINCIPAL-->
   <section id="content">
-<!--SLIDER-->
-    <div id="slider" class="carousel slide container p-0" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#slider" data-slide-to="0" <="" li="" class="active"></li>
-        <li data-target="#slider" data-slide-to="1" <="" li="" class=""></li>
-        <li data-target="#slider" data-slide-to="2" <="" li="" class=""> </li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/public/images/slider/slider-picture1.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Bienvenue sur Evasion Littéraire</h5>
-            <p>Profitez de livres en accès gratuit et d'une réelle communauté ! </p>
-            <a class="btn btn-outline-light" href="#">Je consulte la liste des livres
-              accessibles</a>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="/public/images/slider/slider-picture2.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>L'alaska, ce pays magnifique</h5>
-            <p>J'y ai trouvé mon inspiration </p>
-            <a class="btn btn-outline-light" href="https://fr.wikipedia.org/wiki/Alaska">Je veux en savoir plus sur ce
-              pays !</a>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="/public/images/slider/slider-picture3.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Une aurore boréale</h5>
-            <p>Le dernier chapitre de 'Billet simple pour l'Alaska' </p>
-            <a class="btn btn-outline-light" href="#">Cliquez ici pour le lire</a>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
 <!--EXTRAITS DES CHAPITRES-->
     <div id="latest-chapters" class="container">
       <h2 class="row justify-content-center text-center mt-4">Latest posted chapters</h2>

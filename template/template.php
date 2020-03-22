@@ -5,7 +5,24 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Blog of Jean Forteroche">
+    <meta name="author" content="Jean Forteroche">
     <title><?= $title ?></title>
+
+    <!-- FB Open Graph data -->
+    <meta property="og:title" content="Un billet pour l'Alaska by Jean Forteroche" />
+    <meta property="og:type" content="Online novel" />
+    <meta property="og:url" content="http://www.projet4.younesbouaziz.fr" />
+    <meta property="og:image" content="public/img/logo.jpg" />
+    <meta property="og:description" content="Come and take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Online novel" />
+    <meta name="twitter:title" content="Un billet pour l'Alaska by Jean Forteroche" />
+    <meta name="twitter:image:src" content="http://www.projet4.younesbouaziz.fr/public/images/logo.png" />
+    <meta name="twitter:description" content="Come and to take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({selector:'#adminForm'});</script>
@@ -19,7 +36,7 @@
 </head>
 
 <body>
-<header>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!--<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">-->
         <a class="navbar-brand" href="/">
@@ -49,6 +66,9 @@
                     <a class="nav-link" href="/logout">
                         <button type="button" class="btn btn-primary">Log Out</button>
                     </a>
+                    <a class="text-white">
+                        Hello <?=$_SESSION['username']?> !
+                    </a>
                 <?php endif; ?>
                 <?php if ($_SESSION['role'] === 'admin'): ?>
                     <a class="nav-link" href="/admin">
@@ -60,6 +80,20 @@
             <?php endif; ?>
         </div>
     </nav>
+
+<!-- Page Header -->
+<header class="masthead mb-5" style="background-image: url('<?=$picture ?>'); background-size: cover;">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1 class="main-title h1-responsive font-weight-bold text-center my-4"><?= $titlePage ?></h1>
+                    <span class="subheading"><?= $subheadingPage ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
 <div class="container flex-grow-1">

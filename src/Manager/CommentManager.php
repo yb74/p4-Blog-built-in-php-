@@ -10,7 +10,7 @@ class CommentManager extends Manager
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, author, content, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE related_id = ? ORDER BY creation_date DESC LIMIT 5 OFFSET 0');
         $req->execute(array($postId));
-        $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
         $comments = $req->fetchAll();
 
         return $comments;
@@ -20,21 +20,11 @@ class CommentManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, author, content, related_id, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
-        $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
         $comments = $req->fetchAll();
 
         return $comments;
     }
-
-    /*public function getPosts($perPage, $offset) // get all posts
-    {
-        $db = $this->dbConnect();
-        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT $offset, $perPage");
-        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
-            'App\Model\Post');
-        $posts = $req->fetchAll();
-        return $posts;
-    }*/
 
     /*public function selectReportedComments()
     {
@@ -43,15 +33,6 @@ class CommentManager extends Manager
         $req->execute();
 
         return $req;
-    }
-
-    public function statusComment($commentId, $related_id)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ? AND related_id = ?');
-        $newStatus = $req->execute($commentId, $related_id);
-
-        return $newStatus;
     }*/
 
     public function postComment(Comment $comment) // permet d'afficher un nouveau commentaire en l'inserant dans la table
@@ -59,9 +40,9 @@ class CommentManager extends Manager
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO comments(related_id, author, content, status, creation_date) VALUES(:related_id, :author, :content, 0, NOW())');
         $req->execute(array(
-            'related_id'=> $comment->getRelatedId(),
-            'author'=> $comment->getAuthor(),
-            'content'=> $comment->getContent()
+            'related_id' => $comment->getRelatedId(),
+            'author' => $comment->getAuthor(),
+            'content' => $comment->getContent()
         ));
 
         return $req;
@@ -82,7 +63,43 @@ class CommentManager extends Manager
         $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, posts.title AS title, posts.content AS postContent, posts.picture_url as picture_url, posts.id AS post_id, posts.creation_date AS post_date FROM comments
             INNER JOIN posts ON comments.related_id = posts.id
             GROUP BY comments.related_id');
-        $comments = $req->fetchAll(\PDO::FETCH_CLASS,'App\Model\Comment');
+        $comments = $req->fetchAll(\PDO::FETCH_CLASS, 'App\Model\Comment');
         return $comments;
+    }
+
+    /*public function getNbCommentAdmin()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, comments.related_id FROM comments
+            INNER JOIN posts ON comments.related_id = posts.id
+            GROUP BY comments.related_id');
+        $comments = $req->fetchAll(\PDO::FETCH_CLASS, 'App\Model\Comment');
+        return $comments;
+    }*/
+
+    public function statusComment($commentId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ?');
+        $newStatus = $req->execute($commentId);
+
+        return $newStatus;
+    }
+
+    public function updateStatusComment($commentId)
+    {
+
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ?');
+        $newStatus = $req->execute([$commentId]);
+//        var_dump($newStatus);
+        return $newStatus;
+    }
+
+    public function deleteComment($commentId)
+    {
+        $db = $this->dbConnect();
+        $deleteComment = $db->prepare('DELETE FROM comments WHERE id = ?');
+        $deleteComment->execute([$commentId]);
     }
 }

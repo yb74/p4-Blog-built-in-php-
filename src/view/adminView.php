@@ -1,4 +1,8 @@
-<?php $title = 'Admin'; ?>
+<?php $title = 'Admin';
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Dashboard';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 
@@ -27,7 +31,7 @@
                                             <h3 class="text-center">
                                                 <?= $comment->getTitle() ?>
                                             </h3>
-                                            <p class="text-center">Comments number</p>
+                                            <p class="text-center">Number of comments</p>
                                             <h3 class="text-center">
                                                 <?= $comment->getNbComments() ?>
                                             </h3>

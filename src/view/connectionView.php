@@ -1,9 +1,12 @@
-<?php $title = "Connection"; ?>
+<?php $title = "Connection";
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Log In space';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 
     <section>
-        <h1 class="text-center">Log In space</h1>
 
         <!-- Default form login -->
         <form class="text-center border border-light p-5" action="/connection" method="post">

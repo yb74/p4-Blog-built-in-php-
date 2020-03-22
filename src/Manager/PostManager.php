@@ -38,6 +38,16 @@ class PostManager extends Manager
 
     // ADMIN
 
+    public function getDashboardPosts() // get all posts for the dashboard
+    {
+        $db = $this->dbConnect();
+        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 15");
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
+            'App\Model\Post');
+        $posts = $req->fetchAll();
+        return $posts;
+    }
+
     // CREATE a post
     public function addPost(Post $post)
     {
@@ -67,10 +77,12 @@ class PostManager extends Manager
     }
 
     // DELETE a post
-    public function deletePost($postId)
-    {
+    public function deletePost(Post $post){
         $db = $this->dbConnect();
-        $deletePost = $db->prepare('DELETE FROM posts WHERE id = ?');
-        $deletePost->execute(array($postId));
+        $req = $db->prepare('DELETE FROM posts WHERE related_id = :related_id');
+        $req->execute(array(
+            'related_id'=> $post->getId()
+        ));
+        return $req;
     }
 }

@@ -1,12 +1,14 @@
-<?php $title = "Contact"; ?>
+<?php $title = "Contact";
+$picture ='/public/images/chapters/chapter-image1.jpg';
+$titlePage='Contact me';
+$subheadingPage='';
+?>
 
 <?php ob_start(); ?>
 
 <!--Section: Contact v.2-->
 <section class="mb-4">
 
-    <!--Section heading-->
-    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact me</h2>
     <!--Section description-->
     <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact me directly. I will come back to you within
         a matter of hours to help you.</p>
