@@ -7,8 +7,10 @@ $subheadingPage='';
 <?php ob_start(); ?>
 
     <section>
-
         <form action="/registration" method="post" class="bg-light p-4 p-md-5 contact-form">
+            <div class="form-group <?= $this->empty_inputs_err ? 'has-error' : ''; ?>">
+                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $this->empty_inputs_err; ?></span>
+            </div>
             <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control">

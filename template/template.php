@@ -66,9 +66,6 @@
                     <a class="nav-link" href="/logout">
                         <button type="button" class="btn btn-primary">Log Out</button>
                     </a>
-                    <a class="text-white">
-                        Hello <?=$_SESSION['username']?> !
-                    </a>
                 <?php endif; ?>
                 <?php if ($_SESSION['role'] === 'admin'): ?>
                     <a class="nav-link" href="/admin">

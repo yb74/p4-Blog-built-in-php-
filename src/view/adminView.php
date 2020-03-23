@@ -1,7 +1,11 @@
 <?php $title = 'Admin';
 $picture ='/public/images/chapters/chapter-image1.jpg';
 $titlePage='Dashboard';
-$subheadingPage='';
+if ($_SESSION):
+    $subheadingPage ='Welcome Admin!';
+else:
+    $subheadingPage = "";
+endif;
 ?>
 
 <?php ob_start(); ?>
@@ -10,7 +14,7 @@ $subheadingPage='';
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Posts</h2>
-                <a href="/manageComments" class="btn btn-primary">Manage comments</a>
+                <a href="/manageComments" class="btn btn-primary">Reported comments</a>
                 <a href="createPost" class="btn btn-primary">Create a post</a>
             </div>
         </div>

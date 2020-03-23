@@ -1,7 +1,11 @@
-<?php $title = "Liste des chapitres";
+<?php $title = "Chapter list";
 $picture ='/public/images/chapters/chapter-image1.jpg';
 $titlePage='Homepage';
-$subheadingPage='';
+if ($_SESSION):
+$subheadingPage ='Welcome ' . $_SESSION['username'] . '!';
+else:
+    $subheadingPage = "";
+endif;
 ?>
 
 <?php ob_start(); ?>
