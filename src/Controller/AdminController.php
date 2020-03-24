@@ -43,27 +43,8 @@ class AdminController {
     }
 
     // COMMENT ADMINSTRATION
-    public function manageComments(){
-        /*$modifyAuthor_help = null;
-        $modifyContent_help = null;
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (empty($_POST['author'])) {
-                $modifyAuthor_help = "Please, enter a username !";
-            }
-            if (empty($_POST['content'])) {
-                $modifyContent_help = "Please, enter a content !";
-            }
-            else if (isset($_POST['author']) && isset($_POST['content'])) {
-                $this->post->setTitle($_POST['author']);
-                $this->post->setContent($_POST['content']);
-                $this->post->setId($postId);
-                $this->commentManager->updatePost($this->post);
-                //var_dump($post);
-                header('Location: /manageComments' . $postId);
-            }
-        }*/
-        $comments  = $this->commentManager->getAllComments();
+    public function manageComments() {
+        $comments  = $this->commentManager->getReportedComments();
 
         require "src/view/manageCommentsView.php";
     }
@@ -73,12 +54,8 @@ class AdminController {
         echo "hello";
     }
 
-    public function manageReportedComments() {
-        $this->commentManager->selectReportedComments();
-    }
-
     // POST ADMINISTRATION
-    public function createPost(){
+    public function createPost() {
         $uploadPicture_help = null;
         $createTitle_help = null;
         $createContent_help = null;
@@ -139,7 +116,7 @@ class AdminController {
         //require "src/view/adminView.php";
     }*/
 
-    public function postDelete($postId){
+    public function postDelete($postId) {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             $this->post->setId($postId);
             $this->postManager->deletePost($this->post);

@@ -1,4 +1,4 @@
-<?php $title = 'Admin';
+<?php $title = 'Dashboard';
 $picture ='/public/images/chapters/chapter-image1.jpg';
 $titlePage='Dashboard';
 if ($_SESSION):
