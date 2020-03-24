@@ -23,20 +23,6 @@ $subheadingPage='';
                 <span class="help-block"><?= $this->password_err; ?></span>
             </div>
 
-            <div class="d-flex justify-content-around">
-                <div>
-                    <!-- Remember me -->
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                        <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
-                    </div>
-                </div>
-                <div>
-                    <!-- Forgot password -->
-                    <a href="">Forgot password?</a>
-                </div>
-            </div>
-
             <!-- Sign in button -->
             <button class="btn btn-info btn-block my-4" type="submit" name="send_data">Log In</button>
 
@@ -44,14 +30,6 @@ $subheadingPage='';
             <p>Not a member?
                 <a href="/registration">Register</a>
             </p>
-
-            <!-- Social login -->
-            <p>or sign in with:</p>
-
-            <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
-            <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
-            <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
-            <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
 
         </form>
 
