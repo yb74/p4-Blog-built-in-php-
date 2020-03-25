@@ -49,7 +49,7 @@ $router->get('/', "Post#listPosts"); // display all chapters
 
 $router->get('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // display the selected chapter
 $router->post('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // Comment a chapter
-//$router->get('/chapter:commentId', "Comment#reportComment")->with('commentId', '[0-9]+'); // Report a comment
+$router->get('/reportComment:commentId', "Comment#commentReport")->with('commentId', '[0-9]+'); // Report a comment
 
 // CONTACT SYSTEM
 $router->get('/contact', "Contact#displayContactForm"); // display the contact form

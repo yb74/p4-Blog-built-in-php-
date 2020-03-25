@@ -57,7 +57,7 @@ foreach ($comments as $comment)
                             <?php if ($_SESSION): ?>
                                 <?php if ($_SESSION['role'] === 'user'): ?>
                                     <?php if ($comment->getStatus() == 0): ?>
-                                        <a href="<?= '/chapter?postId='?><?= $comment->getId() ?>">
+                                        <a href="<?= '/reportComment'?><?= $comment->getId() ?>">
                                             <button class="btn btn-danger ml-5 mt-3">Report</button>
                                         </a>
                                     <?php else : ?>

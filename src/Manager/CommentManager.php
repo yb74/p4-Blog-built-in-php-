@@ -59,14 +59,15 @@ class CommentManager extends Manager
         return $comments;
     }*/
 
-    public function updateStatusComment($commentId)
+    public function reportComment(Comment $comment)
     {
 
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ?');
-        $newStatus = $req->execute([$commentId]);
-//        var_dump($newStatus);
-        return $newStatus;
+        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = :id');
+        $req->execute([
+            'id'=> $comment->getId()
+        ]);
+        return $req;
     }
 
     public function deleteComment(Comment $comment)

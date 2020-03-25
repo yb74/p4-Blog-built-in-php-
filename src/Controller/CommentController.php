@@ -30,11 +30,16 @@ class CommentController
         }
     }
 
-    public function supComment()
-    {
-        $comments = $this->commentManager->getAdminComments();
-        $this->commentManager->deleteComment($_GET['id']);
-        $this->msg = 'Comment Deleted';
-        header('Location: index.php?action=showAdminCommentsView');
+    public function commentReport($commentId) {
+        if (isset($commentId) && ($commentId > 0)) {
+            $this->comment->setId($commentId);
+            $this->commentManager->reportComment($this->comment);
+            header('Location: /');
+            var_dump($_GET);
+        }
+        else {
+            $this->msg='No comment id has been sent !';
+            require('src/view/errorView.php');
+        }
     }
 }
