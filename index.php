@@ -18,14 +18,19 @@ $router->get('/error', "Admin#displayError"); // display error
 
 // ADMIN SYSTEM
 $router->get('/admin', "Admin#manageDashboard"); // display the admin panel
+// posts management
 $router->get('/createPost', "Admin#createPost"); // access to the post creation view
 $router->post('/createPost', "Admin#createPost"); // access to the post creation view
 
 $router->get('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // modify a post
 $router->post('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // update a post
+
 $router->get('/deletePost:postId', "Admin#postDelete")->with('postId', '[0-9]+'); // delete a post
 
+//comments management
 $router->get('/manageComments', "Admin#manageComments"); // access to the comment management view
+$router->get('/deleteComment:commentId', "Admin#commentDelete")->with('commentId', '[0-9]+'); // delete a post
+$router->get('/unreportComment:commentId', "Admin#commentUnreport")->with('commentId', '[0-9]+'); // delete a post
 
 // USER SYSTEM
 // registration

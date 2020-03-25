@@ -33,8 +33,8 @@ class AdminController {
 
     public function manageDashboard() // affiche les infos des articles dans l'interface admin
     {
-        $comments = $this->commentManager->getNbCommentAdmin();
-        //$posts = $this->postManager->getDashboardPosts();
+        //$comments = $this->commentManager->getNbCommentAdmin();
+        $posts = $this->postManager->getDashboardPosts();
 
         //$commentList = new CommentManager();
         //$comments = $commentList->getCommentsAdmin();
@@ -42,7 +42,7 @@ class AdminController {
         require 'src/view/adminView.php';
     }
 
-    // COMMENT ADMINSTRATION
+    // COMMENT ADMINISTRATION
     public function manageComments() {
         $comments  = $this->commentManager->getReportedComments();
 
@@ -52,6 +52,30 @@ class AdminController {
     public function reportComment() {
         $this->commentManager->statusComment($commentId);
         echo "hello";
+    }
+
+    public function commentDelete($commentId) {
+        if (isset($commentId) && ($commentId > 0)) {
+            $this->comment->setId($commentId);
+            $this->commentManager->deleteComment($this->comment);
+            header('Location: /manageComments');
+        }
+        else {
+            $this->msg='No comment id has been sent !';
+            require('src/view/errorView.php');
+        }
+    }
+
+    public function commentUnreport($commentId) {
+        if (isset($commentId) && ($commentId > 0)) {
+            $this->comment->setId($commentId);
+            $this->commentManager->unreportComment($this->comment);
+            header('Location: /manageComments');
+        }
+        else {
+            $this->msg='No comment id has been sent !';
+            require('src/view/errorView.php');
+        }
     }
 
     // POST ADMINISTRATION
@@ -109,18 +133,10 @@ class AdminController {
         return;
     }
 
-    /*public function postDelete($postId) {
-        $this->post->setId($postId);
-        $this->postManager->deletePost($this->post);
-        header('Location: /admin');
-        //require "src/view/adminView.php";
-    }*/
-
     public function postDelete($postId) {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
+        if (isset($postId) && $postId > 0) {
             $this->post->setId($postId);
             $this->postManager->deletePost($this->post);
-
                 header('Location: /admin');
         }
         else {

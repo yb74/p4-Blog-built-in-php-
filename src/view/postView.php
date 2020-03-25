@@ -54,12 +54,15 @@ foreach ($comments as $comment)
                         </div>
                         <div class="row">
                             <p class="col-12 p-0 mt-0 mx-2 mb-0"><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
-
                             <?php if ($_SESSION): ?>
                                 <?php if ($_SESSION['role'] === 'user'): ?>
-                                    <a href="<?= '/chapter?postId='?><?= $comment->getId() ?>">
-                                        <button class="btn btn-danger ml-5 mt-3">Report</button>
-                                    </a>
+                                    <?php if ($comment->getStatus() == 0): ?>
+                                        <a href="<?= '/chapter?postId='?><?= $comment->getId() ?>">
+                                            <button class="btn btn-danger ml-5 mt-3">Report</button>
+                                        </a>
+                                    <?php else : ?>
+                                        <span class = "col-lg-8 col-md-10 mx-auto alert alert-danger text-center"> Comment reported ! </span>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </div>

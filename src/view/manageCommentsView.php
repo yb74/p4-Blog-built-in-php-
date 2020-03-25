@@ -12,7 +12,6 @@ $subheadingPage='';
                 <h2>Manage Comments</h2>
                 <a href="/admin" class="btn btn-primary">Manage posts</a>
                 <a href="/createPost" class="btn btn-primary">Create a post</a>
-                <a href="/error" class="btn btn-primary">Test Display Error view</a>
             </div>
         </div>
 
@@ -48,8 +47,12 @@ $subheadingPage='';
                                             <br>
                                             <p class="text-center">Available options</p>
                                             <div class="d-flex justify-content-center">
-                                                <a href="/deleteComment<?= $comment->getId() ?>"
-                                                   class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
+                                                <a href="/deleteComment<?= $comment->getId() ?>"class="delete-button btn btn-danger btn-sm mx-2">
+                                                    Delete
+                                                </a>
+                                                <a href="/unreportComment<?= $comment->getId() ?>"class="unreport-button btn btn-success btn-sm mx-2">
+                                                    Unreport
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

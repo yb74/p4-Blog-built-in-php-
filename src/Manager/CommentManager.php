@@ -8,7 +8,7 @@ class CommentManager extends Manager
     public function getComments($postId)// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, author, content, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE related_id = ? ORDER BY creation_date DESC LIMIT 5 OFFSET 0');
+        $req = $db->prepare('SELECT id, author, content, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE related_id = ? ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
         $req->execute(array($postId));
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
         $comments = $req->fetchAll();
@@ -39,7 +39,7 @@ class CommentManager extends Manager
         return $req;
     }
 
-    public function getNbCommentAdmin()
+    /*public function getNbCommentAdmin()
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, posts.title AS title, posts.content AS postContent, posts.picture_url as picture_url, posts.id AS post_id, posts.creation_date AS post_date FROM comments
@@ -47,7 +47,7 @@ class CommentManager extends Manager
             GROUP BY comments.related_id');
         $comments = $req->fetchAll(\PDO::FETCH_CLASS, 'App\Model\Comment');
         return $comments;
-    }
+    }*/
 
     /*public function getNbCommentAdmin()
     {
@@ -59,15 +59,6 @@ class CommentManager extends Manager
         return $comments;
     }*/
 
-    public function statusComment($commentId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ?');
-        $newStatus = $req->execute($commentId);
-
-        return $newStatus;
-    }
-
     public function updateStatusComment($commentId)
     {
 
@@ -78,10 +69,23 @@ class CommentManager extends Manager
         return $newStatus;
     }
 
-    public function deleteComment($commentId)
+    public function deleteComment(Comment $comment)
     {
         $db = $this->dbConnect();
-        $deleteComment = $db->prepare('DELETE FROM comments WHERE id = ?');
-        $deleteComment->execute([$commentId]);
+        $req = $db->prepare('DELETE FROM comments WHERE id = :id');
+        $req->execute([
+            'id'=> $comment->getId()
+        ]);
+        return $req;
+    }
+
+    public function unreportComment(Comment $comment)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET status = 0 WHERE id = :id');
+        $req->execute([
+            'id'=> $comment->getId()
+        ]);
+        return $req;
     }
 }
