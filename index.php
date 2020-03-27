@@ -11,26 +11,46 @@ use App\Controller\{
     ContactController
 };
 
+use App\Router\RouterException;
+
 $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
+
+try{
+    if (!empty($_SESSION)) {
+        if(($_SESSION['role']) == 'admin') {
+            // ADMIN SYSTEM
+
+            $router->get('/admin', "Admin#manageDashboard"); // display the admin panel
+
+// posts management
+            $router->get('/createPost', "Admin#createPost"); // access to the post creation view
+            $router->post('/createPost', "Admin#createPost"); // access to the post creation view
+
+            $router->get('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // Access to the view to modify a post
+            $router->post('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // update a post
+            $router->get('/deletePost:postId', "Admin#postDelete")->with('postId', '[0-9]+'); // delete a post
+
+//comments management
+            $router->get('/manageComments', "Admin#manageComments"); // access to the comment management view
+            $router->get('/deleteComment:commentId', "Admin#commentDelete")->with('commentId', '[0-9]+'); // delete a post
+            $router->get('/unreportComment:commentId', "Admin#commentUnreport")->with('commentId', '[0-9]+'); // unreport a post
+
+//users management
+            $router->get('/manageUsers', "Admin#manageUsers"); // access to the users management view
+            $router->get('/deleteUser:userId', "Admin#userDelete")->with('userId', '[0-9]+'); // delete a post
+
+        }
+    }
+}
+catch (Exception $e) {
+    displayError($e->getMessage());
+}
 
 // DISPLAY ERROR
 $router->get('/error', "Admin#displayError"); // display error
 
-// ADMIN SYSTEM
-$router->get('/admin', "Admin#manageDashboard"); // display the admin panel
-// posts management
-$router->get('/createPost', "Admin#createPost"); // access to the post creation view
-$router->post('/createPost', "Admin#createPost"); // access to the post creation view
 
-$router->get('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // modify a post
-$router->post('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // update a post
 
-$router->get('/deletePost:postId', "Admin#postDelete")->with('postId', '[0-9]+'); // delete a post
-
-//comments management
-$router->get('/manageComments', "Admin#manageComments"); // access to the comment management view
-$router->get('/deleteComment:commentId', "Admin#commentDelete")->with('commentId', '[0-9]+'); // delete a post
-$router->get('/unreportComment:commentId', "Admin#commentUnreport")->with('commentId', '[0-9]+'); // delete a post
 
 // USER SYSTEM
 // registration
@@ -41,8 +61,6 @@ $router->get('/connection', "User#userAuth");
 $router->post('/connection', "User#userAuth");
 // logout
 $router->get('/logout', "User#logOut");
-// welcome page
-$router->get('/welcome', "User#displayWelcomeView"); // display the WelcomeView
 
 // POSTS AND COMMENTS
 $router->get('/', "Post#listPosts"); // display all chapters

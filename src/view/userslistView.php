@@ -1,6 +1,6 @@
-<?php $title = 'Manage Comments';
+<?php $title = 'Manage users';
 $picture ='/public/images/chapters/chapter-image1.jpg';
-$titlePage='Manage the reported comments !';
+$titlePage='Manage the users !';
 $subheadingPage='';
 ?>
 
@@ -9,10 +9,10 @@ $subheadingPage='';
     <div class="container">
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
-                <h2>Manage Comments</h2>
+                <h2>Manage users</h2>
                 <a href="/admin" class="btn btn-primary">Manage posts</a>
                 <a href="/createPost" class="btn btn-primary">Create a post</a>
-                <a href="/manageUsers" class="btn btn-primary">Manage users</a>
+                <a href="/manageComments" class="btn btn-primary">Reported comments</a>
             </div>
         </div>
 
@@ -22,37 +22,30 @@ $subheadingPage='';
                     <div class="col-md-12">
                         <div class="case">
                             <div class="row">
-                                <?php foreach ($comments as $comment) : ?>
+                                <?php foreach ($users as $user) : ?>
                                     <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                         <div class="text w-100 pl-md-3">
-                                            <p class="text-center">Author</p>
+                                            <p class="text-center">Username</p>
                                             <h3 class="text-center">
-                                                <?= strip_tags($comment->getAuthor()) ?>
+                                                <?= strip_tags($user->getUsername()) ?>
                                             </h3>
-                                            <p class="text-center">Content</p>
+                                            <p class="text-center">Registration date</p>
                                             <h3 class="text-center">
-                                                <?= $comment->getContent() ?>
+                                                <?= $user->getRegistrationDate() ?>
                                             </h3>
-                                            <p class="text-center">Creation date</p>
+                                            <p class="text-center">Id</p>
                                             <h3 class="text-center">
-                                                <?= strip_tags($comment->getCommentDateFr()) ?>
+                                                <?= strip_tags($user->getId()) ?>
                                             </h3>
-                                            <p class="text-center">Post ID</p>
+                                            <p class="text-center">Role</p>
                                             <h3 class="text-center">
-                                                <?= $comment->getRelatedId() ?>
-                                            </h3>
-                                            <p class="text-center">Status</p>
-                                            <h3 class="text-center">
-                                                <?= $comment->getStatus() ?>
+                                                <?= $user->getRole() ?>
                                             </h3>
                                             <br>
                                             <p class="text-center">Available options</p>
                                             <div class="d-flex justify-content-center">
-                                                <a href="/deleteComment<?= $comment->getId() ?>"class="delete-button btn btn-danger btn-sm mx-2">
+                                                <a href="/deleteUser<?= $user->getId() ?>"class="delete-button btn btn-danger btn-sm mx-2">
                                                     Delete
-                                                </a>
-                                                <a href="/unreportComment<?= $comment->getId() ?>"class="unreport-button btn btn-success btn-sm mx-2">
-                                                    Unreport
                                                 </a>
                                             </div>
                                         </div>

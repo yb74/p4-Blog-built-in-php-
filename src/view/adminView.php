@@ -2,7 +2,7 @@
 $picture ='/public/images/chapters/chapter-image1.jpg';
 $titlePage='Dashboard';
 if ($_SESSION):
-    $subheadingPage ='Welcome Admin!';
+    $subheadingPage ='Welcome ' . $_SESSION['role'] . ' !';
 else:
     $subheadingPage = "";
 endif;
@@ -14,8 +14,9 @@ endif;
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Posts</h2>
+                <a href="/manageUsers" class="btn btn-primary">Users list</a>
                 <a href="/manageComments" class="btn btn-primary">Reported comments</a>
-                <a href="createPost" class="btn btn-primary">Create a post</a>
+                <a href="/createPost" class="btn btn-primary">Create a post</a>
             </div>
         </div>
 

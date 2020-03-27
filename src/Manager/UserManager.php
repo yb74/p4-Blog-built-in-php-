@@ -57,5 +57,24 @@ class UserManager extends Manager
 
         return $user;
     }
+
+    public function getUserList() {
+        $db = $this->dbConnect();
+        $req = $db->query("SELECT id, username, role, DATE_FORMAT(registrationDate, '%d/%m/%Y à %Hh%imin%ss') AS registrationDate FROM users ORDER BY registrationDate DESC LIMIT 0, 50");
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
+            'App\Model\User');
+        $users = $req->fetchAll();
+        return $users;
+    }
+
+    public function deleteUser(User $user)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM users WHERE id = :id');
+        $req->execute([
+            'id'=> $user->getId()
+        ]);
+        return $req;
+    }
 }
 

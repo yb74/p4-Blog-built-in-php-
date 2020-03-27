@@ -26,13 +26,14 @@ $subheadingPage='';
     <p>Please, <a href="/connection" class="btn btn-info">Log In</a> to be able to leave a comment !</p>
 <?php elseif ($_SESSION['role'] === 'user'): ?>
         <form action="/chapter<?= $post->getId() ?>" method="post" class="p-5 bg-light">
-            <div class="form-group">
+            <div class="form-group <?= $this->author_help ? 'has-error' : ''; ?>">
                 <input type="text" id="author" style= "cursor: not-allowed" name="author" readonly="readonly" value = "<?= $_SESSION['username']  ?>" class="form-control mb-4">
+                <span class="help-block text-danger"><?= $this->author_help; ?></span>
             </div>
-            <div class="form-group <?= $content_help ? 'has-error' : ''; ?>">
+            <div class="form-group <?= $this->content_help ? 'has-error' : ''; ?>">
                 <label for="content">Comment</label><br />
                 <textarea id="content" name="content" cols="30" rows="5" class="form-control"></textarea>
-                <span class="help-block"><?= $content_help; ?></span>
+                <span class="help-block text-danger"><?= $this->content_help; ?></span>
             </div>
             <div>
                 <input type="submit" value="Post" name="send_data" class="btn py-2 px-3 my-2 btn-primary" />

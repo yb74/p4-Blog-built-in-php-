@@ -16,11 +16,11 @@ $subheadingPage='';
             </div>
             <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username">
             <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
-                <span class="help-block"><?= $this->username_err; ?></span>
+                <span class="help-block text-danger"><?= $this->username_err; ?></span>
             </div>
             <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password">
             <div class="form-group <?= $this->password_err ? 'has-error' : ''; ?>">
-                <span class="help-block"><?= $this->password_err; ?></span>
+                <span class="help-block text-danger"><?= $this->password_err; ?></span>
             </div>
 
             <!-- Sign in button -->

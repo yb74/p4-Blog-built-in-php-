@@ -2,7 +2,7 @@
 $picture ='/public/images/chapters/chapter-image1.jpg';
 $titlePage='Homepage';
 if ($_SESSION):
-$subheadingPage ='Welcome ' . $_SESSION['username'] . '!';
+$subheadingPage ='Welcome ' . $_SESSION['username'] . ' !';
 else:
     $subheadingPage = "";
 endif;

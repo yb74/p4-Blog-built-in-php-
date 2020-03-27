@@ -8,11 +8,18 @@ use App\Manager\{CommentManager,
 
 use App\Model\{
     Comment,
-    Post
+    Post,
+    user
 };
 
 class AdminController {
     public $msg= "";
+    public $empty_inputs_err = "";
+    public $uploadPicture_help = "";
+    public $createTitle_help = "";
+    public $createContent_help = "";
+    public $modifyTitle_help = "";
+    public $modifyContent_help = "";
 
     public function __construct()
     {
@@ -21,37 +28,37 @@ class AdminController {
         $this->postManager = new PostManager();
         $this->comment = new Comment();
         $this->post = new Post();
+        $this->user = new user();
     }
 
+    // Show error page
     public function displayError() {
         require 'src/view/errorView.php';
     }
 
+    // Show dashboard
     public function displayAdminPanel() {
         require 'src/view/adminView.php';
     }
 
-    public function manageDashboard() // affiche les infos des articles dans l'interface admin
+    public function manageDashboard() // Display information about posts in the dashboard
     {
         //$comments = $this->commentManager->getNbCommentAdmin();
         $posts = $this->postManager->getDashboardPosts();
-
-        //$commentList = new CommentManager();
-        //$comments = $commentList->getCommentsAdmin();
 
         require 'src/view/adminView.php';
     }
 
     // COMMENT ADMINISTRATION
-    public function manageComments() {
+    public function manageComments() { // Display the reported comments
         $comments  = $this->commentManager->getReportedComments();
 
         require "src/view/manageCommentsView.php";
     }
 
+    // Function to report a comment
     public function reportComment() {
         $this->commentManager->statusComment($commentId);
-        echo "hello";
     }
 
     public function commentDelete($commentId) {
@@ -80,21 +87,20 @@ class AdminController {
 
     // POST ADMINISTRATION
     public function createPost() {
-        $uploadPicture_help = null;
-        $createTitle_help = null;
-        $createContent_help = null;
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (empty($_POST['picture_url'])) {
-                $uploadPicture_help = "Please, upload a picture !";
+            if (empty($_POST['picture_url']) && empty($_POST['title']) && empty($_POST['content'])) {
+                $this->empty_inputs_err = "Please, fill in the form !";
             }
-            if (empty($_POST['title'])) {
-                $createTitle_help = "Please, enter a title !";
+            elseif (empty($_POST['picture_url'])) {
+                $this->uploadPicture_help = "Please, upload a picture !";
             }
-            if (empty($_POST['content'])) {
-                $createContent_help = "Please, enter a content !";
+            elseif (empty($_POST['title'])) {
+                $this->createTitle_help = "Please, enter a title !";
             }
-            else if (isset($_POST['picture_url']) && isset($_POST['title']) && isset($_POST['content'])) {
+            elseif (empty($_POST['content'])) {
+                $this->createContent_help = "Please, enter a content !";
+            }
+            else {
                 $this->post->setPictureUrl($_POST['picture_url']);
                 $this->post->setTitle($_POST['title']);
                 $this->post->setContent($_POST['content']);
@@ -103,23 +109,24 @@ class AdminController {
 
                 header('Location: /admin');
             }
+            
         }
         require('src/view/createPostView.php');
         return;
     }
 
     public function modifyPost($postId) {
-        $modifyTitle_help = null;
-        $modifyContent_help = null;
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (empty($_POST['title'])) {
-                $modifyTitle_help = "Please, enter a title !";
+            if (empty($_POST['title']) && empty($_POST['content'])) {
+                $this->empty_inputs_err = "Please, fill in the form !";
             }
-            if (empty($_POST['content'])) {
-                $modifyContent_help = "Please, enter a content !";
+            elseif (empty($_POST['title'])) {
+                $this->modifyTitle_help = "Please, enter a title !";
             }
-            else if (isset($_POST['title']) && isset($_POST['content'])) {
+            elseif (empty($_POST['content'])) {
+                $this->modifyContent_help = "Please, enter a content !";
+            }
+            else {
                 $this->post->setTitle(htmlspecialchars($_POST['title']));
                 $this->post->setContent($_POST['content']);
                 $this->post->setId($postId);
@@ -141,6 +148,24 @@ class AdminController {
         }
         else {
             $this->msg='No post id has been sent !';
+            require('src/view/errorView.php');
+        }
+    }
+
+    // USER ADMINISTRATION
+    public function manageUsers() {
+        $users  = $this->userManager->getUserList();
+        require 'src/view/userslistView.php';
+    }
+
+    public function userDelete($userId) {
+        if (isset($userId) && ($userId > 0)) {
+            $this->user->setId($userId);
+            $this->userManager->deleteUser($this->user);
+            header('Location: /manageUsers');
+        }
+        else {
+            $this->msg='No user id has been sent !';
             require('src/view/errorView.php');
         }
     }

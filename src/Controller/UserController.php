@@ -20,55 +20,31 @@ class UserController
     public $confirm_password_err = "";
     public $empty_inputs_err = "";
 
-    public function displayWelcomeView() {
-        require 'src/view/welcomeView.php';
-    }
-
-    public function accountCreate(){
-        if(isset($_POST['submit'])){
-            if (!empty($_POST['name']) && !empty($_POST['login'])
-                && !empty($_POST['password']) && !empty($_POST['password_confirmation'])) {
-                $user =$this->userManager->login($_POST['login']);
-                if($user){
-                    $this->error=true;
-                    $this->msg='Login déjà utilisé!';
-
-                }
-                elseif($_POST['password'] !== $_POST['password_confirmation']){
-                    $this->error=true;
-                    $this->msg='Les mots de passe ne sont pas identiques';
-                }
-                else{
-                    $hash_pwd=password_hash($_POST['password'], PASSWORD_DEFAULT);
-                    $newUser = new User(array(
-                        'user_name'=>$_POST['name'],
-                        'password'=> $hash_pwd,
-                        'login'=>$_POST['login']));
-                    $this->userManager->setUser($newUser);
-                    header('Location: index.php?action=login');
-                }
-            }
-            else {
-                $this->error=true;
-                $this->msg='Veuillez remplir tous les champs';
-            }
-            require('view/createAccountView.php');
-        }
-        else{
-            require('view/createAccountView.php');
-        }
-    }
-
     public function userRegister()
     {
-        if(isset($_POST["send_data"])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $this->userManager->getAuth($_POST['username']);
 
-            if (empty(trim($_POST['username'])) || empty(trim($_POST['password'])) || empty(trim($_POST["confirm_password"]))) {
+            if (empty(trim($_POST['username'])) && empty(trim($_POST['password'])) && empty(trim($_POST["confirm_password"]))) {
                 //$this->username_err = "Please enter a username.";
                 //$this->password_err = "Please enter a password.";
                 //$this->confirm_password_err = "Please confirm password.";
                 $this->empty_inputs_err = "Please, fill in the form.";
+                require 'src/view/registrationView.php';
+                return;
+            }
+            elseif (empty(trim($_POST['username']))) {
+                $this->username_err = "Please enter a username.";
+                require 'src/view/registrationView.php';
+                return;
+            }
+            elseif (empty(trim($_POST['password']))) {
+                $this->password_err = "Please enter a password.";
+                require 'src/view/registrationView.php';
+                return;
+            }
+            elseif (empty(trim($_POST['confirm_password']))) {
+                $this->confirm_password_err = "Please confirm password.";
                 require 'src/view/registrationView.php';
                 return;
             }
@@ -77,7 +53,7 @@ class UserController
                 require 'src/view/registrationView.php';
                 return;
             }
-            elseif (strlen(trim($_POST["password"])) < 6 && trim($_POST["confirm_password"]) < 6) {
+            elseif (strlen(trim($_POST["password"])) < 6 && strlen(trim($_POST["confirm_password"])) < 6) {
                 $this->password_err = "The password must contain at least 6 characters.";
                 require 'src/view/registrationView.php';
                 return;
@@ -102,12 +78,21 @@ class UserController
     }
 
     public function userAuth() {
-        if(isset($_POST["send_data"])) {
-
-            if (empty($_POST['username']) || empty($_POST['password'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (empty($_POST['username']) && empty($_POST['password'])) {
                 $this->empty_inputs_err = "Please, fill in the form.";
-                //$this->username_err = "Please enter a username.";
-                //$this->password_err = "Please enter a password.";
+
+                require 'src/view/connectionView.php';
+                return;
+            }
+            elseif (empty($_POST['username'])) {
+                $this->username_err = "Please enter a username.";
+
+                require 'src/view/connectionView.php';
+                return;
+            }
+            elseif (empty($_POST['password'])) {
+                $this->password_err = "Please enter a password.";
 
                 require 'src/view/connectionView.php';
                 return;
@@ -135,8 +120,8 @@ class UserController
                         }
 
                     } else {
-                        $this->empty_inputs_err = "Your username and your password doesn't match.";
-                        //$this->password_err = "Your username and your password doesn't match.";
+                        $this->empty_inputs_err = "Your username and your password don't match.";
+                        //$this->password_err = "Your username and your password don't match.";
                         require 'src/view/connectionView.php';
                     }
                 }
@@ -158,7 +143,7 @@ class UserController
         // Destroy the session.
         session_destroy();
         // Redirect to logout page
-        require "src/view/logoutView.php";
+        header('Location: /');
         exit;
     }
 }
