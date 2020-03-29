@@ -32,6 +32,7 @@ class ComposerStaticInitab251815d9271268869eb849c34961ef
         'App\\Manager\\RegistrationManager' => __DIR__ . '/../..' . '/src/Manager/RegistrationManager.php',
         'App\\Manager\\UserManager' => __DIR__ . '/../..' . '/src/Manager/UserManager.php',
         'App\\Model\\Comment' => __DIR__ . '/../..' . '/src/Model/Comment.php',
+        'App\\Model\\Img' => __DIR__ . '/../..' . '/src/Model/Img.php',
         'App\\Model\\Post' => __DIR__ . '/../..' . '/src/Model/Post.php',
         'App\\Model\\User' => __DIR__ . '/../..' . '/src/Model/User.php',
         'App\\Router\\Route' => __DIR__ . '/../..' . '/src/Router/Route.php',

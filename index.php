@@ -38,7 +38,6 @@ try{
 //users management
             $router->get('/manageUsers', "Admin#manageUsers"); // access to the users management view
             $router->get('/deleteUser:userId', "Admin#userDelete")->with('userId', '[0-9]+'); // delete a post
-
         }
     }
 }

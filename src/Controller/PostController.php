@@ -19,8 +19,6 @@ class PostController
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
-        $this->comment = new Comment();
-        $this->posts = new Post();
     }
 
     public function listPosts()
@@ -46,10 +44,11 @@ class PostController
                 $this->content_help = "Please, enter a comment !";
             }
             else if (isset($_POST['author']) && isset($_POST['content'])) {
-                $this->comment->setAuthor($_POST['author']);
-                $this->comment->setContent($_POST['content']);
-                $this->comment->setRelatedId($postId);
-                $this->commentManager->postComment($this->comment);
+                $comment = new Comment();
+                $comment->setAuthor($_POST['author']);
+                $comment->setContent($_POST['content']);
+                $comment->setRelatedId($postId);
+                $this->commentManager->postComment($comment);
 
                 header('Location: /chapter' . $postId);
             }
@@ -59,14 +58,5 @@ class PostController
         $comments  = $this->commentManager->getComments($postId);
 
         require('src/view/postView.php');
-    }
-
-    public function reportComment() {
-        $this->commentManager->statusComment($commentId);
-        echo "hello";
-    }
-
-    public function manageReportedComments() {
-        $this->commentManager->selectReportedComments();
     }
 }

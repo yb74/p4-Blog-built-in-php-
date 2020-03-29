@@ -10,15 +10,15 @@ $subheadingPage='';
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 ftco-animate">
-                    <form action="/createPost" method="post"
+                    <form action="/createPost" method="post" enctype="multipart/form-data"
                           class="p-5 bg-light">
                         <div class="form-group <?= $this->empty_inputs_err ? 'has-error' : ''; ?>">
                             <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $this->empty_inputs_err; ?></span>
                         </div>
                         <div class="form-group <?= $this->uploadPicture_help ? 'has-error' : ''; ?>">
-                            <label for="title">Picture</label><br/>
+                            <label for="picture_url">Picture</label><br/>
                             <span class="help-block text-danger"><?= $this->uploadPicture_help; ?></span>
-                            <input type="text" name="picture_url" id="title" cols="30" rows="10"
+                            <input type="file" name="picture_url" id="picture_url" cols="30" rows="10"
                                    class="form-control">  <!-- /public/images/chapters/chapter-image1.jpg -->
                         </div>
                         <div class="form-group <?= $this->createTitle_help ? 'has-error' : ''; ?>">

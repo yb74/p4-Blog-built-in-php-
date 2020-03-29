@@ -8,6 +8,7 @@ class RouterException extends \Exception
             throw new Exception('You are not an admin !');
         } catch (\Exception $e) {
             var_dump($e->getMessage());
+
         }
     }
 }

@@ -17,6 +17,7 @@ return array(
     'App\\Manager\\RegistrationManager' => $baseDir . '/src/Manager/RegistrationManager.php',
     'App\\Manager\\UserManager' => $baseDir . '/src/Manager/UserManager.php',
     'App\\Model\\Comment' => $baseDir . '/src/Model/Comment.php',
+    'App\\Model\\Img' => $baseDir . '/src/Model/Img.php',
     'App\\Model\\Post' => $baseDir . '/src/Model/Post.php',
     'App\\Model\\User' => $baseDir . '/src/Model/User.php',
     'App\\Router\\Route' => $baseDir . '/src/Router/Route.php',
