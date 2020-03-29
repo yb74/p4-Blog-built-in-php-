@@ -124,6 +124,7 @@ class AdminController {
 
     public function createPost() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // $fileName = $_FILES['picture_url']['name'];
             if ($_FILES['picture_url']['size'] !== 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
                 $img = $_FILES['picture_url'];
                 $ext = strtolower(substr($img['name'], -3)); // contains the file extension
@@ -131,17 +132,26 @@ class AdminController {
                 // $img["size"] > 73355
 
                 if (in_array($ext, $allow_ext)) {
-                    //move_uploaded_file($img['tmp_name'], $destination);
+
+                    /*$picturePath = "public/images/chapters/";
+                    $imageNameAndExt = $img['name'];
+                    $imageNameIsolation = explode(".", $imageNameAndExt);
+
+                    $newName = $imageNameIsolation[0];
+                    $newExt = strtolower($imageNameIsolation[1]);*/
+
                     move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
-                    Img::createMin("public/images/chapters/" . $img['name'], "public/images/chapters/min/", $img['name'], 1250, 350);
-                    Img::convertJPG("public/images/chapters/" . $img['name']);
-                    $destination = "public/images/chapters/min/" . $img['name'];
+                    // Img::createMin("public/images/chapters/" . $img['name'], "public/images/chapters/min/", $img['name'], 1250, 350);
+                    // Img::convertJPG("public/images/chapters/" . $img['name']);
+
+                    // $destination = "public/images/chapters/min/" . $img['name'];
+                    $destination = "public/images/chapters/" . $img['name'];
 
                     $post = new Post();
                     $post->setPictureUrl($destination);
                     $post->setTitle($_POST['title']);
                     $post->setContent($_POST['content']);
-                    //$this->post->setId($postId);
+
                     $this->postManager->addPost($post);
 
                     header('Location: /admin');
@@ -161,7 +171,7 @@ class AdminController {
 
             else {
                 $this->empty_inputs_err = "Please, fill in the form !";
-            } var_dump($_FILES['picture_url']); 
+            }
         }
         require('src/view/createPostView.php');
         return;
