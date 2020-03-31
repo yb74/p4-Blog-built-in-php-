@@ -11,16 +11,16 @@ $subheadingPage='';
         <!-- Default form login -->
         <form class="text-center border border-light p-5" action="/connection" method="post">
             <p class="h4 mb-4">Log In</p>
-            <div class="form-group <?= $this->empty_inputs_err ? 'has-error' : ''; ?>">
-                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $this->empty_inputs_err; ?></span>
+            <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
+                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
             </div>
             <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username">
-            <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
-                <span class="help-block text-danger"><?= $this->username_err; ?></span>
+            <div class="form-group <?= $errors['username'] ? 'has-error' : ''; ?>">
+                <span class="help-block text-danger"><?= $errors['username'] ?></span>
             </div>
             <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password">
-            <div class="form-group <?= $this->password_err ? 'has-error' : ''; ?>">
-                <span class="help-block text-danger"><?= $this->password_err; ?></span>
+            <div class="form-group <?= $errors['password'] ? 'has-error' : ''; ?>">
+                <span class="help-block text-danger"><?= $errors['password'] ?></span>
             </div>
 
             <!-- Sign in button -->

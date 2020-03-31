@@ -15,111 +15,93 @@ class UserController
         $this->commentManager = new CommentManager();
     }
 
-    public $username_err = "";
-    public $password_err = "";
-    public $confirm_password_err = "";
-    public $empty_inputs_err = "";
-
     public function userRegister()
     {
+        $errors = [];
+
+        $errors['username']="";
+        $errors['password']="";
+        $errors['confirm_password']="";
+        $errors['form']="";
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (empty(trim($_POST['username'])) && empty(trim($_POST['password'])) && empty(trim($_POST["confirm_password"]))) {
+                $errors['form'] = "Please, fill in the form.";
+            }
+            if (empty(trim($_POST['username']))) {
+                $errors['username'] = "Please enter a username.";
+            }
+            if (empty(trim($_POST['password']))) {
+                $errors['password'] = "Please enter a password.";
+            }
+            if (empty(trim($_POST['confirm_password']))) {
+                $errors['confirm_password'] = "Please confirm password.";
+            }
+
             $user = $this->userManager->getAuth($_POST['username']);
 
-            if (empty(trim($_POST['username'])) && empty(trim($_POST['password'])) && empty(trim($_POST["confirm_password"]))) {
-                $this->empty_inputs_err = "Please, fill in the form.";
-                require 'src/view/registrationView.php';
+            if ($user) {
+                $errors['username'] = "This username is already taken.";
             }
-            elseif (empty(trim($_POST['username']))) {
-                $this->username_err = "Please enter a username.";
-                require 'src/view/registrationView.php';
+            if (strlen(trim($_POST["password"])) < 6 && strlen(trim($_POST["confirm_password"])) < 6) {
+                $errors['password'] = "The password must contain at least 6 characters.";
             }
-            elseif (empty(trim($_POST['password']))) {
-                $this->password_err = "Please enter a password.";
-                require 'src/view/registrationView.php';
+            if (($_POST["password"] != $_POST["confirm_password"])) {
+                $errors['confirm_password'] = "Password did not match.";
             }
-            elseif (empty(trim($_POST['confirm_password']))) {
-                $this->confirm_password_err = "Please confirm password.";
-                require 'src/view/registrationView.php';
-            }
-            elseif ($user) {
-                $this->username_err = "This username is already taken.";
-                require 'src/view/registrationView.php';
-            }
-            elseif (strlen(trim($_POST["password"])) < 6 && strlen(trim($_POST["confirm_password"])) < 6) {
-                $this->password_err = "The password must contain at least 6 characters.";
-                require 'src/view/registrationView.php';
-            }
-            elseif (($_POST["password"] != $_POST["confirm_password"])) {
-                $this->confirm_password_err = "Password did not match.";
-                require 'src/view/registrationView.php';
-            }
-            else {
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+            if (count($errors) === 0) {
+                $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-                $this->userManager->pushUserInfo($username, $hashedPassword);
-
+                $this->userManager->pushUserInfo($_POST['username'], $hashedPassword);
                 header('Location: /connection');
+                die; // no need to require the view
             }
-        } else {
-            require 'src/view/registrationView.php';
         }
+        require 'src/view/registrationView.php';
     }
 
     public function userAuth() {
+
+        $errors = [];
+
+        $errors['username']="";
+        $errors['password']="";
+        $errors['form']="";
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $this->userManager->getAuth($_POST['username']);
             if (empty($_POST['username']) && empty($_POST['password'])) {
-                $this->empty_inputs_err = "Please, fill in the form.";
-
-                require 'src/view/connectionView.php';
+                $errors['form'] = "Please, fill in the form.";
             }
-            elseif (empty($_POST['username'])) {
-                $this->username_err = "Please enter a username.";
-
-                require 'src/view/connectionView.php';
+            if (empty($_POST['username'])) {
+                $errors['username'] = "Please enter a username.";
             }
-            elseif (!$user) {
-                $this->username_err = "This username doesn't exist.";
-                require 'src/view/connectionView.php';
+            if (!$user) {
+                $errors['username'] = "This username doesn't exists.";
             }
-            elseif (empty($_POST['password'])) {
-                $this->password_err = "Please enter a password.";
-
-                require 'src/view/connectionView.php';
+            if (empty($_POST['password'])) {
+                $errors['password'] = "Please enter a password.";
             }
             else {
                 $username = htmlspecialchars($_POST['username']);
                 $password = htmlspecialchars($_POST['password']);
 
                 $user = $this->userManager->getAuth($_POST['username']);
+                $user = $this->userManager->login($username);
 
-                if($user) {
-                    $user = $this->userManager->login($username);
+                if (password_verify($password, $user->getPassword())) {
+                    $_SESSION['id'] = $user->getId();
+                    $_SESSION['role'] = $user->getRole();
+                    $_SESSION['username'] = $user->getUsername();
 
-                    if (password_verify($password, $user->getPassword())) {
-                        $_SESSION['id'] = $user->getId();
-                        $_SESSION['role'] = $user->getRole();
-                        $_SESSION['username'] = $user->getUsername();
-
-                        if ($user->getRole() === 'admin') {
-
-                            header('Location: /admin');
-
-                        } else {
-                            header('Location: /');
-                        }
-
+                    if ($user->getRole() === 'admin') {
+                        header('Location: /admin');
                     } else {
-                        $this->empty_inputs_err = "Your username and your password don't match.";
-                        //$this->password_err = "Your username and your password don't match.";
-                        require 'src/view/connectionView.php';
+                        header('Location: /');
                     }
-                }
-                else {
-                    $this->empty_inputs_err = "This username doesn't exist.";
-                    //$this->username_err = "This username doesn't exist.";
+
+                } else {
+                    $errors['password'] = "Your username and your password don't match.";
                     require 'src/view/connectionView.php';
                 }
             }
