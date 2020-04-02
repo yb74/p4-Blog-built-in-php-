@@ -12,18 +12,16 @@ $subheadingPage='';
             <div class="col-lg-12 ftco-animate">
                 <form action="/modifyPost<?= $post->getId(); ?>" method="post"
                       class="p-5 bg-light">
-                    <div class="form-group <?= $this->empty_inputs_err ? 'has-error' : ''; ?>">
-                        <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $this->empty_inputs_err; ?></span>
+                    <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
+                        <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
                     </div>
-                    <div class="form-group <?= $this->modifyTitle_help ? 'has-error' : ''; ?>">
+                    <div class="form-group ">
                         <label for="title">Title</label><br/>
-                        <span class="help-block text-danger"><?= $this->modifyTitle_help; ?></span>
                         <input type="text" name="title" id="title" cols="30" rows="10"
                                class="form-control" value="<?= $post->getTitle() ?>">
                     </div>
-                    <div class="form-group <?= $this->modifyContent_help ? 'has-error' : ''; ?>">
+                    <div class="form-group">
                         <label for="content">Content</label><br/>
-                        <span class="help-block text-danger"><?= $this->modifyContent_help; ?></span>
                         <textarea type="text" name="content" id="adminForm" cols="160" rows="30"
                                   class="form-control"><?= $post->getContent() ?></textarea>
                     </div>

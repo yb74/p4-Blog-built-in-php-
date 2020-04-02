@@ -1,19 +1,17 @@
 <?php $title = htmlspecialchars($post->getTitle());
-$picture ='/public/images/chapters/chapter-image1.jpg';
+$picture = $post->getPictureUrl();
 $titlePage= htmlspecialchars($post->getTitle());
-$subheadingPage='';
+$subheadingPage= $post->getCreationDateFr();
 ?>
 
 <?php ob_start(); ?>
     <section>
-        <div style="background-image: url('<?= $post->getPictureUrl ?>'); background-size: cover;">
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container chapter-title">
+            <div class="jumbotron jumbotron-fluid" style="background-image: url(<?= $post->getPictureUrl() ?>); background-size: cover;">
+                <div class="container chapter-title text-center">
                     <h1 class="display-4"><?= htmlspecialchars($post->getTitle()) ?></h1>
                     <h3 class="lead"><?= $post->getCreationDateFr() ?></h3>
                 </div>
             </div>
-        </div>
 
         <div class="news">
             <p>
@@ -26,14 +24,17 @@ $subheadingPage='';
     <p>Please, <a href="/connection" class="btn btn-info">Log In</a> to be able to leave a comment !</p>
 <?php elseif ($_SESSION['role'] === 'user'): ?>
         <form action="/chapter<?= $post->getId() ?>" method="post" class="p-5 bg-light">
-            <div class="form-group <?= $this->author_help ? 'has-error' : ''; ?>">
-                <input type="text" id="author" style= "cursor: not-allowed" name="author" readonly="readonly" value = "<?= $_SESSION['username']  ?>" class="form-control mb-4">
-                <span class="help-block text-danger"><?= $this->author_help; ?></span>
+            <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
+                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
             </div>
-            <div class="form-group <?= $this->content_help ? 'has-error' : ''; ?>">
+            <div class="form-group <?= $errors['author'] ? 'has-error' : ''; ?>">
+                <input type="text" id="author" style= "cursor: not-allowed" name="author" readonly="readonly" value = "<?= $_SESSION['username']  ?>" class="form-control mb-4">
+                <span class="help-block text-danger"><?= $errors['author'] ?></span>
+            </div>
+            <div class="form-group <?= $errors['content'] ? 'has-error' : ''; ?>">
                 <label for="content">Comment</label><br />
                 <textarea id="content" name="content" cols="30" rows="5" class="form-control"></textarea>
-                <span class="help-block text-danger"><?= $this->content_help; ?></span>
+                <span class="help-block text-danger"><?= $errors['content'] ?></span>
             </div>
             <div>
                 <input type="submit" value="Post" name="send_data" class="btn py-2 px-3 my-2 btn-primary" />
@@ -58,7 +59,7 @@ foreach ($comments as $comment)
                             <?php if ($_SESSION): ?>
                                 <?php if ($_SESSION['role'] === 'user'): ?>
                                     <?php if ($comment->getStatus() == 0): ?>
-                                        <a href="<?= '/reportComment'?><?= $comment->getId() ?>">
+                                        <a href="<?= '/reportComment'?><?= $comment->getId() ?><?= $postId?>">
                                             <button class="btn btn-danger ml-5 mt-3">Report</button>
                                         </a>
                                     <?php else : ?>

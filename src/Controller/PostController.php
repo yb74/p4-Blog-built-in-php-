@@ -12,9 +12,6 @@ use App\Manager\{
 
 class PostController
 {
-    public $author_help = "";
-    public $content_help = "";
-
     public function __construct()
     {
         $this->postManager = new PostManager();
@@ -36,14 +33,21 @@ class PostController
 
     public function post($postId)
     {
+        $errors['author']="";
+        $errors['content']="";
+        $errors['form']="";
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (empty($_POST['author']) && empty($_POST['content'])) {
+                $errors['form']="please, fill in the form.";
+            }
             if (empty($_POST['author'])) {
-                $this->author_help = "Please, enter your username !";
+                $errors['form'] = "Please, enter your username.";
             }
             if (empty($_POST['content'])) {
-                $this->content_help = "Please, enter a comment !";
+                $errors['form'] = "Please, enter a comment.";
             }
-            else if (isset($_POST['author']) && isset($_POST['content'])) {
+            else {
                 $comment = new Comment();
                 $comment->setAuthor($_POST['author']);
                 $comment->setContent($_POST['content']);

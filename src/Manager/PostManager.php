@@ -37,7 +37,6 @@ class PostManager extends Manager
     }
 
     // ADMIN
-
     public function getDashboardPosts() // get all posts for the dashboard
     {
         $db = $this->dbConnect();
@@ -66,7 +65,7 @@ class PostManager extends Manager
     public function updatePost(Post $post)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE posts SET title = :title, content = :content WHERE id = :id');
+        $req = $db->prepare('UPDATE posts SET title = :title, content = :content, creation_date = NOW() WHERE id = :id ORDER BY creation_date DESC');
         $req->execute(array(
             'title'=> $post->getTitle(),
             'content'=> $post->getContent(),

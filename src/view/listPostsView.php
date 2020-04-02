@@ -20,16 +20,18 @@ endif;
 foreach ($posts as $post)
 {
     ?>
-        <div class="card m-3" style="width: 20.5rem; height:20.5rem">
-          <img src="<?= $post->getPictureUrl() ?>" class="card-img-top"
-               alt="Image du chapitre intitulé Une aurore boréale">
-          <div class="card-body">
-            <h4><?= htmlspecialchars($post->getTitle()) ?></h4>
-            <h5 class="card-title"><?= htmlspecialchars($post->getCreationDateFr()); ?></h5>
-            <p class="card-text"><?= substr(nl2br($post->getContent()), 0, 50) ?></p>
-            <a href="/chapter<?= $post->getId() ?>" class="btn btn-primary">Read more</a>
-          </div>
-        </div>
+        <a href="/chapter<?= $post->getId() ?>" class="chapter_block">
+            <div class="card m-3 inside_block" style="width: 20.5rem; height:20.5rem">
+              <img src="<?= $post->getPictureUrl() ?>" class="card-img-top"
+                   alt="Image du chapitre intitulé Une aurore boréale">
+              <div class="card-body">
+                <h4><?= htmlspecialchars($post->getTitle()) ?></h4>
+                <h5 class="card-title"><?= htmlspecialchars($post->getCreationDateFr()); ?></h5>
+                <p class="card-text"><?= substr(nl2br($post->getContent()), 0, 50) ?></p>
+                  <button class="btn btn-primary">Read more</button>
+              </div>
+            </div>
+        </a>
     <?php
 }
 ?>

@@ -13,19 +13,15 @@ class CommentController
         $this->commentManager = new CommentManager();
     }
 
-    public function commentReport($commentId) {
-        if (isset($commentId) && ($commentId > 0)) {
+    public function reportComment($postId) {
             $comment = new Comment();
             $comment->setId($commentId);
-            $this->commentManager->reportComment($comment);
-            header('Location: /');
-            //header('Location: /chapter' . $relatedId);
+            $this->commentManager->updateCommentStatus($comment);
+            $this->commentManager->getComment($postId);
+            //$this->commentManager->getReportedCommentId($comment);
 
-            var_dump($_GET);
-        }
-        else {
-            $this->msg='No comment id has been sent !';
-            require('src/view/errorView.php');
-        }
+            //header('Location: /');
+            //header('Location: /chapter' . $postId);
+        var_dump($postId);
     }
 }

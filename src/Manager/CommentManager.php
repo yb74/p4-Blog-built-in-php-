@@ -59,7 +59,7 @@ class CommentManager extends Manager
         return $comments;
     }*/
 
-    public function reportComment(Comment $comment)
+    public function updateCommentStatus(Comment $comment)
     {
 
         $db = $this->dbConnect();
@@ -67,6 +67,15 @@ class CommentManager extends Manager
         $req->execute([
             'id'=> $comment->getId()
         ]);
+        return $req;
+    }
+
+    public function getComment($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT related_id FROM comments WHERE id = ?');
+        $req->execute([$postId]);
+        $req->fetch();
         return $req;
     }
 

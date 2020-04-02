@@ -3,33 +3,23 @@ session_start();
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-use App\Controller\{
-    PostController,
-    CommentController,
-    UserController,
-    AdminController,
-    ContactController
-};
-
-use App\Router\RouterException;
-
 $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
 
-try{
-    // DISPLAY ERROR
+
+// DISPLAY ERROR
     $router->get('/error', "Admin#displayError"); // display error
 
 // POSTS AND COMMENTS
     $router->get('/', "Post#listPosts"); // display all chapters
-
     $router->get('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // display the selected chapter
+
+// logout
+    $router->get('/logout', "User#logOut");
 
 // CONTACT SYSTEM
     $router->get('/contact', "Contact#displayContactForm"); // display the contact form
-    if (!empty($_SESSION)) {
-        // logout
-        $router->get('/logout', "User#logOut");
 
+    if (!empty($_SESSION)) {
         if(($_SESSION['role']) == 'admin') {
             // ADMIN SYSTEM
 
@@ -52,9 +42,9 @@ try{
             $router->get('/manageUsers', "Admin#manageUsers"); // access to the users management view
             $router->get('/deleteUser:userId', "Admin#userDelete")->with('userId', '[0-9]+'); // delete a post
         }
-        elseif (($_SESSION['role']) == 'user') {
+        if (($_SESSION['role']) == 'user') {
             $router->post('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // Comment a chapter
-            $router->get('/reportComment:commentId', "Comment#commentReport")->with('commentId', '[0-9]+'); // Report a comment
+            $router->get('/reportComment:postId', "Comment#reportComment")->with('postId', '[0-9]+'); // Report a comment
         }
     }
     else {
@@ -66,10 +56,15 @@ try{
         $router->get('/connection', "User#userAuth");
         $router->post('/connection', "User#userAuth");
     }
+
+//throw new Exception('No matching routes');
+
+try {
+    $router->run(); // fonction servant à vérifier si l'url tappé en paramètre correspond à un des urls
 }
 catch (Exception $e) {
-    // displayError($e->getMessage());
-    echo "You are not allowed to visit this page !";
+    //displayError($e->getMessage());
+    echo $e;
 }
 
 
@@ -77,5 +72,3 @@ catch (Exception $e) {
 /*
 $router->get('/article/:slug-:id/:page', "Posts#show")->with('id', '[0-9]+')->with('page', '[0-9]+')->with('slug', '[a-z\-0-9]+');
 */
-
-$router->run(); // fonction servant à vérifier si l'url tappé en paramètre correspond à un des urls

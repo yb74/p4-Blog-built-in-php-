@@ -17,7 +17,7 @@ class UserController
 
     public function userRegister()
     {
-        $errors = [];
+        //$errors = [];
 
         $errors['username']="";
         $errors['password']="";
@@ -25,42 +25,39 @@ class UserController
         $errors['form']="";
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = $this->userManager->getAuth($_POST['username']);
             if (empty(trim($_POST['username'])) && empty(trim($_POST['password'])) && empty(trim($_POST["confirm_password"]))) {
                 $errors['form'] = "Please, fill in the form.";
             }
-            if (empty(trim($_POST['username']))) {
-                $errors['username'] = "Please enter a username.";
+            elseif (empty(trim($_POST['username']))) {
+                $errors['form'] = "Please enter a username.";
             }
-            if (empty(trim($_POST['password']))) {
-                $errors['password'] = "Please enter a password.";
+            elseif ($user) {
+                $errors['form'] = "This username is already taken.";
             }
-            if (empty(trim($_POST['confirm_password']))) {
-                $errors['confirm_password'] = "Please confirm password.";
+            elseif (empty(trim($_POST['password']))) {
+                $errors['form'] = "Please enter a password.";
             }
-
-            $user = $this->userManager->getAuth($_POST['username']);
-
-            if ($user) {
-                $errors['username'] = "This username is already taken.";
+            elseif (strlen(trim($_POST["password"])) < 6 && strlen(trim($_POST["confirm_password"])) < 6) {
+                $errors['form'] = "The password must contain at least 6 characters.";
             }
-            if (strlen(trim($_POST["password"])) < 6 && strlen(trim($_POST["confirm_password"])) < 6) {
-                $errors['password'] = "The password must contain at least 6 characters.";
+            elseif (empty(trim($_POST['confirm_password']))) {
+                $errors['form'] = "Please confirm password.";
             }
-            if (($_POST["password"] != $_POST["confirm_password"])) {
-                $errors['confirm_password'] = "Password did not match.";
+            elseif (($_POST["password"] != $_POST["confirm_password"])) {
+                $errors['form'] = "Password did not match.";
             }
-            if (count($errors) === 0) {
+            elseif (!empty(trim($_POST['username'])) && !empty(trim($_POST['password'])) && !empty(trim($_POST["confirm_password"]))) {
                 $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
                 $this->userManager->pushUserInfo($_POST['username'], $hashedPassword);
                 header('Location: /connection');
-                die; // no need to require the view
             }
         }
         require 'src/view/registrationView.php';
     }
 
-    public function userAuth() {
+    /*public function userAuth() {
 
         $errors = [];
 
@@ -76,7 +73,7 @@ class UserController
             if (empty($_POST['username'])) {
                 $errors['username'] = "Please enter a username.";
             }
-            if (!$user) {
+            elseif (!$user) {
                 $errors['username'] = "This username doesn't exists.";
             }
             if (empty($_POST['password'])) {
@@ -105,6 +102,63 @@ class UserController
                     require 'src/view/connectionView.php';
                 }
             }
+        }
+            require 'src/view/connectionView.php';
+    }*/
+
+    public function userAuth() {
+        //$errors = [];
+        $errors['username']="";
+        $errors['password']="";
+        $errors['form']="";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = $this->userManager->getAuth($_POST['username']);
+            if (empty($_POST['username']) && empty($_POST['password'])) {
+                $errors['form'] = "Please, fill in the form.";
+            }
+            elseif (empty($_POST['username'])) {
+                $errors['form'] = "Please enter a username.";
+            }
+            elseif (!$user) {
+                $errors['form'] = "This username doesn't exist.";
+            }
+            elseif (empty($_POST['password'])) {
+                $errors['form'] = "Please enter a password.";
+            }
+            if (!empty($_POST['username']) && !empty($_POST['password'])) {
+                $username = htmlspecialchars($_POST['username']);
+                $password = htmlspecialchars($_POST['password']);
+
+                $user = $this->userManager->getAuth($_POST['username']);
+
+                if($user) {
+                    $user = $this->userManager->login($username);
+
+                    if (password_verify($password, $user->getPassword())) {
+                        $_SESSION['id'] = $user->getId();
+                        $_SESSION['role'] = $user->getRole();
+                        $_SESSION['username'] = $user->getUsername();
+
+                        if ($user->getRole() === 'admin') {
+
+                            header('Location: /admin');
+
+                        } else {
+                            header('Location: /');
+                        }
+
+                    } else {
+                        $errors['form'] = "Your username and your password don't match.";
+                        require 'src/view/connectionView.php';
+                    }
+                }
+                else {
+                    $errors['form'] = "This username doesn't exist.";
+                    require 'src/view/connectionView.php';
+                }
+            }
+            require 'src/view/connectionView.php';
         } else {
             require 'src/view/connectionView.php';
         }

@@ -15,12 +15,6 @@ use App\Model\{
 
 class AdminController {
     public $msg= "";
-    public $empty_inputs_err = "";
-    public $uploadPicture_help = "";
-    public $createTitle_help = "";
-    public $createContent_help = "";
-    public $modifyTitle_help = "";
-    public $modifyContent_help = "";
 
     public function __construct()
     {
@@ -81,19 +75,27 @@ class AdminController {
     }
 
     // POST ADMINISTRATION
-    /*public function createPost() {
+    public function createPost() {
+
+        //$errors = [];
+
+        $errors['picture']="";
+        $errors['title']="";
+        $errors['content']="";
+        $errors['form']="";
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (empty($_FILES['picture_url']) && empty($_POST['title']) && empty($_POST['content'])) {
-                $this->empty_inputs_err = "Please, fill in the form !";
+            if ($_FILES['picture_url']['error']  > 0 && empty($_POST['title']) && empty($_POST['content'])) {
+                $errors['form'] = "Please, fill in the form !";
             }
-            elseif (empty($_FILES['picture_url'])) {
-                $this->uploadPicture_help = "Please, upload a picture !";
+            if (empty($_FILES['picture_url'])) {
+                $errors['picture'] = "Please, upload a picture !";
             }
-            elseif (empty($_POST['title'])) {
-                $this->createTitle_help = "Please, enter a title !";
+            if (empty($_POST['title'])) {
+                $errors['title'] = "Please, enter a title !";
             }
-            elseif (empty($_POST['content'])) {
-                $this->createContent_help = "Please, enter a content !";
+            if (empty($_POST['content'])) {
+                $errors['content'] = "Please, enter a content !";
             }
             else {
                 $img = $_FILES['picture_url'];
@@ -105,88 +107,100 @@ class AdminController {
                      move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
                     $destination = "public/images/chapters/" . $img['name'];
 
-                    $this->post->setPictureUrl($destination);
-                    $this->post->setTitle($_POST['title']);
-                    $this->post->setContent($_POST['content']);
-                    //$this->post->setId($postId);
-                    $this->postManager->addPost($this->post);
-                    echo $img;
-                    header('Location: /admin');
-                }
-                else {
-                    $this->uploadPicture_help = "Your file is not a picture !";
-                }
-            }
-        }
-        require('src/view/createPostView.php');
-        return;
-    }*/
-
-    public function createPost() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // $fileName = $_FILES['picture_url']['name'];
-            if ($_FILES['picture_url']['size'] !== 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
-                $img = $_FILES['picture_url'];
-                $ext = strtolower(substr($img['name'], -3)); // contains the file extension
-                $allow_ext = array("jpg", "png", "gif");
-                // $img["size"] > 73355
-
-                if (in_array($ext, $allow_ext)) {
-
-                    /*$picturePath = "public/images/chapters/";
-                    $imageNameAndExt = $img['name'];
-                    $imageNameIsolation = explode(".", $imageNameAndExt);
-
-                    $newName = $imageNameIsolation[0];
-                    $newExt = strtolower($imageNameIsolation[1]);*/
-
-                    move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
-                    // Img::createMin("public/images/chapters/" . $img['name'], "public/images/chapters/min/", $img['name'], 1250, 350);
-                    // Img::convertJPG("public/images/chapters/" . $img['name']);
-
-                    // $destination = "public/images/chapters/min/" . $img['name'];
-                    $destination = "public/images/chapters/" . $img['name'];
-
                     $post = new Post();
                     $post->setPictureUrl($destination);
                     $post->setTitle($_POST['title']);
                     $post->setContent($_POST['content']);
-
+                    //$this->post->setId($postId);
                     $this->postManager->addPost($post);
-
+                    echo $img;
                     header('Location: /admin');
-                } else {
-                    $this->uploadPicture_help = "Your file is not a picture !";
+                    die; // no need to require the view
                 }
-            }
-            /*elseif (empty($_FILES['picture_url'])) {
-                $this->uploadPicture_help = "Please, upload a picture !";
-            }
-            elseif (empty($_POST['title'])) {
-                $this->createTitle_help = "Please, enter a title !";
-            }
-            elseif (empty($_POST['content'])) {
-                $this->createContent_help = "Please, enter a content !";
-            }*/
-
-            else {
-                $this->empty_inputs_err = "Please, fill in the form !";
+                else {
+                    $errors['picture'] = "Your file is not a picture !";
+                }
             }
         }
         require('src/view/createPostView.php');
         return;
     }
 
+//    public function createPost() {
+//
+//        $errors = [];
+//
+//        $errors['picture']="";
+//        $errors['title']="";
+//        $errors['content']="";
+//        $errors['form']="";
+//
+//        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//            // $fileName = $_FILES['picture_url']['name'];
+//            if ($_FILES['picture_url']['size'] !== 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
+//                $img = $_FILES['picture_url'];
+//                $ext = strtolower(substr($img['name'], -3)); // contains the file extension
+//                $allow_ext = array("jpg", "png", "gif");
+//                // $img["size"] > 73355
+//
+//                if (in_array($ext, $allow_ext)) {
+//
+//                    /*$picturePath = "public/images/chapters/";
+//                    $imageNameAndExt = $img['name'];
+//                    $imageNameIsolation = explode(".", $imageNameAndExt);
+//                    $newName = $imageNameIsolation[0];
+//                    $newExt = strtolower($imageNameIsolation[1]);*/
+//
+//                    move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
+//                    // Img::createMin("public/images/chapters/" . $img['name'], "public/images/chapters/min/", $img['name'], 1250, 350);
+//                    // Img::convertJPG("public/images/chapters/" . $img['name']);
+//
+//                    // $destination = "public/images/chapters/min/" . $img['name'];
+//                    $destination = "public/images/chapters/" . $img['name'];
+//
+//                    $post = new Post();
+//                    $post->setPictureUrl($destination);
+//                    $post->setTitle($_POST['title']);
+//                    $post->setContent($_POST['content']);
+//
+//                    $this->postManager->addPost($post);
+//
+//                    header('Location: /admin');
+//                } else {
+//                    $errors['picture'] = "Your file is not a picture !";
+//                }
+//            }
+//            /*elseif (empty($_FILES['picture_url'])) {
+//                $errors['picture'] = "Please, upload a picture !";
+//            }
+//            elseif (empty($_POST['title'])) {
+//                $errors['title'] = "Please, enter a title !";
+//            }
+//            elseif (empty($_POST['content'])) {
+//                $errors['content'] = "Please, enter a content !";
+//            }*/
+//
+//            else {
+//                $errors['form'] = "Please, fill in the form !";
+//            }
+//        }
+//        require('src/view/createPostView.php');
+//        return;
+//    }
+
     public function modifyPost($postId) {
+
+        $errors['form']="";
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (empty($_POST['title']) && empty($_POST['content'])) {
-                $this->empty_inputs_err = "Please, fill in the form !";
+                $errors['form'] = "Please, fill in the form !";
             }
             elseif (empty($_POST['title'])) {
-                $this->modifyTitle_help = "Please, enter a title !";
+                $errors['form'] = "Please, enter a title !";
             }
             elseif (empty($_POST['content'])) {
-                $this->modifyContent_help = "Please, enter a content !";
+                $errors['form'] = "Please, enter a content !";
             }
             else {
                 $post = new Post();
