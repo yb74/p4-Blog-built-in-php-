@@ -27,17 +27,17 @@ class ComposerStaticInitab251815d9271268869eb849c34961ef
         'App\\Controller\\PostController' => __DIR__ . '/../..' . '/src/Controller/PostController.php',
         'App\\Controller\\UserController' => __DIR__ . '/../..' . '/src/Controller/UserController.php',
         'App\\Manager\\CommentManager' => __DIR__ . '/../..' . '/src/Manager/CommentManager.php',
+        'App\\Manager\\ContactManager' => __DIR__ . '/../..' . '/src/Manager/ContactManager.php',
         'App\\Manager\\Manager' => __DIR__ . '/../..' . '/src/Manager/Manager.php',
         'App\\Manager\\PostManager' => __DIR__ . '/../..' . '/src/Manager/PostManager.php',
         'App\\Manager\\RegistrationManager' => __DIR__ . '/../..' . '/src/Manager/RegistrationManager.php',
         'App\\Manager\\UserManager' => __DIR__ . '/../..' . '/src/Manager/UserManager.php',
         'App\\Model\\Comment' => __DIR__ . '/../..' . '/src/Model/Comment.php',
-        'App\\Model\\Img' => __DIR__ . '/../..' . '/src/Model/Img.php',
+        'App\\Model\\Contact' => __DIR__ . '/../..' . '/src/Model/Contact.php',
         'App\\Model\\Post' => __DIR__ . '/../..' . '/src/Model/Post.php',
         'App\\Model\\User' => __DIR__ . '/../..' . '/src/Model/User.php',
         'App\\Router\\Route' => __DIR__ . '/../..' . '/src/Router/Route.php',
         'App\\Router\\Router' => __DIR__ . '/../..' . '/src/Router/Router.php',
-        'App\\Router\\RouterException' => __DIR__ . '/../..' . '/src/Router/RouterException.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

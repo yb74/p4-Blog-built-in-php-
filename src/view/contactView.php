@@ -1,105 +1,40 @@
 <?php $title = "Contact";
 $picture ='/public/images/chapters/chapter-image1.jpg';
-$titlePage='Contact me';
+$titlePage= 'Contact me';
 $subheadingPage='';
 ?>
 
 <?php ob_start(); ?>
 
-<!--Section: Contact v.2-->
-<section class="mb-4">
+    <section>
 
-    <!--Section description-->
-    <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact me directly. I will come back to you within
-        a matter of hours to help you.</p>
-
-    <div class="row">
-
-        <!--Grid column-->
-        <div class="col-md-9 mb-md-0 mb-5">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <input type="text" id="name" name="name" class="form-control">
-                            <label for="name" class="">Your name</label>
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <input type="text" id="email" name="email" class="form-control">
-                            <label for="email" class="">Your email</label>
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-
-                <!--Grid row-->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <input type="text" id="subject" name="subject" class="form-control">
-                            <label for="subject" class="">Subject</label>
-                        </div>
-                    </div>
-                </div>
-                <!--Grid row-->
-
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="md-form">
-                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
-                            <label for="message">Your message</label>
-                        </div>
-
-                    </div>
-                </div>
-                <!--Grid row-->
-
-            </form>
-
-            <div class="text-center text-md-left">
-                <a class="btn btn-primary text-white" onclick="document.getElementById('contact-form').submit();">Send</a>
+        <form class="text-center border border-light p-5" action="/contact" method="post">
+            <p class="h4 mb-4"><?= $successMessage ?> </p>
+            <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
+                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
             </div>
-            <div class="status"></div>
-        </div>
-        <!--Grid column-->
+            <input type="text" id="fullname" name="fullname" class="form-control mb-4" placeholder="Your name">
+            <div class="form-group <?= $errors['fullname'] ? 'has-error' : ''; ?>">
+                <span class="help-block text-danger"><?= $errors['fullname'] ?></span>
+            </div>
+            <input type="email" id="password" name="email" class="form-control mb-4" placeholder="Your email">
+            <div class="form-group <?= $errors['email'] ? 'has-error' : ''; ?>">
+                <span class="help-block text-danger"><?= $errors['email'] ?></span>
+            </div>
+            <div class="form-group <?= $errors['message'] ? 'has-error' : ''; ?>">
+                <label for="message">Comment</label><br />
+                <textarea id="message" name="message" cols="30" rows="5" class="form-control"></textarea>
+                <span class="help-block text-danger"><?= $errors['message'] ?></span>
+            </div>
 
-        <!--Grid column-->
-        <div class="col-md-3 text-center">
-            <ul class="list-unstyled mb-0">
-                <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                    <p>San Francisco, CA 94126, USA</p>
-                </li>
+            <button class="btn btn-info btn-block my-4" type="submit" name="send_data">Send message</button>
 
-                <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                    <p>+ 01 234 567 89</p>
-                </li>
+        </form>
 
-                <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                    <p>contact@mdbootstrap.com</p>
-                </li>
-            </ul>
-        </div>
-        <!--Grid column-->
-
-    </div>
-
-</section>
-<!--Section: Contact v.2-->
+        <a href="/">
+            <button class="btn btn-primary">&laquo; Back to the posts</button>
+        </a>
+    </section>
 
 <?php $content = ob_get_clean(); ?>
 

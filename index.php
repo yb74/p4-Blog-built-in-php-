@@ -17,7 +17,8 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
     $router->get('/logout', "User#logOut");
 
 // CONTACT SYSTEM
-    $router->get('/contact', "Contact#displayContactForm"); // display the contact form
+    $router->get('/contact', "Contact#addMessage"); // display the contact form
+    $router->post('/contact', "Contact#addMessage"); // send a message (contact)
 
     if (!empty($_SESSION)) {
         if(($_SESSION['role']) == 'admin') {
