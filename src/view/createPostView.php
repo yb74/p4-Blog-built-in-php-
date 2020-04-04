@@ -10,7 +10,7 @@ $subheadingPage='';
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 ftco-animate">
-                    <!-- "enctype" is used to upload the file -->
+                    <!-- "enctype" is used to upload the files -->
                     <form action="/createPost" method="post" enctype="multipart/form-data" class="p-5 bg-light">
                         <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
                             <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>

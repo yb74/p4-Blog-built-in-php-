@@ -232,7 +232,7 @@ class AdminController {
             header('Location: /manageUsers');
         }
         else {
-            $this->msg='No user id has been sent !';
+            $this->msg='No user id has been sent !'; //error
             require('src/view/errorView.php');
         }
     }
