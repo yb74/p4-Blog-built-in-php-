@@ -4,6 +4,8 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Blog of Jean Forteroche">
     <meta name="author" content="Jean Forteroche">
@@ -12,7 +14,7 @@
     <!-- FB Open Graph data -->
     <meta property="og:title" content="Un billet pour l'Alaska by Jean Forteroche" />
     <meta property="og:type" content="Online novel" />
-    <meta property="og:url" content="http://www.projet4.younesbouaziz.fr" />
+    <meta property="og:url" content="http://www.jeanforteroche.webagencypro.fr" />
     <meta property="og:image" content="public/img/logo.jpg" />
     <meta property="og:description" content="Come and take a tour to Alaska through the latest online novel by Jean Forteroche"/>
 
@@ -20,7 +22,7 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="Online novel" />
     <meta name="twitter:title" content="Un billet pour l'Alaska by Jean Forteroche" />
-    <meta name="twitter:image:src" content="http://www.projet4.younesbouaziz.fr/public/images/logo.png" />
+    <meta name="twitter:image:src" content="http://www.jeanforteroche.webagencypro.fr/public/images/logo.png" />
     <meta name="twitter:description" content="Come and to take a tour to Alaska through the latest online novel by Jean Forteroche"/>
 
     <!-- TinyMCE -->

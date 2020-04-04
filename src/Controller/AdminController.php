@@ -75,55 +75,6 @@ class AdminController {
     }
 
     // POST ADMINISTRATION
-    public function createPost() {
-
-        $errors = [];
-
-        $errors['picture']="";
-        $errors['title']="";
-        $errors['content']="";
-        $errors['form']="";
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($_FILES['picture_url']['error']  > 0 && empty($_POST['title']) && empty($_POST['content'])) {
-                $errors['form'] = "Please, fill in the form !";
-            }
-            if (empty($_FILES['picture_url'])) {
-                $errors['picture'] = "Please, upload a picture !";
-            }
-            if (empty($_POST['title'])) {
-                $errors['title'] = "Please, enter a title !";
-            }
-            if (empty($_POST['content'])) {
-                $errors['content'] = "Please, enter a content !";
-            }
-            if ($_FILES['picture_url']['error'] === 0) {
-                $img = $_FILES['picture_url'];
-                $ext = strtolower(substr($img['name'], -3)); // contains the file extension
-                $allow_ext = array("jpg", "png", "gif");
-                if (!in_array($ext, $allow_ext)) {
-                    $errors["picture_url"] = "Please, select a valid image !";
-                }
-            }
-            if (count($errors) == 0) {
-                move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
-                $destination = "public/images/chapters/" . $img['name'];
-
-                $post = new Post();
-                $post->setPictureUrl($destination);
-                $post->setTitle($_POST['title']);
-                $post->setContent($_POST['content']);
-                //$this->post->setId($postId);
-                $this->postManager->addPost($post);
-                echo $img;
-                header('Location: /admin');
-                die; // no need to require the view
-            }
-        }
-        require('src/view/createPostView.php');
-        return;
-    }
-
 //    public function createPost() {
 //
 //        $errors = [];
@@ -134,57 +85,96 @@ class AdminController {
 //        $errors['form']="";
 //
 //        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//            // $fileName = $_FILES['picture_url']['name'];
-//            if ($_FILES['picture_url']['size'] !== 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
+//            if ($_FILES['picture_url']['error']  > 0 && empty($_POST['title']) && empty($_POST['content'])) {
+//                $errors['form'] = "Please, fill in the form !";
+//            }
+//            if (empty($_FILES['picture_url'])) {
+//                $errors['picture'] = "Please, upload a picture !";
+//            }
+//            if (empty($_POST['title'])) {
+//                $errors['title'] = "Please, enter a title !";
+//            }
+//            if (empty($_POST['content'])) {
+//                $errors['content'] = "Please, enter a content !";
+//            }
+//            if ($_FILES['picture_url']['error'] === 0) {
 //                $img = $_FILES['picture_url'];
 //                $ext = strtolower(substr($img['name'], -3)); // contains the file extension
 //                $allow_ext = array("jpg", "png", "gif");
-//                // $img["size"] > 73355
-//
-//                if (in_array($ext, $allow_ext)) {
-//
-//                    /*$picturePath = "public/images/chapters/";
-//                    $imageNameAndExt = $img['name'];
-//                    $imageNameIsolation = explode(".", $imageNameAndExt);
-//                    $newName = $imageNameIsolation[0];
-//                    $newExt = strtolower($imageNameIsolation[1]);*/
-//
-//                    move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
-//                    // Img::createMin("public/images/chapters/" . $img['name'], "public/images/chapters/min/", $img['name'], 1250, 350);
-//                    // Img::convertJPG("public/images/chapters/" . $img['name']);
-//
-//                    // $destination = "public/images/chapters/min/" . $img['name'];
-//                    $destination = "public/images/chapters/" . $img['name'];
-//
-//                    $post = new Post();
-//                    $post->setPictureUrl($destination);
-//                    $post->setTitle($_POST['title']);
-//                    $post->setContent($_POST['content']);
-//
-//                    $this->postManager->addPost($post);
-//
-//                    header('Location: /admin');
-//                } else {
-//                    $errors['picture'] = "Your file is not a picture !";
+//                if (!in_array($ext, $allow_ext)) {
+//                    $errors["picture_url"] = "Please, select a valid image !";
 //                }
 //            }
-//            /*elseif (empty($_FILES['picture_url'])) {
-//                $errors['picture'] = "Please, upload a picture !";
-//            }
-//            elseif (empty($_POST['title'])) {
-//                $errors['title'] = "Please, enter a title !";
-//            }
-//            elseif (empty($_POST['content'])) {
-//                $errors['content'] = "Please, enter a content !";
-//            }*/
+//            var_dump($errors);
+//            if (empty($errors)) {
+//                $img = $_FILES['picture_url'];
+//                move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
+//                $destination = "public/images/chapters/" . $img['name'];
 //
-//            else {
-//                $errors['form'] = "Please, fill in the form !";
+//                $post = new Post();
+//                $post->setPictureUrl($destination);
+//                $post->setTitle($_POST['title']);
+//                $post->setContent($_POST['content']);
+//                //$this->post->setId($postId);
+//                $this->postManager->addPost($post);
+//                echo $img;
+//                header('Location: /admin');
+//                die; // no need to require the view
 //            }
 //        }
 //        require('src/view/createPostView.php');
 //        return;
 //    }
+
+    public function createPost() {
+
+        $errors = [];
+
+        $errors['picture']="";
+        $errors['title']="";
+        $errors['content']="";
+        $errors['form']="";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_FILES['picture_url']['size'] !== 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
+                $img = $_FILES['picture_url'];
+                $ext = strtolower(substr($img['name'], -3)); // contains the file extension
+                $allow_ext = array("jpg", "png", "gif");
+                // $img["size"] > 73355
+
+                if (in_array($ext, $allow_ext)) {
+                    move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
+                    $destination = "public/images/chapters/" . $img['name'];
+
+                    $post = new Post();
+                    $post->setPictureUrl($destination);
+                    $post->setTitle($_POST['title']);
+                    $post->setContent($_POST['content']);
+
+                    $this->postManager->addPost($post);
+
+                    header('Location: /admin');
+                } else {
+                    $errors['picture'] = "Your file is not a picture !";
+                }
+            }
+            /*elseif (empty($_FILES['picture_url'])) {
+                $errors['picture'] = "Please, upload a picture !";
+            }
+            elseif (empty($_POST['title'])) {
+                $errors['title'] = "Please, enter a title !";
+            }
+            elseif (empty($_POST['content'])) {
+                $errors['content'] = "Please, enter a content !";
+            }*/
+
+            else {
+                $errors['form'] = "Please, fill in the form !";
+            }
+        }
+        require('src/view/createPostView.php');
+        return;
+    }
 
     public function modifyPost($postId) {
 

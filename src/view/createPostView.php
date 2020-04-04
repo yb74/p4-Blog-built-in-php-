@@ -18,8 +18,6 @@ $subheadingPage='';
                         <div class="form-group <?= $errors['picture'] ? 'has-error' : ''; ?>">
                             <label for="picture_url">Picture</label><br/>
                             <span class="help-block text-danger"><?= $errors['picture'] ?></span>
-                            <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
-                            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                             <input type="file" name="picture_url" id="picture_url" class="form-control">  <!-- /public/images/chapters/chapter-image1.jpg -->
                         </div>
                         <div class="form-group <?= $errors['title'] ? 'has-error' : ''; ?>">
