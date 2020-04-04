@@ -44,7 +44,7 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
         }
         if (($_SESSION['role']) == 'user') {
             $router->post('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // Comment a chapter
-            $router->get('/reportComment:postId', "Comment#reportComment")->with('postId', '[0-9]+'); // Report a comment
+            $router->get('/reportComment:commentId', "Comment#reportComment")->with('commentId', '[0-9]+'); // Report a comment
         }
     }
     else {

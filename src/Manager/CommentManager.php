@@ -70,13 +70,24 @@ class CommentManager extends Manager
         return $req;
     }
 
-    public function getComment($postId)
+//    public function getCommentRelatedId($commentId)
+//    {
+//        $db = $this->dbConnect();
+//        $req = $db->query('SELECT related_id FROM comments WHERE id = :id');
+//        $req->execute([$commentId]);
+//        $req->fetch();
+//        return $req;
+//    }
+
+    public function getCommentRelatedId(Comment $comment)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT related_id FROM comments WHERE id = ?');
-        $req->execute([$postId]);
-        $req->fetch();
-        return $req;
+        $req = $db->prepare('SELECT related_id FROM comments WHERE id = :id');
+        $req->execute([
+            'id' => $comment->getId()
+        ]);
+        $comment = $req->fetch();
+        return $comment;
     }
 
     public function deleteComment(Comment $comment)

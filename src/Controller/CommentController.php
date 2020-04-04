@@ -13,15 +13,13 @@ class CommentController
         $this->commentManager = new CommentManager();
     }
 
-    public function reportComment($postId) {
-            $comment = new Comment();
-            $comment->setId($commentId);
-            $this->commentManager->updateCommentStatus($comment);
-            $this->commentManager->getComment($postId);
-            //$this->commentManager->getReportedCommentId($comment);
+    public function reportComment($commentId) {
+        $comment = new Comment();
+        $comment->setId($commentId);
 
-            //header('Location: /');
-            //header('Location: /chapter' . $postId);
-        var_dump($postId);
+        $this->commentManager->updateCommentStatus($comment);
+        $comment = $this->commentManager->getCommentRelatedId($comment);
+
+        header('Location: /chapter' . $comment['related_id']);
     }
 }
