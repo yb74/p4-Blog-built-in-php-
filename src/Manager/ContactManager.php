@@ -9,10 +9,11 @@ class ContactManager extends Manager
     public function createMessage(Contact $contact)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO contacts(fullname, email, message, contact_date) VALUES (:fullname, :email, :message, NOW())');
+        $req = $db->prepare('INSERT INTO contacts(fullname, email, subject, message, contact_date) VALUES (:fullname, :email, :subject, :message, NOW())');
         $req->execute([
             'fullname' => $contact->getfullname(),
             'email' => $contact->getEmail(),
+            'subject' => $contact->getSubject(),
             'message' => $contact->getMessage()
         ]);
         return $req;

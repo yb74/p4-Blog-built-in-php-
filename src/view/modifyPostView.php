@@ -13,7 +13,9 @@ $subheadingPage='';
                 <form action="/modifyPost<?= $post->getId(); ?>" method="post"
                       class="p-5 bg-light">
                     <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
-                        <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                        <?php if(!empty($errors['form'])): ?>
+                            <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                        <?php endif; ?>
                     </div>
                     <div class="form-group ">
                         <label for="title">Title</label><br/>

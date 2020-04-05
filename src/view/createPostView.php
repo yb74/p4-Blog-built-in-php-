@@ -13,7 +13,9 @@ $subheadingPage='';
                     <!-- "enctype" is used to upload the files -->
                     <form action="/createPost" method="post" enctype="multipart/form-data" class="p-5 bg-light">
                         <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
-                            <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                            <?php if(!empty($errors['form'])): ?>
+                                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group <?= $errors['picture'] ? 'has-error' : ''; ?>">
                             <label for="picture_url">Picture</label><br/>

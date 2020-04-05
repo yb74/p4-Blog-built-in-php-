@@ -9,11 +9,13 @@ $subheadingPage='';
     <section>
         <form action="/registration" method="post" class="bg-light p-4 p-md-5 contact-form">
             <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
-                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                <?php if(!empty($errors['form'])): ?>
+                    <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                <?php endif; ?>
             </div>
             <div class="form-group <?= $errors['username'] ? 'has-error' : ''; ?>">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control">
+                <input type="text" name="username" class="form-control" value="<?php if(isset($_POST['username'])) {echo $_POST['username'];} ?>">
                 <span class="help-block text-danger"><?= $errors['username'] ?></span>
             </div>
             <div class="form-group <?= $errors['password'] ? 'has-error' : ''; ?>">

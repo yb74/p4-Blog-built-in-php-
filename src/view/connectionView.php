@@ -12,9 +12,11 @@ $subheadingPage='';
         <form class="text-center border border-light p-5" action="/connection" method="post">
             <p class="h4 mb-4">Log In</p>
             <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
-                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                <?php if(!empty($errors['form'])): ?>
+                    <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                <?php endif; ?>
             </div>
-            <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username">
+            <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" value="<?php if(isset($_POST['username'])) {echo $_POST['username'];} ?>">
             <div class="form-group <?= $errors['username'] ? 'has-error' : ''; ?>">
                 <span class="help-block text-danger"><?= $errors['username'] ?></span>
             </div>

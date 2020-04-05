@@ -7,6 +7,7 @@ class Contact
     private $id;
     private $fullname;
     private $email;
+    private $subject;
     private $message;
     private $contact_date;
 
@@ -56,6 +57,22 @@ class Contact
     public function setEmail($email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @param mixed $subject
+     */
+    public function setSubject($subject): void
+    {
+        $this->subject = $subject;
     }
 
     /**

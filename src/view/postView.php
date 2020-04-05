@@ -25,7 +25,9 @@ $subheadingPage= $post->getCreationDateFr();
 <?php elseif ($_SESSION['role'] === 'user'): ?>
         <form action="/chapter<?= $post->getId() ?>" method="post" class="p-5 bg-light">
             <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
-                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                <?php if(!empty($errors['form'])): ?>
+                    <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                <?php endif; ?>
             </div>
             <div class="form-group <?= $errors['author'] ? 'has-error' : ''; ?>">
                 <input type="text" id="author" style= "cursor: not-allowed" name="author" readonly="readonly" value = "<?= $_SESSION['username']  ?>" class="form-control mb-4">

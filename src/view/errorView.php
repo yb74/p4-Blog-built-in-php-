@@ -8,7 +8,9 @@ $subheadingPage='';
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $this->msg ?></div>
+            <?php if(!empty($this->msg)): ?>
+                <div class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $this->msg ?></div>
+            <?php endif; ?>
         </div>
     </div>
 
