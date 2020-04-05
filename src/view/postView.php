@@ -14,9 +14,9 @@ $subheadingPage= "Posted on : " . $post->getCreationDateFr();
             </div>-->
 
         <div class="news">
-            <p>
+            <article class="chapter_content mb-4">
                 <?= $post->getContent() ?>
-            </p>
+            </article>
         </div>
             <a href="<?= '/'?>" class="btn btn-primary my-3">&laquo; Back to chapters list</a>
         <h2 class="my-3">Comments</h2>
