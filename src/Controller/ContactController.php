@@ -66,14 +66,14 @@ class ContactController
                     <html>
                         <body>
                             <div align="center">
-                                <img src="http://www.primfx.com/mailing/banniere.png"/>
+                                <img src="/public/images/email/email_banner.jpg"/>
                                 <br />
                                 <u>Sender\s name :</u>'.htmlspecialchars($_POST['fullname']).'<br />
                                 <u>Sender\s email :</u>'.htmlspecialchars($_POST['email']).'<br />
                                 <br />
                                 '.nl2br(htmlspecialchars($_POST['message'])).'
                                 <br />
-                                <img src="http://www.primfx.com/mailing/separation.png"/>
+                                <img src="/public/images/email/email_separator.png"/>
                             </div>
                         </body>
                     </html>
