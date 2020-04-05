@@ -17,7 +17,7 @@ class PostManager extends Manager
     public function getPosts($perPage, $offset) // get all posts
     {
         $db = $this->dbConnect();
-        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT $offset, $perPage");
+        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y at %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT $offset, $perPage");
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
             'App\Model\Post');
         $posts = $req->fetchAll();
@@ -27,7 +27,7 @@ class PostManager extends Manager
     public function getPost($postId) // get the selected post
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
+        $req = $db->prepare('SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, \'%d/%m/%Y at %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
         $req->execute(array($postId));//execute la requete préparée et la range dans un array
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
             'App\Model\Post');
@@ -40,7 +40,7 @@ class PostManager extends Manager
     public function getDashboardPosts() // get all posts for the dashboard
     {
         $db = $this->dbConnect();
-        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 15");
+        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y at %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 15");
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
             'App\Model\Post');
         $posts = $req->fetchAll();

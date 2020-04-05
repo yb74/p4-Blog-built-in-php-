@@ -60,7 +60,7 @@ class UserManager extends Manager
 
     public function getUserList() {
         $db = $this->dbConnect();
-        $req = $db->query("SELECT id, username, role, DATE_FORMAT(registrationDate, '%d/%m/%Y à %Hh%imin%ss') AS registrationDate FROM users ORDER BY registrationDate DESC LIMIT 0, 50");
+        $req = $db->query("SELECT id, username, role, DATE_FORMAT(registrationDate, '%d/%m/%Y at %Hh%imin%ss') AS registrationDate FROM users ORDER BY registrationDate DESC LIMIT 0, 50");
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
             'App\Model\User');
         $users = $req->fetchAll();

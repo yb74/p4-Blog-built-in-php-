@@ -10,7 +10,6 @@ endif;
 
 <?php ob_start(); ?>
 
-
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Posts</h2>

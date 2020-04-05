@@ -79,13 +79,12 @@
 
 <!-- Page Header -->
 <header class="masthead mb-5" style="background-image: url('<?=$picture ?>'); background-size: cover;">
-    <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
+                <div class="site-heading mt-5">
                     <h1 class="main-title h1-responsive font-weight-bold text-center my-4"><?= $titlePage ?></h1>
-                    <span class="subheading"><?= $subheadingPage ?></span>
+                    <p class="subheading text-center"><?= $subheadingPage ?></p>
                 </div>
             </div>
         </div>
@@ -97,7 +96,7 @@
 </div>
 
 <!--PIED DE PAGE-->
-<footer class="footer mt-auto py-3 bg-dark">
+<footer class="footer mt-5 py-3 bg-dark">
     <div class="container">
         <div class="row align-items-center">
             <a class="col-md-3 text-white" href="#">Politique de confidentialité</a>

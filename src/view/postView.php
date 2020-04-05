@@ -1,17 +1,17 @@
 <?php $title = htmlspecialchars($post->getTitle());
 $picture = $post->getPictureUrl();
 $titlePage= htmlspecialchars($post->getTitle());
-$subheadingPage= $post->getCreationDateFr();
+$subheadingPage= "Posted on : " . $post->getCreationDateFr();
 ?>
 
 <?php ob_start(); ?>
     <section>
-            <div class="jumbotron jumbotron-fluid" style="background-image: url(<?= $post->getPictureUrl() ?>); background-size: cover;">
+            <!--<div class="jumbotron jumbotron-fluid" style="background-image: url(<?/*= $post->getPictureUrl() */?>); background-size: cover;">
                 <div class="container chapter-title text-center">
-                    <h1 class="display-4"><?= htmlspecialchars($post->getTitle()) ?></h1>
-                    <h3 class="lead"><?= $post->getCreationDateFr() ?></h3>
+                    <h1 class="display-4"><?/*= htmlspecialchars($post->getTitle()) */?></h1>
+                    <h3 class="lead"><?/*= $post->getCreationDateFr() */?></h3>
                 </div>
-            </div>
+            </div>-->
 
         <div class="news">
             <p>

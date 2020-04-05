@@ -8,7 +8,7 @@ class CommentManager extends Manager
     public function getComments($postId)// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, author, content, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE related_id = ? ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
+        $req = $db->prepare('SELECT id, author, content, status, DATE_FORMAT(creation_date, \'%d/%m/%Y at %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE related_id = ? ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
         $req->execute(array($postId));
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
         $comments = $req->fetchAll();
@@ -19,7 +19,7 @@ class CommentManager extends Manager
     public function getReportedComments()// permet d'afficher tous les commentaires associés à l'ID du post en dessous du billet
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, author, content, related_id, status, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE status = 1 ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
+        $req = $db->query('SELECT id, author, content, related_id, status, DATE_FORMAT(creation_date, \'%d/%m/%Y at %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE status = 1 ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
         $comments = $req->fetchAll();
 
@@ -69,15 +69,6 @@ class CommentManager extends Manager
         ]);
         return $req;
     }
-
-//    public function getCommentRelatedId($commentId)
-//    {
-//        $db = $this->dbConnect();
-//        $req = $db->query('SELECT related_id FROM comments WHERE id = :id');
-//        $req->execute([$commentId]);
-//        $req->fetch();
-//        return $req;
-//    }
 
     public function getCommentRelatedId(Comment $comment)
     {
