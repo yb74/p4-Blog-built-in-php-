@@ -11,9 +11,9 @@ class Manager
     }
 
     // ONLINE DATABASE
-    /*protected function dbConnect()
-    {
-        $db = new \PDO('mysql:host=db5000345698.hosting-data.io;dbname=dbs336157;charset=utf8', 'dbu387808', '0622178800-Yb');
-        return $db; // renvoie la connection
-    }*/
+//    protected function dbConnect()
+//    {
+//        $db = new \PDO('mysql:host=db5000360491.hosting-data.io;dbname=dbs349951;charset=utf8', 'dbu113871', '0622178800-Yb');
+//        return $db; // renvoie la connection
+//    }
 }

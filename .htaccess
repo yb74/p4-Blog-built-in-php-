@@ -3,7 +3,7 @@
 RewriteEngine On
 
 #RewriteCond %{HTTPS} !=on
-
+#
 #RewriteRule ^(.*)$ https://%{SERVER_NAME}/$1 [R,L]
 
 
@@ -11,8 +11,8 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 # signifie que l'on applique la rule que si le fichier n'existe pas, si le fichier existe, on va pas plus loin
 
-RewriteRule ^(.*)$ index.php [QSA,L]
-
 #RewriteRule ^(.*)$ index.php [QSA,L]
+
+RewriteRule ^(.*)$ /index.php [QSA,L]
 # ^(.*)$ -> signifie peut, importe ce qu'il y a avant, on renvoie vers index.php
 # [QSA,L] -> QSA permet de transvaser les variables passer en GET, et ,L pour dire qu'il s'agit du dernier URL que l'on rencontre

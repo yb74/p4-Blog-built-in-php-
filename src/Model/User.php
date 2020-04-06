@@ -6,7 +6,6 @@ class User
     private $id;
     private $username;
     private $password;
-    private $email;
     private $registrationDate;
     private $role;
 
@@ -41,9 +40,6 @@ class User
     public function setPassword(string $password) {
         $this->password = $password;
     }
-    public function setEmail(string $email) {
-        $this->email = $email;
-    }
     public function setRegistrationDate(string $registrationDate) {
         $this->registrationDate = $registrationDate;
     }
@@ -60,9 +56,6 @@ class User
     }
     public function getPassword(): string {
         return $this->password;
-    }
-    public function getEmail(): string {
-        return $this->email;
     }
     public function getRegistrationDate(): string {
         return $this->registrationDate;
