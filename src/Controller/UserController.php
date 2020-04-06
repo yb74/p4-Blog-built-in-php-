@@ -17,11 +17,6 @@ class UserController
 
     public function userRegister()
     {
-        //$errors = [];
-
-        $errors['username']="";
-        $errors['password']="";
-        $errors['confirm_password']="";
         $errors['form']="";
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -107,9 +102,6 @@ class UserController
     }*/
 
     public function userAuth() {
-        //$errors = [];
-        $errors['username']="";
-        $errors['password']="";
         $errors['form']="";
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

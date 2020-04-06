@@ -12,23 +12,6 @@ class ContactController
     }
 
     public function addMessage() {
-
-// Le message
-        $message = "Line 1\r\nLine 2\r\nLine 3";
-
-// Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
-        $message = wordwrap($message, 70, "\r\n");
-
-// Envoi du mail
-        mail('jean.forteroche@jeanforteroche.webagencypro.fr', 'CONTACT - jeanforteroche.webagencypro.fr', $message);
-
-
-        //$errors = [];
-
-        $errors['fullname']="";
-        $errors['email']= "";
-        $errors['subject']= "";
-        $errors['message']="";
         $errors['form']="";
         $successMessage="Do you have any questions? Please do not hesitate to contact me directly. I will come back to you within a matter of hours to help you.";
 
@@ -49,12 +32,12 @@ class ContactController
                 $errors['form'] = "Please, enter a message.";
             }
             elseif (!empty($_POST['fullname']) && !empty($_POST['email']) && !empty($_POST['message'])) {
-//                $contact = new Contact();
-//                $contact->setFullname(htmlspecialchars($_POST['fullname']));
-//                $contact->setEmail(htmlspecialchars($_POST['email']));
-//                $contact->setSubject(htmlspecialchars($_POST['subject']));
-//                $contact->setMessage(htmlspecialchars($_POST['message']));
-//                $this->contactManager->createMessage($contact);
+                $contact = new Contact();
+                $contact->setFullname(htmlspecialchars($_POST['fullname']));
+                $contact->setEmail(htmlspecialchars($_POST['email']));
+                $contact->setSubject(htmlspecialchars($_POST['subject']));
+                $contact->setMessage(htmlspecialchars($_POST['message']));
+                $this->contactManager->createMessage($contact);
 
                 $header="MIME-Version: 1.0\r\n";
                 // $header.='From:"JeanForteroche.fr"<support@Jeanforteroche.fr>'."\n";

@@ -6,41 +6,40 @@ $subheadingPage='';
 
 <?php ob_start(); ?>
 
+
+
     <section>
-        <form class="border border-light p-5" action="/contact" method="post">
+        <form action="/contact" method="post" class="bg-light p-4 p-md-5 contact-form">
             <p class="text-center h4 mb-4"><?= $successMessage ?> </p>
             <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
                 <?php if(!empty($errors['form'])): ?>
                     <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
                 <?php endif; ?>
             </div>
-            <div class="form-group <?= $errors['fullname'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label for="fullname">Name</label><br />
-                <input type="text" id="fullname" name="fullname" class="form-control mb-4" placeholder="Your name" value="<?php if(isset($_POST['fullname'])) {echo $_POST['fullname'];} ?>">
-                <span class="help-block text-danger"><?= $errors['fullname'] ?></span>
+                <input type="text" name="fullname" class="form-control" value="<?php if(isset($_POST['fullname'])) {echo $_POST['fullname'];} ?>">
             </div>
-            <div class="form-group <?= $errors['email'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label for="email">Email</label><br />
-                <input type="email" id="email" name="email" class="form-control mb-4" placeholder="Your email" value="<?php if(isset($_POST['email'])) {echo $_POST['email'];} ?>">
-                <span class="help-block text-danger"><?= $errors['email'] ?></span>
+                <input type="email" name="email" class="form-control" value="<?php if(isset($_POST['email'])) {echo $_POST['email'];} ?>">
             </div>
-            <div class="form-group <?= $errors['subject'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label for="subject">Subject</label><br />
-                <input type="text" id="subject" name="subject" class="form-control mb-4" placeholder="Your subject" value="<?php if(isset($_POST['subject'])) {echo $_POST['subject'];} ?>">
-                <span class="help-block text-danger"><?= $errors['subject'] ?></span>
+                <input type="text" name="subject" class="form-control">
             </div>
-            <div class="text-center form-group <?= $errors['message'] ? 'has-error' : ''; ?>">
+            <div class="text-center form-group">
                 <label for="message" class="text-center">Message</label><br />
-                <textarea id="message" name="message" cols="30" rows="5" class="form-control"><?php if(isset($_POST['message'])) {echo $_POST['message'];} ?></textarea>
-                <span class="help-block text-danger"><?= $errors['message'] ?></span>
+                <textarea id="message" name="message" cols="30" rows="5" class="form-control"></textarea>
             </div>
-
-            <button class="btn btn-info btn-block my-4" type="submit" name="send_data">Send message</button>
-
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary py-3 px-5" value="Send message" name="send_data">
+                <input type="reset" class="btn btn-primary py-3 px-5" value="Reset">
+            </div>
         </form>
 
         <a href="/">
-            <button class="btn btn-primary">&laquo; Back to the posts</button>
+            <button class="btn btn-primary mt-3">&laquo; Back to the posts</button>
         </a>
     </section>
 

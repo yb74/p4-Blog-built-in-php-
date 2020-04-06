@@ -135,45 +135,44 @@ class AdminController {
         $errors['content']="";
         $errors['form']="";
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($_FILES['picture_url']['size'] !== 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
-                $img = $_FILES['picture_url'];
-                $ext = strtolower(substr($img['name'], -3)); // contains the file extension
-                $allow_ext = array("jpg", "png", "gif");
-                // $img["size"] > 73355
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'):
+            if (!empty($_FILES) && !empty($_POST['title']) && !empty($_POST['content'])):
 
-                if (in_array($ext, $allow_ext)) {
-                    move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
-                    $destination = "public/images/chapters/" . $img['name'];
+                $temporaryPath= $_FILES['picture_url']['tmp_name'];
+                $fileName= $_FILES['picture_url']['name'];
+                $temp=explode(".",$fileName);
+                $newName=round(microtime(true)).'.'.end($temp);
+                $finalPath= 'public/images/chapters/uploaded_pictures/'.$newName;
+                $fileExtension= strrchr($newName, ".");
+                $extensionAllowed= array('.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.gif', '.GIF');
+                $maxSize = 2000000;
+                $size = ($_FILES['picture_url']['size']);
+
+                if(in_array($fileExtension,$extensionAllowed) && $size<$maxSize && $size!==0):
+                    $movePath= move_uploaded_file($temporaryPath,$finalPath);
+                    if($movePath):
 
                     $post = new Post();
-                    $post->setPictureUrl($destination);
+                    $post->setPictureUrl($finalPath);
                     $post->setTitle($_POST['title']);
                     $post->setContent($_POST['content']);
 
                     $this->postManager->addPost($post);
 
                     header('Location: /admin');
-                } else {
-                    $errors['picture'] = "Your file is not a picture !";
-                }
-            }
-            /*elseif (empty($_FILES['picture_url'])) {
-                $errors['picture'] = "Please, upload a picture !";
-            }
-            elseif (empty($_POST['title'])) {
-                $errors['title'] = "Please, enter a title !";
-            }
-            elseif (empty($_POST['content'])) {
-                $errors['content'] = "Please, enter a content !";
-            }*/
-
-            else {
+                 else:
+                     $errors['form'] = "An error has occured during the uploading process of your file";
+                    endif;
+                elseif(in_array($fileExtension,$extensionAllowed) && $size>$maxSize || $size ==0):
+                    $errors['form'] = "The uploaded file size can't exceed 2Mo";
+                else:
+                    $errors['form'] = 'You are allowed to upload jpg, png, or gif files only';
+                endif;
+            else:
                 $errors['form'] = "Please, fill in the form !";
-            }
-        }
+            endif;
+        endif;
         require('src/view/createPostView.php');
-        return;
     }
 
     public function modifyPost($postId) {

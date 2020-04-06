@@ -13,20 +13,17 @@ $subheadingPage='';
                     <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
                 <?php endif; ?>
             </div>
-            <div class="form-group <?= $errors['username'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="<?php if(isset($_POST['username'])) {echo $_POST['username'];} ?>">
-                <span class="help-block text-danger"><?= $errors['username'] ?></span>
             </div>
-            <div class="form-group <?= $errors['password'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control">
-                <span class="help-block text-danger"><?= $errors['password'] ?></span>
             </div>
-            <div class="form-group <?= $errors['confirm_password'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control">
-                <span class="help-block text-danger"><?= $errors['confirm_password'] ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary py-3 px-5" value="Submit New User" name="send_data">
@@ -36,7 +33,7 @@ $subheadingPage='';
         </form>
 
         <a href="/">
-            <button class="btn btn-primary">&laquo; Back to the posts</button>
+            <button class="btn btn-primary mt-3">&laquo; Back to the posts</button>
         </a>
     </section>
 
