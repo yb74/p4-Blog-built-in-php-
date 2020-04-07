@@ -17,20 +17,17 @@ $subheadingPage='';
                                 <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
                             <?php endif; ?>
                         </div>
-                        <div class="form-group <?= $errors['picture'] ? 'has-error' : ''; ?>">
+                        <div class="form-group">
                             <label for="picture_url">Picture</label><br/>
-                            <span class="help-block text-danger"><?= $errors['picture'] ?></span>
                             <input type="file" name="picture_url" id="picture_url" class="form-control">  <!-- /public/images/chapters/chapter-image1.jpg -->
                         </div>
-                        <div class="form-group <?= $errors['title'] ? 'has-error' : ''; ?>">
+                        <div class="form-group">
                             <label for="title">Title</label><br/>
-                            <span class="help-block text-danger"><?= $errors['title'] ?></span>
                             <input type="text" name="title" id="title" class="form-control">
                         </div>
-                        <div class="form-group <?= $errors['content'] ? 'has-error' : ''; ?>">
-                            <label for="content">Content</label><br/>
-                            <span class="help-block text-danger"><?= $errors['content'] ?></span>
-                            <textarea type="text" name="content" id="adminForm" cols="160" rows="30"></textarea>
+                        <div class="form-group">
+                            <label for="adminForm">Content</label><br/>
+                            <textarea name="content" id="adminForm" cols="160" rows="30"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Post" class="btn py-3 px-4 btn-primary">

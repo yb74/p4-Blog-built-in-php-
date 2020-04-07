@@ -15,6 +15,10 @@ class UserController
         $this->commentManager = new CommentManager();
     }
 
+
+    /**
+     * Function to create an account
+     */
     public function userRegister()
     {
         $errors['form']="";
@@ -52,55 +56,9 @@ class UserController
         require 'src/view/registrationView.php';
     }
 
-    /*public function userAuth() {
-
-        $errors = [];
-
-        $errors['username']="";
-        $errors['password']="";
-        $errors['form']="";
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $user = $this->userManager->getAuth($_POST['username']);
-            if (empty($_POST['username']) && empty($_POST['password'])) {
-                $errors['form'] = "Please, fill in the form.";
-            }
-            if (empty($_POST['username'])) {
-                $errors['username'] = "Please enter a username.";
-            }
-            elseif (!$user) {
-                $errors['username'] = "This username doesn't exists.";
-            }
-            if (empty($_POST['password'])) {
-                $errors['password'] = "Please enter a password.";
-            }
-            else {
-                $username = htmlspecialchars($_POST['username']);
-                $password = htmlspecialchars($_POST['password']);
-
-                $user = $this->userManager->getAuth($_POST['username']);
-                $user = $this->userManager->login($username);
-
-                if (password_verify($password, $user->getPassword())) {
-                    $_SESSION['id'] = $user->getId();
-                    $_SESSION['role'] = $user->getRole();
-                    $_SESSION['username'] = $user->getUsername();
-
-                    if ($user->getRole() === 'admin') {
-                        header('Location: /admin');
-                    } else {
-                        header('Location: /');
-                    }
-
-                } else {
-                    $errors['password'] = "Your username and your password don't match.";
-                    require 'src/view/connectionView.php';
-                }
-            }
-        }
-            require 'src/view/connectionView.php';
-    }*/
-
+    /**
+     * Function to log in
+     */
     public function userAuth() {
         $errors['form']="";
 
@@ -156,13 +114,17 @@ class UserController
         }
     }
 
+
+    /**
+     * Function to log out
+     */
     public function logOut() {
         unset($_SESSION['id']);
         // Unset all of the session variables
         $_SESSION = array();
         // Destroy the session.
         session_destroy();
-        // Redirect to logout page
+        // Redirect to the homepage
         header('Location: /');
         exit;
     }

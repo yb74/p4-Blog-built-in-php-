@@ -13,6 +13,10 @@ class CommentController
         $this->commentManager = new CommentManager();
     }
 
+
+    /**
+     * Function to report a comment
+     */
     public function reportComment($commentId) {
         $comment = new Comment();
         $comment->setId($commentId);

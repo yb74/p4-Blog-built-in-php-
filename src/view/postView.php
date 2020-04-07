@@ -4,21 +4,17 @@ $titlePage= htmlspecialchars($post->getTitle());
 $subheadingPage= "Posted on : " . $post->getCreationDateFr();
 ?>
 
+<!--         Display the selected post          -->
+
 <?php ob_start(); ?>
     <section>
-            <!--<div class="jumbotron jumbotron-fluid" style="background-image: url(<?/*= $post->getPictureUrl() */?>); background-size: cover;">
-                <div class="container chapter-title text-center">
-                    <h1 class="display-4"><?/*= htmlspecialchars($post->getTitle()) */?></h1>
-                    <h3 class="lead"><?/*= $post->getCreationDateFr() */?></h3>
-                </div>
-            </div>-->
-
         <div class="news">
             <article class="chapter_content mb-4">
                 <?= $post->getContent() ?>
             </article>
         </div>
             <a href="<?= '/'?>" class="btn btn-primary my-3">&laquo; Back to chapters list</a>
+    <!--         Add Comment Form          -->
         <h2 class="my-3">Comments</h2>
 <?php if (!$_SESSION): ?>
     <p>Please, <a href="/connection" class="btn btn-info">Log In</a> to be able to leave a comment !</p>
@@ -29,20 +25,20 @@ $subheadingPage= "Posted on : " . $post->getCreationDateFr();
                     <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
                 <?php endif; ?>
             </div>
-            <div class="form-group <?= $errors['author'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <input type="text" id="author" style= "cursor: not-allowed" name="author" readonly="readonly" value = "<?= $_SESSION['username']  ?>" class="form-control mb-4">
-                <span class="help-block text-danger"><?= $errors['author'] ?></span>
             </div>
-            <div class="form-group <?= $errors['content'] ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label for="content">Comment</label><br />
                 <textarea id="content" name="content" cols="30" rows="5" class="form-control"></textarea>
-                <span class="help-block text-danger"><?= $errors['content'] ?></span>
             </div>
             <div>
                 <input type="submit" value="Post" name="send_data" class="btn py-2 px-3 my-2 btn-primary" />
             </div>
         </form>
 <?php endif; ?>
+
+    <!--         Display all comments           -->
         <?php
 foreach ($comments as $comment)
         {
@@ -50,7 +46,6 @@ foreach ($comments as $comment)
 
             <div class="container comment-zone p-4 mx-auto bg-light">
                 <div class="media mt-3 p-3 bg-white comment-bubble">
-                    <!--<img src="public/images/profile_pictures/155678948553782604_2525062594189150_7288303766074294272_o (2).jpg" class="mr-3 profile-picture align-middle" alt="profile picture">-->
                     <div class="media-body">
                         <div class="row">
                             <p class="comment-username mt-0 mx-2"><?= $comment->getAuthor(); ?></p>
@@ -73,11 +68,14 @@ foreach ($comments as $comment)
                     </div>
                 </div>
             </div>
-            </section>
+    </section>
 
     <?php
 }
 ?>
+
+
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template/template.php'); ?>

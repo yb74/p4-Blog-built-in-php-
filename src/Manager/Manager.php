@@ -4,10 +4,10 @@ namespace App\Manager;
 class Manager
 {
     // LOCAL DATABASE
-    protected function dbConnect()
+    protected function dbConnect() // Connection to the database
     {
         $db = new \PDO('mysql:host=localhost;dbname=blog_database;charset=utf8', 'root', '');
-        return $db; // renvoie la connection
+        return $db;
     }
 
     // ONLINE DATABASE

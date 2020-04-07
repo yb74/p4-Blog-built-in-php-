@@ -10,9 +10,9 @@ endif;
 
 <?php ob_start(); ?>
 
-<!--CONTENU PRINCIPAL-->
+<!--MAIN CONTENT-->
   <section id="content">
-<!--EXTRAITS DES CHAPITRES-->
+<!--EXTRACT OF CHAPTERS-->
     <div id="latest-chapters" class="container">
       <h2 class="row justify-content-center text-center mt-4">Latest posted chapters</h2>
       <div class="row justify-content-center">
@@ -37,6 +37,8 @@ foreach ($posts as $post)
 ?>
       </div>
     </div>
+
+<!-- PAGING -->
       <div class="d-flex justify-content-between my-4">
           <?php if ($currentPage > 1): ?>
               <a href="<?= '/?page='?><?= $currentPage -1 ?>" class="btn btn-primary">&laquo; Previous page</a>

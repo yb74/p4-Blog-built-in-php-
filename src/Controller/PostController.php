@@ -18,6 +18,10 @@ class PostController
         $this->commentManager = new CommentManager();
     }
 
+
+    /**
+     * Function to get all posts on the main page
+     */
     public function listPosts()
     {
         $totalArticleNumber = $this->postManager->getTotal();
@@ -31,10 +35,12 @@ class PostController
         require('src/view/listPostsView.php');
     }
 
+
+    /**
+     * Function to comment a post and show a specific post
+     */
     public function post($postId)
     {
-        $errors['author']="";
-        $errors['content']="";
         $errors['form']="";
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

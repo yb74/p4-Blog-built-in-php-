@@ -9,8 +9,7 @@ use App\Manager\{CommentManager,
 use App\Model\{
     Comment,
     Post,
-    user,
-    Img
+    user
 };
 
 class AdminController {
@@ -23,31 +22,43 @@ class AdminController {
         $this->postManager = new PostManager();
     }
 
-    // Show error page
+    /**
+     * Function to show error page
+     */
     public function displayError() {
         require 'src/view/errorView.php';
     }
 
-    // Show dashboard
+    /**
+     * Function to access to the dashboard as an admin
+     */
     public function displayAdminPanel() {
         require 'src/view/adminView.php';
     }
 
+    /**
+     * Function to display dashboard content
+     */
     public function manageDashboard() // Display information about posts in the dashboard
     {
-        //$comments = $this->commentManager->getNbCommentAdmin();
         $posts = $this->postManager->getDashboardPosts();
 
         require 'src/view/adminView.php';
     }
 
     // COMMENT ADMINISTRATION
-    public function manageComments() { // Display the reported comments
+    /**
+     * Function to display the reported comments on the comment dashboard
+     */
+    public function manageComments() {
         $comments  = $this->commentManager->getReportedComments();
 
         require "src/view/manageCommentsView.php";
     }
 
+    /**
+     * Function to delete a reported comment
+     */
     public function commentDelete($commentId) {
         if (isset($commentId) && ($commentId > 0)) {
             $comment = new Comment();
@@ -61,6 +72,9 @@ class AdminController {
         }
     }
 
+    /**
+     * Function to unreport a comment
+     */
     public function commentUnreport($commentId) {
         if (isset($commentId) && ($commentId > 0)) {
             $comment = new Comment();
@@ -74,65 +88,10 @@ class AdminController {
         }
     }
 
-    // POST ADMINISTRATION
-//    public function createPost() {
-//
-//        $errors = [];
-//
-//        $errors['picture']="";
-//        $errors['title']="";
-//        $errors['content']="";
-//        $errors['form']="";
-//
-//        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//            if ($_FILES['picture_url']['error']  > 0 && empty($_POST['title']) && empty($_POST['content'])) {
-//                $errors['form'] = "Please, fill in the form !";
-//            }
-//            if (empty($_FILES['picture_url'])) {
-//                $errors['picture'] = "Please, upload a picture !";
-//            }
-//            if (empty($_POST['title'])) {
-//                $errors['title'] = "Please, enter a title !";
-//            }
-//            if (empty($_POST['content'])) {
-//                $errors['content'] = "Please, enter a content !";
-//            }
-//            if ($_FILES['picture_url']['error'] === 0) {
-//                $img = $_FILES['picture_url'];
-//                $ext = strtolower(substr($img['name'], -3)); // contains the file extension
-//                $allow_ext = array("jpg", "png", "gif");
-//                if (!in_array($ext, $allow_ext)) {
-//                    $errors["picture_url"] = "Please, select a valid image !";
-//                }
-//            }
-//            var_dump($errors);
-//            if (empty($errors)) {
-//                $img = $_FILES['picture_url'];
-//                move_uploaded_file($img['tmp_name'], "public/images/chapters/" . $img['name']);
-//                $destination = "public/images/chapters/" . $img['name'];
-//
-//                $post = new Post();
-//                $post->setPictureUrl($destination);
-//                $post->setTitle($_POST['title']);
-//                $post->setContent($_POST['content']);
-//                //$this->post->setId($postId);
-//                $this->postManager->addPost($post);
-//                echo $img;
-//                header('Location: /admin');
-//                die; // no need to require the view
-//            }
-//        }
-//        require('src/view/createPostView.php');
-//        return;
-//    }
-
+    /**
+     * Function to create a post
+     */
     public function createPost() {
-
-        $errors = [];
-
-        $errors['picture']="";
-        $errors['title']="";
-        $errors['content']="";
         $errors['form']="";
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'):
@@ -140,10 +99,12 @@ class AdminController {
 
                 $temporaryPath= $_FILES['picture_url']['tmp_name'];
                 $fileName= $_FILES['picture_url']['name'];
-                $temp=explode(".",$fileName);
-                $newName=round(microtime(true)).'.'.end($temp);
+
+                // securing the website by renaming an uploaded picture and adding a "." sign to its name so the security can't be bypassed by the user by modifying the extension name of the uploaded file
+                $temp=explode(".",$fileName); // isolation of the "." and the name of the uploaded file
+                $newName=round(microtime(true)).'.'.end($temp); // renaming the uploaded file by generating a random number as the new filename and incremeting a "." symbol
                 $finalPath= 'public/images/chapters/uploaded_pictures/'.$newName;
-                $fileExtension= strrchr($newName, ".");
+                $fileExtension= strrchr($newName, "."); // isolation of the file extension
                 $extensionAllowed= array('.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.gif', '.GIF');
                 $maxSize = 2000000;
                 $size = ($_FILES['picture_url']['size']);
@@ -160,7 +121,7 @@ class AdminController {
                     $this->postManager->addPost($post);
 
                     header('Location: /admin');
-                 else:
+                    else:
                      $errors['form'] = "An error has occured during the uploading process of your file";
                     endif;
                 elseif(in_array($fileExtension,$extensionAllowed) && $size>$maxSize || $size ==0):
@@ -175,8 +136,10 @@ class AdminController {
         require('src/view/createPostView.php');
     }
 
+    /**
+     * Function to update a post
+     */
     public function modifyPost($postId) {
-
         $errors['form']="";
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -204,6 +167,9 @@ class AdminController {
         return;
     }
 
+    /**
+     * Function to delete a message
+     */
     public function postDelete($postId) {
         if (isset($postId) && $postId > 0) {
             $post = new Post();
@@ -218,11 +184,17 @@ class AdminController {
     }
 
     // USER ADMINISTRATION
+    /**
+     * Function to get the user list form the user dashboard
+     */
     public function manageUsers() {
         $users  = $this->userManager->getUserList();
         require 'src/view/userslistView.php';
     }
 
+    /**
+     * Function to delete a user
+     */
     public function userDelete($userId) {
         if (isset($userId) && ($userId > 0)) {
             $user = new User();

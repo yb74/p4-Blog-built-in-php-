@@ -5,41 +5,31 @@ use App\Model\User;
 
 class UserManager extends Manager
 {
-    // Matching username and password
+    /**
+     * Function to check if password and username match
+     */
     public function getAuth($username) {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT username, password, role FROM users WHERE username = ?');
         $req->execute(array($username));
 
         return $req->fetch();
-
-        /*$data = $req->fetch();
-
-        $user = new User();
-
-        $user->setUsername($data["username"]);
-        $user->setPassword($data["password"]);
-
-        return $user;*/
     }
 
+    /**
+     * Function to create a user account with an hashed password
+     */
     public function pushUserInfo($username, $hashedPassword) {
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO users(username, password, registrationDate) VALUES (?, ?, NOW())');
         $req->execute(array($username, $hashedPassword));
 
         return $req;
-
-        /*$data = $req->fetch();
-
-        $user = new User();
-
-        $user->setUsername($data["username"]);
-        $user->setPassword($data["password"]);
-
-        return $user;*/
     }
 
+    /**
+     * Function to check if password entered match hashed password in database
+     */
     public function login($username)// check if password entered match hashed password in database
     {
         $db = $this->dbConnect();
@@ -58,6 +48,9 @@ class UserManager extends Manager
         return $user;
     }
 
+    /**
+     * Function to get the list of users registered on the database
+     */
     public function getUserList() {
         $db = $this->dbConnect();
         $req = $db->query("SELECT id, username, role, DATE_FORMAT(registrationDate, '%d/%m/%Y at %Hh%imin%ss') AS registrationDate FROM users ORDER BY registrationDate DESC LIMIT 0, 50");
@@ -67,6 +60,9 @@ class UserManager extends Manager
         return $users;
     }
 
+    /**
+     * Function to delete a user from database
+     */
     public function deleteUser(User $user)
     {
         $db = $this->dbConnect();

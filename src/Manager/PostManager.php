@@ -6,6 +6,9 @@ use App\Model\Post;
 
 class PostManager extends Manager
 {
+    /**
+     * Function to get the total number of pages
+     */
     public function getTotal() // get total number of pages
     {
         $db = $this->dbConnect();
@@ -14,7 +17,10 @@ class PostManager extends Manager
         return $req;
     }
 
-    public function getPosts($perPage, $offset) // get all posts
+    /**
+     * Function to get all posts
+     */
+    public function getPosts($perPage, $offset)
     {
         $db = $this->dbConnect();
         $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y at %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT $offset, $perPage");
@@ -24,6 +30,9 @@ class PostManager extends Manager
         return $posts;
     }
 
+    /**
+     * Function to get a specific post
+     */
     public function getPost($postId) // get the selected post
     {
         $db = $this->dbConnect();
@@ -37,7 +46,10 @@ class PostManager extends Manager
     }
 
     // ADMIN
-    public function getDashboardPosts() // get all posts for the dashboard
+    /**
+     * Function to get all posts from the dashboard
+     */
+    public function getDashboardPosts()
     {
         $db = $this->dbConnect();
         $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y at %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 15");
@@ -47,7 +59,9 @@ class PostManager extends Manager
         return $posts;
     }
 
-    // CREATE a post
+    /**
+     * Function to create a post
+     */
     public function addPost(Post $post)
     {
         $db = $this->dbConnect();
@@ -61,7 +75,9 @@ class PostManager extends Manager
         return $req;
     }
 
-    // UPDATE a post
+    /**
+     * Function to update a post
+     */
     public function updatePost(Post $post)
     {
         $db = $this->dbConnect();
@@ -75,7 +91,9 @@ class PostManager extends Manager
         return $req;
     }
 
-    // DELETE a post
+    /**
+     * Function to delete a post
+     */
     public function deletePost(Post $post){
         $db = $this->dbConnect();
         $req = $db->prepare('DELETE FROM posts WHERE id = :id');

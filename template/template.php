@@ -31,6 +31,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/public/css/style.css">
     <!-- icones fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -38,14 +39,14 @@
 </head>
 
 <body>
-
+<!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <!--<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">-->
         <a class="navbar-brand" href="/">
             <img src="/public/images/logo.png" class="d-inline-block align-center text-white" style="width:50px;height:50px;">
             Billet simple pour l'Alaska
         </a>
 
+        <!-- Left menu -->
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="/">Homepage</a>
@@ -55,6 +56,7 @@
             </li>
         </ul>
 
+        <!-- Right menu -->
         <div class = "d-flex">
             <?php if (!$_SESSION): ?>
                 <a class="nav-link" href="/connection">
@@ -77,7 +79,7 @@
         </div>
     </nav>
 
-<!-- Page Header -->
+    <!-- HEADER -->
 <header class="masthead mb-5" style="background-image: url('<?=$picture ?>'); background-size: cover;">
     <div class="container">
         <div class="row">
@@ -91,11 +93,12 @@
     </div>
 </header>
 
+<!-- MAIN CONTENT -->
 <div class="container flex-grow-1">
     <?= $content ?>
 </div>
 
-<!--PIED DE PAGE-->
+<!-- FOOTER -->
 <footer class="footer mt-5 py-3 bg-dark">
     <div class="container">
         <div class="row align-items-center">
@@ -121,6 +124,7 @@
     <p class="copyright text-muted col-md-12">Younes Bouaziz | 2019 © Tous droits réservés </p>
 </footer>
 
+<!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
 </script>
@@ -130,5 +134,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
 </script>
+
 </body>
 </html>

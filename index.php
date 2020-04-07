@@ -3,8 +3,12 @@ session_start();
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
+$router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/"); // instantiation of the router
 
+
+// Structure of a route : first, the REQUEST_METHOD is set (post or get) and it takes the path and and a callable as parameters.
+// The callable is composed of the controller that should be used and the function to call separated with an "#" sign.
+// then you have the option to us the with() function to set a GET superglobal or a slug with it's REGEX)
 
 // DISPLAY ERROR
     $router->get('/error', "Admin#displayError"); // display error
@@ -28,7 +32,7 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
 
 // posts management
             $router->get('/createPost', "Admin#createPost"); // access to the post creation view
-            $router->post('/createPost', "Admin#createPost"); // access to the post creation view
+            $router->post('/createPost', "Admin#createPost"); // submit a new post
 
             $router->get('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // Access to the view to modify a post
             $router->post('/modifyPost:postId', "Admin#modifyPost")->with('postId', '[0-9]+'); // update a post
@@ -41,7 +45,7 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
 
 //users management
             $router->get('/manageUsers', "Admin#manageUsers"); // access to the users management view
-            $router->get('/deleteUser:userId', "Admin#userDelete")->with('userId', '[0-9]+'); // delete a post
+            $router->get('/deleteUser:userId', "Admin#userDelete")->with('userId', '[0-9]+'); // delete a user
         }
         if (($_SESSION['role']) == 'user') {
             $router->post('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // Comment a chapter
@@ -58,18 +62,9 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/");
         $router->post('/connection', "User#userAuth");
     }
 
-//throw new Exception('No matching routes');
-
 try {
-    $router->run(); // fonction servant à vérifier si l'url tappé en paramètre correspond à un des urls
+    $router->run(); // This function is used to run the route if all the conditions are complied
 }
 catch (Exception $e) {
-    //displayError($e->getMessage());
-    echo $e;
+    echo $e; // if there is a problem with the route, an exception is thrown to display the error
 }
-
-
-
-/*
-$router->get('/article/:slug-:id/:page', "Posts#show")->with('id', '[0-9]+')->with('page', '[0-9]+')->with('slug', '[a-z\-0-9]+');
-*/

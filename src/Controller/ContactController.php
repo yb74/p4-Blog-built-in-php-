@@ -11,6 +11,10 @@ class ContactController
         $this->contactManager = new ContactManager();
     }
 
+
+    /**
+     * Function to send a message and create the body of the email sent
+     */
     public function addMessage() {
         $errors['form']="";
         $successMessage="Do you have any questions? Please do not hesitate to contact me directly. I will come back to you within a matter of hours to help you.";
@@ -39,12 +43,14 @@ class ContactController
                 $contact->setMessage(htmlspecialchars($_POST['message']));
                 $this->contactManager->createMessage($contact);
 
+                // configuration of the email to be send
                 $header="MIME-Version: 1.0\r\n";
                 // $header.='From:"JeanForteroche.fr"<support@Jeanforteroche.fr>'."\n";
                 $header.='Content-Type:text/html; charset="uft-8"'."\n";
                 $header.='Content-Transfer-Encoding: 8bit';
 
                 $subject = htmlspecialchars($_POST['subject']);
+                // email body
                 $message='
                     <html>
                         <body>
@@ -62,6 +68,7 @@ class ContactController
                     </html>
                     ';
 
+                // function mail() to send the email
                 mail('jean.forteroche@jeanforteroche.webagencypro.fr', $subject, $message, $header);
 
                 $successMessage="Your message has been sent with success !";
