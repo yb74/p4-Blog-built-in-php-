@@ -4,13 +4,13 @@ namespace App\Router;
 class Route
 {
     private $path;
-    private $callable;
-    private $matches = [];
-    private $params = [];
+    private $callable;  // contains the controller function to be called
+    private $matches = []; // contains the list of elements to be compared to check if they match
+    private $params = []; // contains the list of parameters
 
     public function __construct($path, $callable)
     {
-        $this->path = trim($path, '/'); // On retire les / inutiles
+        $this->path = trim($path, '/'); // here we remove the usless "/"
         $this->callable = $callable;
     }
 
@@ -38,7 +38,7 @@ class Route
     }
 
     /**
-     * Function to check if a parameter match 
+     * Function to check if a parameter match
      */
     private function paramMatch($match) {
         if(isset($this->params[$match[1]])) {

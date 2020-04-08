@@ -3,9 +3,9 @@ namespace App\Router;
 
 class Router
 {
-    private $url; // Contient l'url sur lequel on souhaite se rendre
-    private $routes = []; // // Contiendra la liste des routes
-    private $namedRoutes = [];
+    private $url; // contains the url where we want to go
+    private $routes = []; // contains the list of the routes
+    private $namedRoutes = []; // contains the list of the named routes
 
     public function __construct($url) {
         $this->url = $url;
