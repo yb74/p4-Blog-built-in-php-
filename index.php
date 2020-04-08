@@ -63,7 +63,7 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/"); // instantiation 
     }
 
 try {
-    $router->run(); // This function is used to run the route if all the conditions are complied
+    $router->run(); // This function is used to run the route if all the conditions are complied (if the route match the url)
 }
 catch (Exception $e) {
     echo $e; // if there is a problem with the route, an exception is thrown to display the error

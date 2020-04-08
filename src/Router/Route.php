@@ -14,13 +14,17 @@ class Route
         $this->callable = $callable;
     }
 
+    /**
+     * Function to set parameters and regex
+     */
     public function with($param, $regex) {
         $this->params[$param] = str_replace('(', '(?:', $regex);
-        return $this; // on return $this afin de pouvoir enchainer les méthodes
+        return $this; // $this is return so that we can chain several methods
     }
 
-    // Permettra de capturer l'url avec les paramètre  get('/posts/:slug-:id') par exemple
-
+    /**
+     * Function which Allows to catch the url with its parameters and check if they match with the path
+     */
     public function match($url) {
         $url = trim($url, '/');
         $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->path);
@@ -33,6 +37,9 @@ class Route
         return true;
     }
 
+    /**
+     * Function to check if a parameter match 
+     */
     private function paramMatch($match) {
         if(isset($this->params[$match[1]])) {
             return '(' . $this->params[$match[1]] . ')';
@@ -40,6 +47,9 @@ class Route
         return '([^/]+)';
     }
 
+    /**
+     * Function used to call a function of the controller (the action)
+     */
     public function call() {
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
@@ -53,6 +63,9 @@ class Route
         }
     }
 
+    /**
+     * Function to get the url
+     */
     public function getUrl($params) {
         $path = $this->path;
         foreach($params as $k => $v) {
