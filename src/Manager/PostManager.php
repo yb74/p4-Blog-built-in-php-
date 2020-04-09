@@ -40,7 +40,7 @@ class PostManager extends Manager
         $req->execute(array($postId));//execute la requete préparée et la range dans un array
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
             'App\Model\Post');
-        $post = $req->fetch();// recupére chaque ligne de la requête donc ici les posts
+        $post = $req->fetch();
 
         return $post;
     }

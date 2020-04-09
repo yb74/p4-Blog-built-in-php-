@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:list-style-type="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
 <head>
     <!-- Required meta tags -->
@@ -42,7 +42,7 @@
 <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
-            <img src="/public/images/logo.png" class="d-inline-block align-center text-white" style="width:50px;height:50px;">
+            <img src="/public/images/logo.png" alt="logo" title="logo of the website" class="d-inline-block align-center text-white" style="width:50px;height:50px;">
             Billet simple pour l'Alaska
         </a>
 
@@ -59,19 +59,13 @@
         <!-- Right menu -->
         <div class = "d-flex">
             <?php if (!$_SESSION): ?>
-                <a class="nav-link" href="/connection">
-                    <button type="button" class="btn btn-primary">Log In</button>
-                </a>
+                <a class="btn btn-primary mx-2" href="/connection">Log In</a>
             <?php else: ?>
                 <?php if ($_SESSION['id']): ?>
-                    <a class="nav-link" href="/logout">
-                        <button type="button" class="btn btn-primary">Log Out</button>
-                    </a>
+                    <a class="btn btn-primary mx-2" href="/logout">Log Out</a>
                 <?php endif; ?>
                 <?php if ($_SESSION['role'] === 'admin'): ?>
-                    <a class="nav-link" href="/admin">
-                        <button type="button" class="btn btn-primary">Dashboard</button>
-                    </a>
+                    <a class="btn btn-primary mx-2" href="/admin">Dashboard</a>
                 <?php elseif ($_SESSION['role'] === 'user'): ?>
                     <li class="nav-item" style="list-style-type:none";><a href="/" class="nav-link"></a></li>
                 <?php endif; ?>

@@ -28,7 +28,7 @@ foreach ($posts as $post)
                 <h4><?= htmlspecialchars($post->getTitle()) ?></h4>
                 <h5 class="card-title"><?= htmlspecialchars($post->getCreationDateFr()); ?></h5>
                 <p class="card-text"><?= substr(nl2br($post->getContent()), 0, 50) ?></p>
-                  <button class="btn btn-primary">Read more</button>
+                  <span class="btn btn-primary">Read more</span>
               </div>
             </div>
         </a>
