@@ -2,10 +2,12 @@
 session_start();
 
 require_once __DIR__ . "/vendor/autoload.php";
+$path = $_SERVER['REQUEST_URI'];
+//$path = substr($path, 0, strrpos($path, '?'));
+//$a = substr($a, 0, strrpos($a, '.'));
 
-$router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/"); // instantiation of the router
-
-
+$router = new App\Router\Router($path ?? "/"); // instantiation of the router
+//var_dump($path ?? "/");
 // Structure of a route : first, the REQUEST_METHOD is set (post or get) and it takes the path and and a callable as parameters.
 // The callable is composed of the controller that should be used and the function to call separated with an "#" sign.
 // then you have the option to us the with() function to set a GET superglobal or a slug with it's REGEX)
@@ -25,9 +27,9 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/"); // instantiation 
     $router->post('/contact', "Contact#addMessage"); // send a message (contact)
 
     if (!empty($_SESSION)) {
+        $router->post('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // Comment a chapter
         if(($_SESSION['role']) == 'admin') {
             // ADMIN SYSTEM
-
             $router->get('/admin', "Admin#manageDashboard"); // display the admin panel
 
 // posts management
@@ -48,7 +50,6 @@ $router = new App\Router\Router($_SERVER['PATH_INFO'] ?? "/"); // instantiation 
             $router->get('/deleteUser:userId', "Admin#userDelete")->with('userId', '[0-9]+'); // delete a user
         }
         if (($_SESSION['role']) == 'user') {
-            $router->post('/chapter:postId', "Post#post")->with('postId', '[0-9]+'); // Comment a chapter
             $router->get('/reportComment:commentId', "Comment#reportComment")->with('commentId', '[0-9]+'); // Report a comment
         }
     }

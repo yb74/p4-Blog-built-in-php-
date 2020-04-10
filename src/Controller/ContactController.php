@@ -45,7 +45,7 @@ class ContactController
 
                 // configuration of the email to be send
                 $header="MIME-Version: 1.0\r\n";
-                // $header.='From:"JeanForteroche.fr"<support@Jeanforteroche.fr>'."\n";
+                $header.='From:"JeanForteroche.fr"<support@Jeanforteroche.fr>'."\n";
                 $header.='Content-Type:text/html; charset="uft-8"'."\n";
                 $header.='Content-Transfer-Encoding: 8bit';
 
@@ -55,14 +55,14 @@ class ContactController
                     <html>
                         <body>
                             <div align="center">
-                                <img src="/public/images/email/email_banner.jpg"/>
+                                <img src="/p4-Blog-built-in-php-/public/images/email/email_banner.jpg"/>
                                 <br />
-                                <u>Sender\s name :</u>'.htmlspecialchars($_POST['fullname']).'<br />
-                                <u>Sender\s email :</u>'.htmlspecialchars($_POST['email']).'<br />
+                                <u>Name of the sender : </u>'.htmlspecialchars($_POST['fullname']).'<br />
+                                <u>Email of the sender : </u>'.htmlspecialchars($_POST['email']).'<br />
                                 <br />
                                 '.nl2br(htmlspecialchars($_POST['message'])).'
                                 <br />
-                                <img src="/public/images/email/email_separator.png"/>
+                                <img src="/p4-Blog-built-in-php-/public/images/email/email_separator.png"/>
                             </div>
                         </body>
                     </html>

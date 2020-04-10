@@ -43,7 +43,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <img src="/public/images/logo.png" alt="logo" title="logo of the website" class="d-inline-block align-center text-white" style="width:50px;height:50px;">
-            Billet simple pour l'Alaska
+            Single ticket for Alaska
         </a>
 
         <!-- Left menu -->

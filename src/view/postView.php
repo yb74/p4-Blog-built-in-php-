@@ -18,7 +18,7 @@ $subheadingPage= "Posted on : " . $post->getCreationDateFr();
         <h2 class="my-3">Comments</h2>
 <?php if (!$_SESSION): ?>
     <p>Please, <a href="/connection" class="btn btn-info">Log In</a> to be able to leave a comment !</p>
-<?php elseif ($_SESSION['role'] === 'user'): ?>
+<?php else: ?>
         <form action="/chapter<?= $post->getId() ?>" method="post" class="p-5 bg-light">
             <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
                 <?php if(!empty($errors['form'])): ?>
@@ -54,15 +54,16 @@ foreach ($comments as $comment)
                         <div class="row">
                             <p class="col-12 p-0 mt-0 mx-2 mb-0"><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
                             <?php if ($_SESSION): ?>
+                            <div class="row">
                                 <?php if ($_SESSION['role'] === 'user'): ?>
-                                    <?php if ($comment->getStatus() == 0): ?>
                                         <a href="<?= '/reportComment'?><?= $comment->getId() ?>">
                                             <button class="btn btn-danger ml-5 mt-3">Report</button>
                                         </a>
-                                    <?php else : ?>
-                                        <span class = "col-lg-8 col-md-10 mx-auto alert alert-danger text-center"> Comment reported ! </span>
+                                    <?php if ($comment->getStatus() > 0): ?>
+                                        <span class = "col-lg-8 col-md-10 mx-auto alert alert-danger text-center mt-3"> Comment reported ! </span>
                                     <?php endif; ?>
                                 <?php endif; ?>
+                            </div>
                             <?php endif; ?>
                         </div>
                     </div>

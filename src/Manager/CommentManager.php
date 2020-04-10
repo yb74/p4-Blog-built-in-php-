@@ -25,7 +25,7 @@ class CommentManager extends Manager
     public function getReportedComments()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, author, content, related_id, status, DATE_FORMAT(creation_date, \'%d/%m/%Y at %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE status = 1 ORDER BY creation_date DESC LIMIT 50 OFFSET 0');
+        $req = $db->query('SELECT id, author, content, related_id, status, DATE_FORMAT(creation_date, \'%d/%m/%Y at %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE status > 0 ORDER BY status DESC LIMIT 50 OFFSET 0');
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'App\Model\Comment');
         $comments = $req->fetchAll();
 
@@ -54,7 +54,7 @@ class CommentManager extends Manager
     public function updateCommentStatus(Comment $comment)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = :id');
+        $req = $db->prepare('UPDATE comments SET status = status +1 WHERE id = :id');
         $req->execute([
             'id'=> $comment->getId()
         ]);
