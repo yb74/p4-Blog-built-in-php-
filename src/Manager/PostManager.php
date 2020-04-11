@@ -7,23 +7,12 @@ use App\Model\Post;
 class PostManager extends Manager
 {
     /**
-     * Function to get the total number of pages
-     */
-    public function getTotal() // get total number of pages
-    {
-        $db = $this->dbConnect();
-        $req = (int)$db->query('SELECT COUNT(id) FROM posts')->fetch($db::FETCH_NUM)[0];
-
-        return $req;
-    }
-
-    /**
      * Function to get all posts
      */
-    public function getPosts($perPage, $offset)
+    public function getPosts()
     {
         $db = $this->dbConnect();
-        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y at %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT $offset, $perPage");
+        $req = $db->query("SELECT id, title, content, picture_url, DATE_FORMAT(creation_date, '%d/%m/%Y at %Hh%imin%ss') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 30");
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
             'App\Model\Post');
         $posts = $req->fetchAll();

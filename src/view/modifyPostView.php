@@ -14,7 +14,7 @@ $subheadingPage='';
                       class="p-5 bg-light">
                     <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
                         <?php if(!empty($errors['form'])): ?>
-                            <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                            <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center form-control" id="updateError"><?= $errors['form'] ?></span>
                         <?php endif; ?>
                     </div>
                     <div class="form-group ">
@@ -24,8 +24,9 @@ $subheadingPage='';
                     </div>
                     <div class="form-group">
                         <label for="content">Content</label><br/>
-                        <textarea type="text" name="content" id="adminForm" cols="160" rows="30"
-                                  class="form-control"><?= $post->getContent() ?></textarea>
+                        <textarea class="form-control" name="content" id="adminForm" cols="160" rows="30">
+                            <?= $post->getContent() ?>
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Post" class="btn py-3 px-4 btn-primary">

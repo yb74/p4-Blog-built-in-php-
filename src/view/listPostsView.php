@@ -37,16 +37,6 @@ foreach ($posts as $post)
 ?>
       </div>
     </div>
-
-<!-- PAGING -->
-      <div class="d-flex justify-content-between my-4">
-          <?php if ($currentPage > 1): ?>
-              <a href="<?= '/?page='?><?= $currentPage -1 ?>" class="btn btn-primary">&laquo; Previous page</a>
-          <?php endif ?>
-          <?php if ($currentPage < $totalPages): ?>
-              <a href="<?= '/?page='?><?= $currentPage +1 ?>" class="btn btn-primary ml-auto">Next page &raquo;</a>
-          <?php endif ?>
-      </div>
   </section>
 
 <?php $content = ob_get_clean(); ?>

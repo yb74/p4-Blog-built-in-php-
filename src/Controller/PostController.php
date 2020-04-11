@@ -24,14 +24,7 @@ class PostController
      */
     public function listPosts()
     {
-        $totalArticleNumber = $this->postManager->getTotal();
-        $currentPage = (int)($_GET['page'] ?? 1);
-        $perPage = 6;
-        $totalPages = ceil($totalArticleNumber / $perPage);
-        $offset = $perPage * ($currentPage - 1);
-
-        $posts = $this->postManager->getPosts($perPage, $offset);
-
+        $posts = $this->postManager->getPosts();
         require('src/view/listPostsView.php');
     }
 

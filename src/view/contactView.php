@@ -13,7 +13,7 @@ $subheadingPage='';
             <p class="text-center h4 mb-4"><?= $successMessage ?> </p>
             <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
                 <?php if(!empty($errors['form'])): ?>
-                    <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                    <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center form-control" id="contactError"><?= $errors['form'] ?></span>
                 <?php endif; ?>
             </div>
             <div class="form-group">
@@ -33,8 +33,8 @@ $subheadingPage='';
                 <textarea id="message" name="message" cols="30" rows="5" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary py-3 px-5" value="Send message" name="send_data">
-                <input type="reset" class="btn btn-primary py-3 px-5" value="Reset">
+                <input type="submit" class="btn btn-primary btn-contact py-3 px-5" value="Send message" name="send_data">
+                <input type="reset" class="btn btn-primary btn-contact py-3 px-5" value="Reset">
             </div>
         </form>
 

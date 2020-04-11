@@ -52,7 +52,7 @@ foreach ($comments as $comment)
                             <span class="font-weight-lighter font-italic"><?= $comment->getCommentDateFr(); ?></span>
                         </div>
                         <div class="row">
-                            <p class="col-12 p-0 mt-0 mx-2 mb-0"><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
+                            <p class="col-12 p-0 mt-0 mx-2 mb-0"><?= nl2br($comment->getContent()) ?></p>
                             <?php if ($_SESSION): ?>
                             <div class="row">
                                 <?php if ($_SESSION['role'] === 'user'): ?>

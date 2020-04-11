@@ -41,7 +41,7 @@ $subheadingPage='';
                                             <h3 class="text-center">
                                                 <?= $comment->getRelatedId() ?>
                                             </h3>
-                                            <p class="text-center">Status</p>
+                                            <p class="text-center">Status (number of reporting)</p>
                                             <h3 class="text-center">
                                                 <?= $comment->getStatus() ?>
                                             </h3>

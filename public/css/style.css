@@ -35,6 +35,11 @@ header  {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* Form errors */
+#connectionError, #contactError, #createError, #Error, #registrationError, #updateError {
+  height: auto;
+}
+
 /* Chapter list cards */
   .chapter_block {
     color: black;
@@ -55,6 +60,11 @@ header  {
 }
 .inside_block:hover, .card-dashboard:hover {
   background-color: lightgrey;
+}
+
+/*connection form buttons*/
+.btn-login, .btn-register, .btn-dashboard, .btn-contact {
+  margin: 3px;
 }
 
 /* chapter */

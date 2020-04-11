@@ -55,14 +55,12 @@ class ContactController
                     <html>
                         <body>
                             <div align="center">
-                                <img src="/p4-Blog-built-in-php-/public/images/email/email_banner.jpg"/>
                                 <br />
                                 <u>Name of the sender : </u>'.htmlspecialchars($_POST['fullname']).'<br />
                                 <u>Email of the sender : </u>'.htmlspecialchars($_POST['email']).'<br />
                                 <br />
                                 '.nl2br(htmlspecialchars($_POST['message'])).'
                                 <br />
-                                <img src="/p4-Blog-built-in-php-/public/images/email/email_separator.png"/>
                             </div>
                         </body>
                     </html>

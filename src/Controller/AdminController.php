@@ -154,7 +154,7 @@ class AdminController {
             }
             else {
                 $post = new Post();
-                $post->setTitle(htmlspecialchars($_POST['title']));
+                $post->setTitle($_POST['title']);
                 $post->setContent($_POST['content']);
                 $post->setId($postId);
                 $this->postManager->updatePost($post);

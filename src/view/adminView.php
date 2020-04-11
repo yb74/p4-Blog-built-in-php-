@@ -13,9 +13,9 @@ endif;
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Posts</h2>
-                <a href="/manageUsers" class="btn btn-primary">Users list</a>
-                <a href="/manageComments" class="btn btn-primary">Reported comments</a>
-                <a href="/createPost" class="btn btn-primary">Create a post</a>
+                <a href="/manageUsers" class="btn btn-primary btn-dashboard">Users list</a>
+                <a href="/manageComments" class="btn btn-primary btn-dashboard">Reported comments</a>
+                <a href="/createPost" class="btn btn-primary btn-dashboard">Create a post</a>
             </div>
         </div>
 

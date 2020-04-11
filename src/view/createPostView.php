@@ -14,20 +14,20 @@ $subheadingPage='';
                     <form action="/createPost" method="post" enctype="multipart/form-data" class="p-5 bg-light">
                         <div class="form-group <?= $errors['form'] ? 'has-error' : ''; ?>">
                             <?php if(!empty($errors['form'])): ?>
-                                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center"><?= $errors['form'] ?></span>
+                                <span class="col-lg-8 col-md-10 mx-auto alert alert-danger text-center form-control" id="createError"><?= $errors['form'] ?></span>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label for="picture_url">Picture</label><br/>
-                            <input type="file" name="picture_url" id="picture_url" class="form-control">  <!-- /public/images/chapters/chapter-image1.jpg -->
+                            <input type="file" name="picture_url" id="picture_url">
                         </div>
                         <div class="form-group">
                             <label for="title">Title</label><br/>
                             <input type="text" name="title" id="title" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="adminForm">Content</label><br/>
-                            <textarea name="content" id="adminForm" cols="160" rows="30"></textarea>
+                            <label for="content">Content</label><br/>
+                            <textarea name="content" id="adminForm" cols="160" rows="30" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Post" class="btn py-3 px-4 btn-primary">
