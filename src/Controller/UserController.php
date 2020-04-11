@@ -101,11 +101,13 @@ class UserController
                     } else {
                         $errors['form'] = "Your username and your password don't match.";
                         require 'src/view/connectionView.php';
+                        return;
                     }
                 }
                 else {
                     $errors['form'] = "This username doesn't exist.";
                     require 'src/view/connectionView.php';
+                    return;
                 }
             }
             require 'src/view/connectionView.php';

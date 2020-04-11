@@ -2,12 +2,11 @@
 session_start();
 
 require_once __DIR__ . "/vendor/autoload.php";
-$path = $_SERVER['REQUEST_URI'];
-//$path = substr($path, 0, strrpos($path, '?'));
-//$a = substr($a, 0, strrpos($a, '.'));
+//$path = $_SERVER['REQUEST_URI'];
+//$path = substr($path, 0, strrpos($path, '/', 4));
 
-$router = new App\Router\Router($path ?? "/"); // instantiation of the router
-//var_dump($path ?? "/");
+$router = new App\Router\Router($_SERVER['REQUEST_URI'] ?? "/"); // instantiation of the router
+//var_dump($path);
 // Structure of a route : first, the REQUEST_METHOD is set (post or get) and it takes the path and and a callable as parameters.
 // The callable is composed of the controller that should be used and the function to call separated with an "#" sign.
 // then you have the option to us the with() function to set a GET superglobal or a slug with it's REGEX)

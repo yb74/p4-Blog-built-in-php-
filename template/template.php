@@ -12,7 +12,7 @@
     <title><?= $title ?></title>
 
     <!-- FB Open Graph data -->
-    <meta property="og:title" content="Un billet pour l'Alaska by Jean Forteroche" />
+    <meta property="og:title" content="Single ticket for Alaska by Jean Forteroche" />
     <meta property="og:type" content="Online novel" />
     <meta property="og:url" content="http://www.jeanforteroche.webagencypro.fr" />
     <meta property="og:image" content="public/img/logo.jpg" />
@@ -21,7 +21,7 @@
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="Online novel" />
-    <meta name="twitter:title" content="Un billet pour l'Alaska by Jean Forteroche" />
+    <meta name="twitter:title" content="Single ticket for Alaska by Jean Forteroche" />
     <meta name="twitter:image:src" content="http://www.jeanforteroche.webagencypro.fr/public/images/logo.png" />
     <meta name="twitter:description" content="Come and to take a tour to Alaska through the latest online novel by Jean Forteroche"/>
 
