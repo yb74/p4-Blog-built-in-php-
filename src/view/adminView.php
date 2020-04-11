@@ -11,7 +11,7 @@ endif;
 <?php ob_start(); ?>
 
         <div class="row header-dashboard py-5">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center dashboard_menu">
                 <h2>Posts</h2>
                 <a href="/manageUsers" class="btn btn-primary btn-dashboard">Users list</a>
                 <a href="/manageComments" class="btn btn-primary btn-dashboard">Reported comments</a>

@@ -13,7 +13,7 @@ class Manager
     // ONLINE DATABASE
 //    protected function dbConnect()
 //    {
-//        $db = new \PDO('mysql:host=db5000366659.hosting-data.io;dbname=dbs355182;charset=utf8', 'dbu477943', '0622178800-Yb');
+//        $db = new \PDO('mysql:host=db5000367838.hosting-data.io;dbname=dbs356130;charset=utf8', 'dbu123930', '0622178800-Yb');
 //        return $db;
 //    }
 }

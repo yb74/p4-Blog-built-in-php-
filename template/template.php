@@ -42,12 +42,12 @@
 <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
-            <img src="/public/images/logo.png" alt="logo" title="logo of the website" class="d-inline-block align-center text-white" style="width:50px;height:50px;">
+            <img src="/public/images/logo.png" alt="logo" title="logo of the website" class="d-inline-block align-center text-white mr-2" style="width:50px;height:50px;">
             Single ticket for Alaska
         </a>
 
         <!-- Left menu -->
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 left-menu-homepage">
             <li class="nav-item">
                 <a class="nav-link" href="/">Homepage</a>
             </li>
@@ -57,15 +57,15 @@
         </ul>
 
         <!-- Right menu -->
-        <div class = "d-flex">
+        <div class="right-menu-homepage">
             <?php if (!$_SESSION): ?>
-                <a class="btn btn-primary mx-2" href="/connection">Log In</a>
+                <a class="btn btn-primary mx-2 right-menu-homepage-btn" href="/connection">Log In</a>
             <?php else: ?>
                 <?php if ($_SESSION['id']): ?>
-                    <a class="btn btn-primary mx-2" href="/logout">Log Out</a>
+                    <a class="btn btn-primary mx-2 right-menu-homepage-btn" href="/logout">Log Out</a>
                 <?php endif; ?>
                 <?php if ($_SESSION['role'] === 'admin'): ?>
-                    <a class="btn btn-primary mx-2" href="/admin">Dashboard</a>
+                    <a class="btn btn-primary mx-2 right-menu-homepage-btn" href="/admin">Dashboard</a>
                 <?php elseif ($_SESSION['role'] === 'user'): ?>
                     <li class="nav-item" style="list-style-type:none";><a href="/" class="nav-link"></a></li>
                 <?php endif; ?>
@@ -76,14 +76,12 @@
     <!-- HEADER -->
 <header class="masthead mb-5" style="background-image: url('<?=$picture ?>'); background-size: cover;">
     <div class="container">
-        <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading mt-5">
+                <div class="site-heading">
                     <h1 class="main-title h1-responsive font-weight-bold text-center my-4"><?= $titlePage ?></h1>
                     <p class="subheading text-center"><?= $subheadingPage ?></p>
                 </div>
             </div>
-        </div>
     </div>
 </header>
 
