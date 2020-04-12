@@ -49,7 +49,7 @@ class UserController
             elseif (!empty(trim($_POST['username'])) && !empty(trim($_POST['password'])) && !empty(trim($_POST["confirm_password"]))) {
                 $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-                $this->userManager->pushUserInfo(ucfirst($_POST['username']), $hashedPassword);
+                $this->userManager->pushUserInfo(ucfirst(htmlspecialchars($_POST['username'])), $hashedPassword);
                 header('Location: /connection');
             }
         }

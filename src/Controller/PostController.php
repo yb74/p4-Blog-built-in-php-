@@ -48,8 +48,8 @@ class PostController
             }
             else {
                 $comment = new Comment();
-                $comment->setAuthor($_POST['author']);
-                $comment->setContent($_POST['content']);
+                $comment->setAuthor(htmlspecialchars($_POST['author']));
+                $comment->setContent(htmlspecialchars($_POST['content']));
                 $comment->setRelatedId($postId);
                 $this->commentManager->postComment($comment);
 
