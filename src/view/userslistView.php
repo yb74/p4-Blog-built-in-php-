@@ -10,9 +10,9 @@ $subheadingPage='';
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Manage users</h2>
-                <a href="/admin" class="btn btn-primary">Manage posts</a>
-                <a href="/createPost" class="btn btn-primary">Create a post</a>
-                <a href="/manageComments" class="btn btn-primary">Reported comments</a>
+                <a href="/admin" class="btn btn-primary btn-dashboard">Manage posts</a>
+                <a href="/createPost" class="btn btn-primary btn-dashboard">Create a post</a>
+                <a href="/manageComments" class="btn btn-primary btn-dashboard">Reported comments</a>
             </div>
         </div>
 
