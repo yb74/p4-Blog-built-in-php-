@@ -8,7 +8,7 @@ $subheadingPage='';
 
     <div class="container">
         <div class="row header-dashboard py-5">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center dashboard_menu">
                 <h2>Manage users</h2>
                 <a href="/admin" class="btn btn-primary btn-dashboard">Manage posts</a>
                 <a href="/createPost" class="btn btn-primary btn-dashboard">Create a post</a>
