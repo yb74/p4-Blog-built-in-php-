@@ -19,7 +19,7 @@ $subheadingPage='';
                         </div>
                         <div class="form-group">
                             <label for="picture_url">Picture</label><br/>
-                            <input type="file" name="picture_url" id="picture_url">
+                            <input type="file" name="picture_url" id="picture_url" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="title">Title</label><br/>
