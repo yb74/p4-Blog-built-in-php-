@@ -76,12 +76,14 @@
     <!-- HEADER -->
 <header class="masthead mb-5" style="background-image: url('<?=$picture ?>'); background-size: cover;">
     <div class="container">
+        <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
+                <div class="site-heading mt-5">
                     <h1 class="main-title h1-responsive font-weight-bold text-center my-4"><?= $titlePage ?></h1>
                     <p class="subheading text-center"><?= $subheadingPage ?></p>
                 </div>
             </div>
+        </div>
     </div>
 </header>
 
