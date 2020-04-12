@@ -9,7 +9,7 @@ use App\Manager\{CommentManager,
 use App\Model\{
     Comment,
     Post,
-    user
+    User
 };
 
 class AdminController {
