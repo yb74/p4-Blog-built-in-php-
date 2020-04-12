@@ -115,7 +115,7 @@ class AdminController {
 
                     $post = new Post();
                     $post->setPictureUrl($finalPath);
-                    $post->setTitle($_POST['title']);
+                    $post->setTitle(htmlspecialchars($_POST['title']));
                     $post->setContent($_POST['content']);
 
                     $this->postManager->addPost($post);
@@ -154,7 +154,7 @@ class AdminController {
             }
             else {
                 $post = new Post();
-                $post->setTitle($_POST['title']);
+                $post->setTitle(htmlspecialchars($_POST['title']));
                 $post->setContent($_POST['content']);
                 $post->setId($postId);
                 $this->postManager->updatePost($post);
